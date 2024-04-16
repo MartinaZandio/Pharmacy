@@ -1,5 +1,5 @@
 package pharmacy.db.pojos;
 
-public class Precription {
+public class Prescription {
 
 }
