@@ -1,5 +1,9 @@
 package pharmacy.db.pojos;
 
-public class Prescription {
+import java.time.*;
 
+public class Prescription {
+	int quantity; 
+	LocalDate issueDate; 
+	LocalDate dateUssed; 
 }
