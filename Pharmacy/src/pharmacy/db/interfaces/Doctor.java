@@ -1,5 +1,5 @@
 package pharmacy.db.interfaces;
 
-public class Doctor {
+public interface Doctor {
 
 }
