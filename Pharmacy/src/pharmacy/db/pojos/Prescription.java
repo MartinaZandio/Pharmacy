@@ -71,10 +71,3 @@ import java.time.*;
 	
 	
 }
-=======
-public class Prescription {
-	int quantity; 
-	LocalDate issueDate; 
-	LocalDate dateUssed; 
-}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
