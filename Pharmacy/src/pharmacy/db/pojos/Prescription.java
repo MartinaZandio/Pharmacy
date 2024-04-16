@@ -1,11 +1,8 @@
 package pharmacy.db.pojos;
-
-
-	import java.util.Objects;
+import java.util.Objects;
 
 public class Prescription {
-=======
-import java.time.*;
+
 
 	private int quantity;
 	private String issueDate;
