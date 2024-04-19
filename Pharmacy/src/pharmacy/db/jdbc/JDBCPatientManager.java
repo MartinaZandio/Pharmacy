@@ -1,6 +1,6 @@
 package pharmacy.db.jdbc;
 import java.sql.*;
-import java.util.List;
+import java.util.*;
 
 import pharmacy.db.interfaces.PatientProfile;
 import pharmacy.db.pojos.Patient;
@@ -23,17 +23,32 @@ public class JDBCPatientManager implements PatientProfile {
 		}
 	}	
 		
-	private void createtables() {
+	private void close() {
+		try {
+			c.close();
+		}catch(SQLException e) {
+			System.out.println("Error closing the database");
+			e.printStackTrace();
+		}
+	}
+	
+	private void createTables() {
 		try {
 			//Create the tables
 			Statement createTables1=c.createStatement();
-			String create1="CREATE TABLE patient ( "
+			String create1="CREATE TABLE gender ( "
+					+ " id INTEGER PRIMARY KEY,"
+					+ " Sex TEXT NOT NULL)"; //NO SE SI ESTÁ BIEN
+			createTables1.executeUpdate(create1);
+			createTables1.close();	
+			Statement createTables2=c.createStatement();
+			String create2="CREATE TABLE patient ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
 					+ " sex INTEGER REFERENCES gender(id)"; //NO SE SI ESTÁ BIEN
-			createTables1.executeUpdate(create1);
-			createTables1.close();			
+			createTables2.executeUpdate(create2);
+			createTables2.close();	
 		}catch(SQLException sqlE) {
 			System.out.println("Error in query");
 			sqlE.printStackTrace();
@@ -67,8 +82,25 @@ public class JDBCPatientManager implements PatientProfile {
 
 	@Override
 	public List<Patient> searchPatientById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients= new ArrayList<Patient>();
+		try {
+			String sql= "SELECT * FROM patient WHERE id = ?";
+			PreparedStatement search=c.prepareStatement(sql);
+			ResultSet rs= search.executeQuery();
+			while(rs.next()) {
+				Integer identity= rs.getInt("id");
+				String nme= rs.getString("name");
+				Date DOB= rs.getDate("dateOfBirth");
+				Gender s= rs.getString("Gender"); //¿Como ponemos la enumeracion aqui?
+				Patient new Patient = new Patient(identity,nme,DOB,s);
+			}
+			return patients;
+		}catch(SQLException e){
+			System.out.println("Error looking for a book");
+			e.printStackTrace();
+		}
+		
+		return patients;
 	}
 
 	@Override

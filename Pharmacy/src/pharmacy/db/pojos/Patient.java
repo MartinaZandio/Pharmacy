@@ -5,14 +5,9 @@ import java.util.Objects;
 
 public class Patient implements Serializable{
 	
-<<<<<<< HEAD
 	private static final long serialVersionUID = 3668403771940551440L;
-=======
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	private Integer id;
 	private String name;
 	private String dateOfBirth;
