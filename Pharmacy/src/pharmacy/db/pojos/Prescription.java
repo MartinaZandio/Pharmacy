@@ -1,7 +1,8 @@
-package pharmacy.db.pojos;
-import java.util.Objects;
+	
+	package pharmacy.db.pojos;
+	import java.util.Objects;
 
-public class Prescription {
+	public class Prescription {
 
 
 	private int quantity;
