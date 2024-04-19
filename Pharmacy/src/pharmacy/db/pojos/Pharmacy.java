@@ -6,10 +6,15 @@ import java.util.Objects;
 
 
 public class Pharmacy {
+	
 	String name; 
 	String location; 
 	Integer postalCode; 
 	Integer numberOfWorkers;
+	
+	public Pharmacy() {
+		super();
+	}
 	
 	public Pharmacy(String name, String location, int postalCode, int numberOfWorkers) {
 		super();

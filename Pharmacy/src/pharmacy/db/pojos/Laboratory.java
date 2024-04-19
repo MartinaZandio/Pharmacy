@@ -7,13 +7,16 @@ public class Laboratory {
 	private Integer postalCode; 
 	private String location;
 
-	
+	public Laboratory() {
+			super();
+	 }
+
 	public Laboratory(String name, String location, Integer postalCode) {
 		
 		this.name = name;
 		this.location = location;
 		this.postalCode = postalCode;
- }
+	}
 
 
 	public String getName() {

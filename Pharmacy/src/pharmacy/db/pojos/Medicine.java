@@ -7,6 +7,10 @@ public class Medicine {
 	private String name;
 	private int numAsigned;
 	
+	public Medicine() {
+		super();
+	}
+	
 	public Medicine(String name, int numAsigned){
 	
 		this.name= name;
