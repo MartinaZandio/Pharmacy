@@ -68,9 +68,16 @@ public class Menu {
 			System.out.println("NumberAssigned: ");
 			Integer id= Integer.parseInt(r.readLine());
 			
+			System.out.println("These are the available medicines, choose one by typing its id: ");
+			listMedicines();
+			Integer medId=Integer.parseInt(r.readLine());
 			Medicine medicine = new Medicine(name, id);
 			MedicineManager.addPatient(medicine);
 			break;
+		}
+		
+		private static void listMedicines() throws IOException{
+			//TODO show available medicines
 		}
 	}
 	

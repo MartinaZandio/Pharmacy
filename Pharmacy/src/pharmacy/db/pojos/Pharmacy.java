@@ -1,6 +1,6 @@
 package pharmacy.db.pojos;
 
-import java.util.Objects;
+import java.util.*;
 
 
 public class Pharmacy {
@@ -9,9 +9,12 @@ public class Pharmacy {
 	String location; 
 	Integer postalCode; 
 	Integer numberOfWorkers;
+	private ArrayList<Medicine> medicines;
 	
 	public Pharmacy() {
 		super();
+		this.medicines= new ArrayList<Medicine>();
+		
 	}
 	
 	public Pharmacy(String name, String location, int postalCode, int numberOfWorkers) {

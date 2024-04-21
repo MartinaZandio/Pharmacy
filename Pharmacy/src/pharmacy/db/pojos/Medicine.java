@@ -6,6 +6,7 @@ public class Medicine {
 
 	private String name;
 	private int numAsigned;
+	private Laboratory laboratoy;
 	
 	public Medicine() {
 		super();
