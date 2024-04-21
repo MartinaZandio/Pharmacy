@@ -1,13 +1,15 @@
 package pharmacy.db.interfaces;
-import pharmacy.db.pojos.*;
+
 import java.util.List;
 
+import pharmacy.db.pojos.Patient;
 
-public interface PatientProfile {
+public interface PharmacistManager {
 
-	//(Nete) Ejemplos de una interfaz
 	public void addPatient(Patient p);
 	public List<Patient> searchPatientByName(String name);
 	public List<Patient> searchPatientById(int id);
-	public void deletePatient(Patient p);
+	public void deletePatient(int patientId);
+	
+	
 }

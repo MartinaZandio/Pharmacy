@@ -24,7 +24,7 @@ public class Patient implements Serializable{
 		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
-		this.sex=gender.MALE;
+		this.sex= sex;
 		
 	}
 

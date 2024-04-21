@@ -1,6 +1,5 @@
 package pharmacy.db.interfaces;
 
-public interface Pharmacist {
+public interface DoctorManager {
 
-	
 }
