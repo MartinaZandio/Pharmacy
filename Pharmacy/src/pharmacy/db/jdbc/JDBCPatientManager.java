@@ -1,15 +1,17 @@
 package pharmacy.db.jdbc;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
-import pharmacy.db.interfaces.PatientProfile;
+import pharmacy.db.interfaces.PatientManager;
+import pharmacy.db.pojos.Medicine;
 import pharmacy.db.pojos.Patient;
 
-public class JDBCPatientManager implements PatientProfile {
+public class JDBCPatientManager implements PatientManager {
 	
 	private Connection c;
 	
-	public JDBCBookManager(Connection c) {
+	public JDBCPatientManager(Connection c) {
 		this.c=c;
 	}
 	
@@ -23,6 +25,7 @@ public class JDBCPatientManager implements PatientProfile {
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
+		
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -49,8 +52,8 @@ public class JDBCPatientManager implements PatientProfile {
 				Integer identity= rs.getInt("id");
 				String nme= rs.getString("name");
 				Date DOB= rs.getDate("dateOfBirth");
-				Gender s= rs.getString("Gender"); //¿Como ponemos la enumeracion aqui?
-				Patient new Patient = new Patient(identity,nme,DOB,s);
+				Patient.gender s= Patient.gender.valueOf(rs.getString("Gender")); //¿Como ponemos la enumeracion aqui?
+				Patient Patient = new Patient(identity,nme,DOB,s);
 			}
 			return patients;
 		}catch(SQLException e){
@@ -65,6 +68,18 @@ public class JDBCPatientManager implements PatientProfile {
 	public void deletePatient(Patient p) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void takeMedicine(int patientId, int medicineId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Medicine> getTakenMedicines(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

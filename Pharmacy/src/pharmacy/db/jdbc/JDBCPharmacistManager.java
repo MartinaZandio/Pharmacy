@@ -3,14 +3,15 @@ package pharmacy.db.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import pharmacy.db.interfaces.Pharmacist;
+
+import pharmacy.db.interfaces.PharmacistManager;
 import pharmacy.db.pojos.Patient;
 
 public class JDBCPharmacistManager implements PharmacistManager {
 
 private Connection c;
 	
-	public JDBCBookManager(Connection c) {
+	public JDBCPharmacistManager(Connection c) {
 		this.c=c;
 	}
 	

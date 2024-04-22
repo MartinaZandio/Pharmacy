@@ -1,17 +1,18 @@
 package pharmacy.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Patient implements Serializable{
 	
-	private static final long serialVersionUID = 3668403771940551440L;
+	private static final long serialVersionUID1 = 3668403771940551440L;
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
-	private String dateOfBirth;
-	private enum gender{MALE, FEMALE}
+	private Date dateOfBirth;
+	public enum gender{MALE, FEMALE}
 	private gender sex;
 	
 	public Patient() {
@@ -19,7 +20,7 @@ public class Patient implements Serializable{
 	}
 
 	
-	public Patient(Integer id, String name, String dateOfBirth, gender sex) {
+	public Patient(Integer id, String name, Date dateOfBirth, gender sex) {
 		super();
 		this.id=id;
 		this.name=name;
@@ -44,11 +45,11 @@ public class Patient implements Serializable{
 		this.name = name;
 	}
 
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
