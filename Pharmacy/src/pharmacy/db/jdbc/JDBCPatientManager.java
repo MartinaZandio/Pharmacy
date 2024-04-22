@@ -18,11 +18,13 @@ public class JDBCPatientManager implements PatientProfile {
 		// TODO Auto-generated method stub
 		try {
 		String query= "INSERT INTO patient (id, name, dateOfBirth, sex)"
-				+ "VALUES (?,?,?,?);";
+				+ "VALUES (?,?,?,?,?);";
 		PreparedStatement insert= c.prepareStatement(query);		
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
+		insert.setInt(4, p.getsex());
+
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
