@@ -4,16 +4,14 @@ import java.beans.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import pharmacy.db.pojos.Medicine;
+
 public interface MedicineManager {
 	
 	
-	public void addMedicine() {
-		
-	}
+	public void addMedicine(Medicine medicine);
+	public void searchMedicine( )
 	
-	public void changeMedicine() {
-		
-	}
 	
 	public Medicine getmedicine(int id) {
 		try{

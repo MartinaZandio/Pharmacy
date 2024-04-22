@@ -10,22 +10,24 @@ import pharmacy.db.pojos.Patient;
 public class JDBCPatientManager implements PatientManager {
 	
 	private Connection c;
+	private ConnectionManager conMan; 
 	
-	public JDBCPatientManager(Connection c) {
-		this.c=c;
+	public JDBCPatientManager(ConnectionManager conMan) {
+		this.conMan = conMan; 
+		this.c = conMan.getConnection();
 	}
 	
 	@Override
 	public void addPatient(Patient p) {
 		// TODO Auto-generated method stub
 		try {
-		String query= "INSERT INTO patient (id, name, dateOfBirth, sex)"
+		String template= "INSERT INTO patient (id, name, dateOfBirth, sex)"
 				+ "VALUES (?,?,?,?);";
-		PreparedStatement insert= c.prepareStatement(query);		
+		PreparedStatement insert= c.prepareStatement(template);		
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
-		
+		insert.setInt(4, p.getSex());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {

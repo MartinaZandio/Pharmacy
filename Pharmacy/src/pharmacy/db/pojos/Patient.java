@@ -8,11 +8,15 @@ public class Patient implements Serializable{
 	
 	private static final long serialVersionUID1 = 3668403771940551440L;
 
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
-	public enum gender{MALE, FEMALE}
+	public enum gender{MALE, FEMALE;
+
+	gender valueOf(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}}
 	private gender sex;
 	
 	public Patient() {
