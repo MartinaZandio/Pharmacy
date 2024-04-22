@@ -12,12 +12,18 @@ public class Patient implements Serializable{
 	private enum gender{MALE, FEMALE}
 	private gender sex;
 	
+	
+	public Patient() {
+		super();
+	}
+
+	
 	public Patient(Integer id, String name, String dateOfBirth, gender sex) {
 		super();
 		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
-		this.sex=gender.MALE;
+		this.sex= sex;
 		
 	}
 

@@ -1,12 +1,22 @@
 package pharmacy.db.pojos;
 
-import java.util.Objects;
+import java.util.*;
+import java.io.Serializable;
 
-public class Pharmacy {
+
+public class Pharmacy implements Serializable{
+	
 	String name; 
 	String location; 
 	Integer postalCode; 
 	Integer numberOfWorkers;
+	private ArrayList<Medicine> medicines;
+	
+	public Pharmacy() {
+		super();
+		this.medicines= new ArrayList<Medicine>();
+		
+	}
 	
 	public Pharmacy(String name, String location, int postalCode, int numberOfWorkers) {
 		super();
