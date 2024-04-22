@@ -6,7 +6,7 @@ import java.util.List;
 import pharmacy.db.interfaces.Pharmacist;
 import pharmacy.db.pojos.Patient;
 
-public class JDBCPharmacistManager implements Pharmacist {
+public class JDBCPharmacistManager implements PharmacistManager {
 
 private Connection c;
 	

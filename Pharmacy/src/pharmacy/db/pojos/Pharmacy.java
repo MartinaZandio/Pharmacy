@@ -1,9 +1,10 @@
 package pharmacy.db.pojos;
 
 import java.util.*;
+import java.io.Serializable;
 
 
-public class Pharmacy {
+public class Pharmacy implements Serializable{
 	
 	String name; 
 	String location; 

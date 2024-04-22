@@ -1,8 +1,9 @@
 package pharmacy.db.pojos;
 
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Laboratory {
+public class Laboratory implements Serializable {
 	private String name; 
 	private Integer postalCode; 
 	private String location;

@@ -1,8 +1,9 @@
 	
 	package pharmacy.db.pojos;
 	import java.util.Objects;
+	import java.io.Serializable;
 
-	public class Prescription {
+	public class Prescription implements Serializable{
 
 
 	private int quantity;

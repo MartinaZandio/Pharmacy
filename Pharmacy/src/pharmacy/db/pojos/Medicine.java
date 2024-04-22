@@ -1,12 +1,14 @@
 package pharmacy.db.pojos;
 
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Medicine {
+public class Medicine implements Serializable {
 
 	private String name;
 	private int numAsigned;
-	private Laboratory laboratoy;
+	private Laboratory laboratory;
+	//list de pharmacys??
 	
 	public Medicine() {
 		super();
