@@ -43,21 +43,15 @@ public class ConnectionManager {
 	private void createTables() {
 		//If the tables are already created, skip this step
 		try {
-			//Create the tables
+			//Create the tables			
 			Statement createTables1=c.createStatement();
-			String create1="CREATE TABLE gender ( "
-					+ " id INTEGER PRIMARY KEY,"
-					+ " Sex TEXT NOT NULL)"; //NO SE SI ESTÁ BIEN
-			createTables1.executeUpdate(create1);
-			createTables1.close();	
-			Statement createTables2=c.createStatement();
-			String create2="CREATE TABLE patient ( "
+			String create1="CREATE TABLE patient ( "
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
-					+ " sex INTEGER REFERENCES gender(id)"; //NO SE SI ESTÁ BIEN
-			createTables2.executeUpdate(create2);
-			createTables2.close();	
+					+ " sex TEXT NOT NULL)"; //NO SE SI ESTÁ BIEN
+			createTables1.executeUpdate(create1);
+			createTables1.close();	
 		}catch(SQLException sqlE) {
 			if(sqlE.getMessage().contains("already exist")){
 				System.out.println("No need to create the tables; already there");
