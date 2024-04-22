@@ -27,7 +27,7 @@ public class JDBCPatientManager implements PatientManager {
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
-		insert.setInt(4, p.getSex());
+		insert.setString(4, p.getSex().name());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
