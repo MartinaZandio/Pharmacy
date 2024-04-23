@@ -1,10 +1,10 @@
 package pharmacy.db.jdbc;
 
 import java.sql.Connection;
-import pharmacy.db.interfaces.PharmacistManager;
+import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
 
-public class JDBCPharmacyManager implements PharmacistManager {
+public class JDBCPharmacyManager implements PharmacyManager {
 	
 	private Connection c; 
 

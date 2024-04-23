@@ -3,7 +3,7 @@ package pharmacy.db.interfaces;
 import java.util.List;
 import pharmacy.db.pojos.*;
 
-public interface PharmacistManager {
+public interface PharmacyManager {
 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient);
 	public void markPrescriptionAsUsed(Prescription prescription);

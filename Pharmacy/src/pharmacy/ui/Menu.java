@@ -15,12 +15,15 @@ public class Menu {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	private static PatientManager patientManager;
+	private static DoctorManager doctorManager;
+	private static PharmacyManager pharmacyManager;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		ConnectionManager conMan = new ConnectionManager();
-		patientManager = conMan.getPatientManager();
-		patientManager = new JDBCPatientManager();
+		patientManager = new JDBCPatientManager(conMan.getConnection());
+		doctorManager = new JDBCDoctorManager(conMan.getConnection());
+		pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 		
 		System.out.println("Choose your desired option");
 		System.out.println("1. Add a new patient");
