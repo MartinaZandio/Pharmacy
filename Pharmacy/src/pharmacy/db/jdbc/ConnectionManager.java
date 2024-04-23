@@ -49,7 +49,7 @@ public class ConnectionManager {
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
-					+ " sex TEXT NOT NULL)"; //NO SE SI ESTÁ BIEN
+					+ " sex TEXT NOT NULL)";
 			createTables1.executeUpdate(create1);
 			createTables1.close();	
 		}catch(SQLException sqlE) {
