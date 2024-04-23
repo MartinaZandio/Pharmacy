@@ -3,9 +3,9 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+import library.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
-import pharmacy.db.pojos.Medicine;
-import pharmacy.db.pojos.Patient;
+import pharmacy.db.pojos.*;
 
 public class JDBCPatientManager implements PatientManager {
 	
@@ -16,7 +16,7 @@ public class JDBCPatientManager implements PatientManager {
 		this.conMan = conMan; 
 		this.c = conMan.getConnection();
 	}
-	
+
 	@Override
 	public void addPatient(Patient p) {
 		// TODO Auto-generated method stub

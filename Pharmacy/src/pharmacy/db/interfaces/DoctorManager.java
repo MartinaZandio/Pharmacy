@@ -1,8 +1,6 @@
 package pharmacy.db.interfaces;
 
-import pharmacy.db.pojos.Medicine;
-import pharmacy.db.pojos.Patient;
-import pharmacy.db.pojos.Prescription;
+import pharmacy.db.pojos.*;
 
 public interface DoctorManager {
 	

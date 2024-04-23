@@ -1,11 +1,12 @@
 package pharmacy.db.jdbc;
 
+import java.sql.Connection;
 import pharmacy.db.interfaces.PharmacistManager;
-import pharmacy.db.pojos.Medicine;
-import pharmacy.db.pojos.Patient;
-import pharmacy.db.pojos.Prescription;
+import pharmacy.db.pojos.*;
 
 public class JDBCPharmacyManager implements PharmacistManager {
+	
+	private Connection c; 
 
 	@Override
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {

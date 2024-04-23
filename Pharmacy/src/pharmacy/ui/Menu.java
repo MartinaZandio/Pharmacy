@@ -4,18 +4,24 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import library.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jdbc.*;
-import pharmacy.db.pojos.Patient;
+import pharmacy.db.pojos.*;
 
 public class Menu {
 
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static PatientManager patientManager = new JDBCPatientManager();
+	private static PatientManager patientManager;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
+		
+		ConnectionManager conMan = new ConnectionManager();
+		patientManager = conMan.getPatientManager();
+		patientManager = new JDBCPatientManager();
+		
 		System.out.println("Choose your desired option");
 		System.out.println("1. Add a new patient");
 		System.out.println("2. Search a patient by its name");

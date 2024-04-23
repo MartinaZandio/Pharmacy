@@ -4,7 +4,7 @@ import java.beans.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import pharmacy.db.pojos.Medicine;
+import pharmacy.db.pojos.*;
 
 public interface MedicineManager {
 	
