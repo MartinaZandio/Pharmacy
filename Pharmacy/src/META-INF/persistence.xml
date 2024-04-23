@@ -6,11 +6,11 @@
 	<!-- Persistence Provider -->
 	<!-- RESOURCE-LOCAL: Application-managed transactions -->
 	<!-- JTA: Container-managed transactions -->
-	<persistence-unit name="pharmacy-provider" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="company-provider" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class --> 
-		<class>sample.db.pojos.Employee</class>
+		<class>sample.db.pojos.Patient</class>
 		<class>sample.db.pojos.Department</class>
 		<class>sample.db.pojos.Report</class> 
  

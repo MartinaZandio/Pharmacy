@@ -3,8 +3,6 @@ package pharmacy.db.pojos;
 import java.util.Objects;
 import java.io.Serializable;
 
-@Table(name="laboratories")a
-
 public class Laboratory implements Serializable {
 	private String name; 
 	private Integer postalCode; 

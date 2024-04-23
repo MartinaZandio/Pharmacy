@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+@Table(name= "patients")
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID1 = 3668403771940551440L;
 
+	@id
+	@GeneratedValue(generator="patients")
+	//...
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;

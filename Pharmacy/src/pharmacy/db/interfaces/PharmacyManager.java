@@ -1,12 +1,9 @@
 package pharmacy.db.interfaces;
 
 import java.util.List;
+import pharmacy.db.pojos.*;
 
-import pharmacy.db.pojos.Medicine;
-import pharmacy.db.pojos.Patient;
-import pharmacy.db.pojos.Prescription;
-
-public interface PharmacistManager {
+public interface PharmacyManager {
 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient);
 	public void markPrescriptionAsUsed(Prescription prescription);
