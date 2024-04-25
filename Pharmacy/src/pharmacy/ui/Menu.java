@@ -17,6 +17,9 @@ public class Menu {
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
 	private static PharmacyManager pharmacyManager;
+	private static UserManager userMan;
+	
+	//CUIDADO: inicializar JDBC antes que JPA
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
@@ -26,32 +29,84 @@ public class Menu {
 		pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 		
 		System.out.println("Choose your desired option");
-		System.out.println("1. Add a new patient");
-		System.out.println("2. Search a patient by its name");
-		System.out.println("3. Search a patient by its id");
-		System.out.println("4. Add a new medicine");
-
+		System.out.println("1. Login");
+		System.out.println("2. Register");
 		System.out.println("0. Exit");
 
 		int choice=Integer.parseInt(r.readLine());
 		switch(choice) {
 		case 1: {
-			addPatient();
+			menuLogin();
 			break;
 		}
 		case 2: {
+			menuRegister();
 			break;
-		}
-		case 3: {
-			break;
-		}
-		case 4: {
-			addMedicine();
 		}
 		case 0: {
+			conMan.close();
 			return;
 		}
 		default:
+		}
+		
+		private static menuLogin() throws NumberFormatException, IOException{
+			System.out.println("Username: ");
+			String username=r.readLine();
+			System.out.println("Password: ");
+			String password=r.readLine();
+			User u= userMan.login(username, password);
+		}
+		
+		private static void menuRegister() throws NumberFormatException, IOException{
+			System.out.println("Choose a username: ");
+			String username=r.readLine();
+			System.out.println("Choose a password: ");
+			
+			List<Role> roles=userMan.getAllRoles();
+			System.out.println(roles);
+			String roleName=Integer.parseInt(r.readLine());
+			Role r= userMan.getRole(id);
+			User u= new User (username,password);
+		}
+		
+		
+	
+		private static void pharmacyMenu{
+			ConnectionManager conMan = new ConnectionManager();
+			patientManager = new JDBCPatientManager(conMan.getConnection());
+			doctorManager = new JDBCDoctorManager(conMan.getConnection());
+			pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+			
+			System.out.println("Choose your desired option");
+			System.out.println("1. Add a new patient");
+			System.out.println("2. Search a patient by its name");
+			System.out.println("3. Search a patient by its id");
+			System.out.println("4. Add a new medicine");
+
+			System.out.println("0. Exit");
+
+			int choice=Integer.parseInt(r.readLine());
+			switch(choice) {
+			case 1: {
+				addPatient();
+				break;
+			}
+			case 2: {
+				break;
+			}
+			case 3: {
+				break;
+			}
+			case 4: {
+				addMedicine();
+			}
+			case 0: {
+				return;
+			}
+			default:
+			}
+			
 		}
 		
 		private static void addPatient() throws NumberFormatException, IOException{
