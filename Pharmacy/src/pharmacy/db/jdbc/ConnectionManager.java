@@ -4,9 +4,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pharmacy.db.interfaces.*;
+
 public class ConnectionManager {
 
 	private Connection c;
+	private PatientManager patientMan;
+	private DoctorManager doctorMan;
+	private MedicineManager medicineMan;
+	private PrescriptionManager prescriptionMan;
+	
 
 	public Connection getConnection() {
 		return c;
@@ -14,6 +21,10 @@ public class ConnectionManager {
 	
 	public ConnectionManager() {
 		this.Connect();
+		this.patientMan = new JDBCPatientManager(this);
+		this.doctorMan = new JDBCDoctorManager(this);
+		this.medicineMan = new JDBCMedicineManager(this);
+		this.prescriptionMan = new JDBCPrescriptionManager(this);
 		this.createTables();
 	}
 
@@ -62,6 +73,24 @@ public class ConnectionManager {
 			}
 		}
 	}
+
+	public PatientManager getPatientMan() {
+		return patientMan;
+	}
+
+	public DoctorManager getDoctorMan() {
+		return doctorMan;
+	}
+
+	public MedicineManager getMedicineMan() {
+		return medicineMan;
+	}
+
+	public PrescriptionManager getPrescriptionMan() {
+		return prescriptionMan;
+	}
+	
+	
 		
 	
 }

@@ -17,6 +17,8 @@ public class Menu {
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
 	private static PharmacyManager pharmacyManager;
+	private static PrescriptionManager prescriptionManager; 
+	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
 	//CUIDADO: inicializar JDBC antes que JPA
@@ -24,9 +26,11 @@ public class Menu {
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		ConnectionManager conMan = new ConnectionManager();
-		patientManager = new JDBCPatientManager(conMan.getConnection());
-		doctorManager = new JDBCDoctorManager(conMan.getConnection());
-		pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+		patientManager = conMan.getPatientMan();
+		doctorManager = conMan.getDoctorMan();
+		//pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+		medicineManager = conMan.getMedicineMan();
+		prescriptionManager = conMan.getPrescriptionMan();
 		
 		System.out.println("Choose your desired option");
 		System.out.println("1. Login");

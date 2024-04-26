@@ -3,7 +3,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-import library.db.jdbc.ConnectionManager;
+import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
 import pharmacy.db.pojos.*;
 
@@ -81,6 +81,22 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public List<Medicine> getTakenMedicines(int patientId) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Patient getPatient(int id) {
+		try {
+			String sql = "SELECT * FROM patients WHERE id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("sex"));
+			return a;
+		}catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
 		return null;
 	}
 

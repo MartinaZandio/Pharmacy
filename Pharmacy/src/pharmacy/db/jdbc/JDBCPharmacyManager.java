@@ -6,7 +6,13 @@ import pharmacy.db.pojos.*;
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
-	private Connection c; 
+	private Connection c;
+	private ConnectionManager conMan; 
+	
+	public JDBCPharmacyManager(ConnectionManager conMan) {
+		this.conMan = conMan; 
+		this.c = conMan.getConnection();
+	}
 
 	@Override
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {

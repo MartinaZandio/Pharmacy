@@ -11,6 +11,7 @@ public interface MedicineManager {
 	
 	public void addMedicine(Medicine medicine);
 	public void searchMedicine( );
+	public Medicine getMedicine(int id);
 	
 	
 	/*

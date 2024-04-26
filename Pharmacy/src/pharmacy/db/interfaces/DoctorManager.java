@@ -1,10 +1,16 @@
 package pharmacy.db.interfaces;
-
-<<<<<<< HEAD
-=======
 import pharmacy.db.pojos.*;
 
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 public interface DoctorManager {
+
+	void createPrescription(Patient patient);
+
+	void modifyPrescrption(Prescription prescription);
+
+	void identifyPatient(Patient patient);
+
+	void assignMedicine(Medicine medicine, Prescription prescription);
+
+	void deletePrescription(Prescription prescrption);
 	
 }
