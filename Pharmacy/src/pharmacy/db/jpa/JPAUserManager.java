@@ -1,5 +1,7 @@
 package pharmacy.db.jpa;
 
+import javax.persistence.*;
+
 import pharmacy.db.interfaces.UserManager;
 import pharmacy.db.pojos.Role;
 import pharmacy.db.pojos.User;

@@ -2,6 +2,7 @@ package pharmacy.db.pojos;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -14,8 +15,8 @@ public class User implements Serializable{
 	private static final long serialVersionUID = -2388486227120532414L;
 	@Id
 	@GeneratedValue(generator="users")
-	@TableGenerator (name= "users", table= "sqlite_sequence,"
-			pkColumn= "")
+	@TableGenerator (name= "users", table= "sqlite_sequence",
+			pkColumnName= "name", valueColumnName= "seq", pkColumnValue= "users")
 	private int id;
 	private String userName;
 	private String password;
@@ -58,10 +59,12 @@ public class User implements Serializable{
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, password, role, userName);
+		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,15 +74,13 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return id == other.id && Objects.equals(password, other.password) && Objects.equals(role, other.role)
-				&& Objects.equals(userName, other.userName);
+		return id == other.id;
 	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", role=" + role + "]";
 	}
-
-	
 	
 	
 }
