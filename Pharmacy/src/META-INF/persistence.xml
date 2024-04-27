@@ -11,13 +11,13 @@
  
 		<!-- Entity Class --> 
 		<class>pharmacy.db.pojos.User</class>
-		<class>pharmacy.db.Role.</class>
+		<class>pharmacy.db.pojos.Role.</class>
 		 
  Department
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/pharmacy.db CHANGE TO OUR FILE" />
+		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/pharmacy.db" />
 			<!-- Fill if we need user and password -->
 			<property name="javax.persistence.jdbc.user" value="" />
 			<property name="javax.persistence.jdbc.password" value="" />
