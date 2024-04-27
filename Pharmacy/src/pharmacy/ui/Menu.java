@@ -3,10 +3,12 @@ import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import library.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jdbc.*;
+import pharmacy.db.jpa.JPAUserManager;
 import pharmacy.db.pojos.*;
 
 public class Menu {
@@ -14,6 +16,7 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
+	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
 	private static PharmacyManager pharmacyManager;
@@ -25,12 +28,13 @@ public class Menu {
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
-		ConnectionManager conMan = new ConnectionManager();
+		conMan = new ConnectionManager();
 		patientManager = conMan.getPatientMan();
 		doctorManager = conMan.getDoctorMan();
 		//pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 		medicineManager = conMan.getMedicineMan();
 		prescriptionManager = conMan.getPrescriptionMan();
+		userMan = new JPAUserManager();
 		
 		System.out.println("Choose your desired option");
 		System.out.println("1. Login");
@@ -54,7 +58,7 @@ public class Menu {
 		default:
 		}
 		
-		private static menuLogin() throws NumberFormatException, IOException{
+		private static void menuLogin() throws NumberFormatException, IOException{
 			System.out.println("Username: ");
 			String username=r.readLine();
 			System.out.println("Password: ");
@@ -66,17 +70,19 @@ public class Menu {
 			System.out.println("Choose a username: ");
 			String username=r.readLine();
 			System.out.println("Choose a password: ");
-			
-			List<Role> roles=userMan.getAllRoles();
+			String password = r.readLine();
+			System.out.println("Choose your role (type its name): ");
+			List<Role> roles = userMan.getAllRoles();
 			System.out.println(roles);
-			String roleName=Integer.parseInt(r.readLine());
-			Role r= userMan.getRole(id);
-			User u= new User (username,password);
+			String roleName = r.readLine();
+			Role r = userMan.getRole(roleName);
+			User u= new User (username,password, r);
+			userMan.register(u);
 		}
 		
 		
 	
-		private static void pharmacyMenu{
+		private static void pharmacyMenu(){
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan.getConnection());
 			doctorManager = new JDBCDoctorManager(conMan.getConnection());

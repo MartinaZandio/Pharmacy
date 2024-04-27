@@ -1,5 +1,7 @@
 package pharmacy.db.jpa;
 
+import java.util.*;
+
 import javax.persistence.*;
 
 import pharmacy.db.interfaces.UserManager;
@@ -17,37 +19,46 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().commit();
 		//Create default roles
 		//if they don't exist already
-		if(this.getRole("pharmacy") ==null) {
-		this.createRole(new Role ("pharmacy"));
-		this.createRole(new Role ("patient"));
+		try {
+			this.getRole("pharmacy");
+		} catch(NoResultException e) {
+			this.createRole(new Role ("pharmacy"));
+			this.createRole(new Role ("patient"));
 		}
+		//if(this.getRole("pharmacy") == null) {
+		//this.createRole(new Role ("pharmacy"));
+		//this.createRole(new Role ("patient"));
+		//}
 	}
 	
 	@Override
 	public void register(User u) {
-		em.getTransaction.begin(); //before every change
+		em.getTransaction().begin();  //before every change
 		em.persist(u);
-		em.getTransaction.commit();//after every change
+		em.getTransaction().commit();  //after every change
 
 	}
 
 	@Override
 	public void createRole(Role r) {
-		em.getTransaction.begin(); //before every change
+		em.getTransaction().begin();  //before every change
 		em.persist(r);
-		em.getTransaction.commit();//after every change
+		em.getTransaction().commit();  //after every change
+
 	}
 
 	@Override
 	public Role getRole(String name) {
-		Query q= em.createNativeQuery("SELECT FROM roles WHERE name LIKE ?", Role.class);
+		Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, name);
 		Role r= (Role) q.getSingleResult();
 		return r;
 	}
 	
 	public List<Role> getAllRoles(){
-		Query q= em.getNAtiveQuery("SELECT * FROM roles", Role.class);
+		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
+		List<Role> roles = (List<Role>) q.getResultList();
+		return roles;
 	}
 
 	@Override
@@ -60,16 +71,17 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public User login(String userName, String password) {
-		Query q= em.createNativeQuery("SELECT FROM users WHERE username = ? AND "
-				+ "password =2 ?", User.class);
-		q.setParameter(1,username);
+		User u;
+		Query q= em.createNativeQuery("SELECT * FROM users WHERE userName = ? AND password = ?", User.class);
+		q.setParameter(1,userName);
 		q.setParameter(2, password);
 		try{
-			User u = (User) q.getSingleResult(); //Cast because you get an object
+			u = (User) q.getSingleResult(); //Cast because you get an object
 		}catch (NoResultException e) {
-			return null
+			return null;
 		}
 		return u;
+
 	}
 
 }

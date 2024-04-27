@@ -18,6 +18,7 @@ public class Role implements Serializable{
 	@TableGenerator (name= "roles", table= "sqlite_sequence",
 			pkColumnName= "name", valueColumnName= "seq", pkColumnValue= "roles")
 	private Integer id;
+	@Column(nullable = false, unique =true)
 	private String name;
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
 	@JoinColumn
@@ -80,8 +81,8 @@ public class Role implements Serializable{
 		}
 	}
 	
-	public void removeUser(USer u) {
+	public void removeUser(User u) {
 		if(users.contains(u))
-			users.remove();
+			users.remove(u);
 	}
 }
