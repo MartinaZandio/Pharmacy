@@ -3,9 +3,9 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
-import pharmacy.db.pojos.Medicine;
-import pharmacy.db.pojos.Patient;
+import pharmacy.db.pojos.*;
 
 public class JDBCPatientManager implements PatientManager {
 	
@@ -16,7 +16,7 @@ public class JDBCPatientManager implements PatientManager {
 		this.conMan = conMan; 
 		this.c = conMan.getConnection();
 	}
-	
+
 	@Override
 	public void addPatient(Patient p) {
 		// TODO Auto-generated method stub
@@ -27,7 +27,7 @@ public class JDBCPatientManager implements PatientManager {
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
-		insert.setInt(4, p.getSex());
+		insert.setString(4, p.getSex().name());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -81,6 +81,22 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public List<Medicine> getTakenMedicines(int patientId) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Patient getPatient(int id) {
+		try {
+			String sql = "SELECT * FROM patients WHERE id = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("sex"));
+			return a;
+		}catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
 		return null;
 	}
 

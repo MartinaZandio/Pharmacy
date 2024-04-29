@@ -4,9 +4,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pharmacy.db.interfaces.*;
+
 public class ConnectionManager {
 
 	private Connection c;
+	private PatientManager patientMan;
+	private DoctorManager doctorMan;
+	private MedicineManager medicineMan;
+	private PrescriptionManager prescriptionMan;
+	
 
 	public Connection getConnection() {
 		return c;
@@ -14,16 +21,20 @@ public class ConnectionManager {
 	
 	public ConnectionManager() {
 		this.Connect();
+		this.patientMan = new JDBCPatientManager(this);
+		this.doctorMan = new JDBCDoctorManager(this);
+		this.medicineMan = new JDBCMedicineManager(this);
+		this.prescriptionMan = new JDBCPrescriptionManager(this);
 		this.createTables();
 	}
 
 	private void Connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c=DriverManager.getConnection("jdbc:sqlite:./db/library.db");
+			c=DriverManager.getConnection("jdbc:sqlite:./db/pharmacy.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 		}catch(ClassNotFoundException cnfE) {
-			System.out.println("Databases libraries not loaded");
+			System.out.println("Databases pharmacy not loaded");
 			cnfE.printStackTrace();
 		}catch(SQLException sqlE) {
 			System.out.println("Error with database");
@@ -49,7 +60,7 @@ public class ConnectionManager {
 					+ " id INTEGER PRIMARY KEY,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
-					+ " sex TEXT NOT NULL)"; //NO SE SI ESTÁ BIEN
+					+ " sex TEXT NOT NULL)";
 			createTables1.executeUpdate(create1);
 			createTables1.close();	
 		}catch(SQLException sqlE) {
@@ -62,6 +73,24 @@ public class ConnectionManager {
 			}
 		}
 	}
+
+	public PatientManager getPatientMan() {
+		return patientMan;
+	}
+
+	public DoctorManager getDoctorMan() {
+		return doctorMan;
+	}
+
+	public MedicineManager getMedicineMan() {
+		return medicineMan;
+	}
+
+	public PrescriptionManager getPrescriptionMan() {
+		return prescriptionMan;
+	}
+	
+	
 		
 	
 }
