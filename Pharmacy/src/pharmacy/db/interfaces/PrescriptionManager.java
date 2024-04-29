@@ -1,8 +1,10 @@
 package pharmacy.db.interfaces;
 import pharmacy.db.pojos.*;
 
-public class PrescriptionManager {
+public interface PrescriptionManager {
 	
-	public void 
+	public void createPrescription(Patient patient);
+	public void modifyPrescription(Prescription prescription);
+	public void assignMedicine(Medicine medicine, Prescription prescription);
 
 }
