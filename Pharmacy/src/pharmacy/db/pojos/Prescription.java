@@ -2,7 +2,7 @@
 	package pharmacy.db.pojos;
 	import java.util.*;
 
-import library.db.pojos.Book;
+import pharmacy.db.pojos.Book;
 
 import java.io.Serializable;
 
