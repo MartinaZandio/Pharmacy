@@ -2,7 +2,8 @@
 	package pharmacy.db.pojos;
 	import java.util.*;
 
-import pharmacy.db.pojos.Book;
+import pharmacy.db.pojos.Medicine;
+import pharmacy.db.pojos.*;
 
 import java.io.Serializable;
 
@@ -12,13 +13,15 @@ import java.io.Serializable;
 	private int quantity;
 	private String issueDate;
 	private String dateUsed;
+	private Patient patient;
 	private ArrayList<Medicine> medicines;
 	
-	public Prescription(int id, int quantity, String issueDate, String dateUsed){
+	public Prescription(int id, int quantity, String issueDate, String dateUsed, Patient patient){
 		this.id= id;
 		this.quantity=quantity;
 		this.issueDate=issueDate;
 		this.dateUsed=dateUsed;
+		this.patient=patient;
 	}
 	
 	public Prescription() {
@@ -60,15 +63,32 @@ import java.io.Serializable;
 	public void setDateUsed(String dateUsed) {
 		this.dateUsed=dateUsed;
 	}
+	
+	public Patient getPatient() {
+		return patient;
+	}
+	
+	public void setPatient(Patient p) {
+		this.patient=p;
+	}
+	
+	public ArrayList<Medicine> getMedicines() {
+		return medicines;
+	}
+
+	public void setMedicines(ArrayList<Medicine> medicines) {
+		this.medicines = medicines;
+	}
 
 	@Override
 	public String toString() {
-		return "Prescription [quantity=" + quantity + ", issueDate=" + issueDate + ", dateUsed=" + dateUsed + "]";
+		return "Prescription [id=" + id + ", quantity=" + quantity + ", issueDate=" + issueDate + ", dateUsed="
+				+ dateUsed + ", patient=" + patient + ", medicines=" + medicines + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateUsed, issueDate, quantity);
+		return Objects.hash(dateUsed, id, issueDate, medicines, patient, quantity);
 	}
 
 	@Override
@@ -80,9 +100,11 @@ import java.io.Serializable;
 		if (getClass() != obj.getClass())
 			return false;
 		Prescription other = (Prescription) obj;
-		return Objects.equals(dateUsed, other.dateUsed) && Objects.equals(issueDate, other.issueDate)
+		return Objects.equals(dateUsed, other.dateUsed) && id == other.id && Objects.equals(issueDate, other.issueDate)
+				&& Objects.equals(medicines, other.medicines) && Objects.equals(patient, other.patient)
 				&& quantity == other.quantity;
 	}
+
 	
 	
 	
