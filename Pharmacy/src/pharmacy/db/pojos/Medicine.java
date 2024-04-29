@@ -7,8 +7,9 @@ public class Medicine implements Serializable {
 
 	private String name;
 	private int numAsigned;
+	private Prescription prescription;
 	private Laboratory laboratory;
-	//list de pharmacys??
+		
 	
 	public Medicine() {
 		super();
@@ -39,17 +40,25 @@ public class Medicine implements Serializable {
 		this.numAsigned=numAsigned;
 	}
 	
-	@Override
-	public String toString() {
-		String texto="";
-		texto+="Name: " + name;
-		texto+="\nNumber Asigned: " + numAsigned;
-		return texto;
+	public Prescription getPrescription() {
+		return prescription;
+	}
+
+	public void setPrescription(Prescription prescription) {
+		this.prescription = prescription;
+	}
+
+	public Laboratory getLaboratory() {
+		return laboratory;
+	}
+
+	public void setLaboratory(Laboratory laboratory) {
+		this.laboratory = laboratory;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, numAsigned);
+		return Objects.hash(laboratory, name, numAsigned, prescription);
 	}
 
 	@Override
@@ -61,8 +70,16 @@ public class Medicine implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Medicine other = (Medicine) obj;
-		return Objects.equals(name, other.name) && numAsigned == other.numAsigned;
+		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
+				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription);
 	}
+
+	@Override
+	public String toString() {
+		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
+				+ ", laboratory=" + laboratory + "]";
+	}
+
 	
 	
 	
