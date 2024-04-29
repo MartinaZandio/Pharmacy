@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.io.Serializable;
 
 public class Laboratory implements Serializable {
+	private Integer id;
 	private String name; 
 	private Integer postalCode; 
 	private String location;
@@ -12,13 +13,22 @@ public class Laboratory implements Serializable {
 			super();
 	 }
 
-	public Laboratory(String name, String location, Integer postalCode) {
+	public Laboratory(Integer id, String name, String location, Integer postalCode) {
 		
+		this.id = id;
 		this.name = name;
 		this.location = location;
 		this.postalCode = postalCode;
 	}
 
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -49,18 +59,10 @@ public class Laboratory implements Serializable {
 		this.location = location;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Laboratory [name=" + name + ", postalCode=" + postalCode + ", location=" + location + "]";
-	}
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(location, name, postalCode);
+		return Objects.hash(id, location, name, postalCode);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -71,9 +73,17 @@ public class Laboratory implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Laboratory other = (Laboratory) obj;
-		return Objects.equals(location, other.location) && Objects.equals(name, other.name)
-				&& Objects.equals(postalCode, other.postalCode);
+		return Objects.equals(id, other.id) && Objects.equals(location, other.location)
+				&& Objects.equals(name, other.name) && Objects.equals(postalCode, other.postalCode);
 	}
+
+	@Override
+	public String toString() {
+		return "Laboratory [id=" + id + ", name=" + name + ", postalCode=" + postalCode + ", location=" + location
+				+ "]";
+	}
+
+
 	
 	
 }

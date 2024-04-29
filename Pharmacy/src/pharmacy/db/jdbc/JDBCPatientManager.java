@@ -99,5 +99,11 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return null;
 	}
+	@Override
+	public void identifyPatient(Patient patient) {
+		// TODO Auto-generated method stub
+
+	}
+
 
 }

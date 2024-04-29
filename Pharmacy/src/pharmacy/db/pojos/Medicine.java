@@ -9,11 +9,7 @@ public class Medicine implements Serializable {
 	private int numAsigned;
 	private Prescription prescription;
 	private Laboratory laboratory;
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	
+
 	public Medicine() {
 		super();
 	}

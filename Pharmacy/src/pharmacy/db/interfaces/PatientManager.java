@@ -11,5 +11,6 @@ public interface PatientManager {
 	List<Patient> searchPatientByName(String name);
 	List<Patient> searchPatientById(int id);
 	void deletePatient(Patient p);
+	void identifyPatient(Patient patient);
 	
 }
