@@ -13,7 +13,7 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static PatientManager patientManager = new JDBCPatientManager();
+	private static PatientProfile patientManager = new JDBCPatientManager();
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		System.out.println("Choose your desired option");

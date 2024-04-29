@@ -10,7 +10,7 @@ public interface MedicineManager {
 	
 	
 	public void addMedicine(Medicine medicine);
-	public void searchMedicine( )
+	public void searchMedicine( );
 	
 	
 	public Medicine getmedicine(int id) {
