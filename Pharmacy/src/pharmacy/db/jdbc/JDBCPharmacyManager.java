@@ -49,5 +49,13 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		// TODO Auto-generated method stub
 
 	}
+	
+
+	@Override
+	public void assignMedicine(Medicine medicine) {
+		// TODO Auto-generated method stub
+
+	}
+
 
 }

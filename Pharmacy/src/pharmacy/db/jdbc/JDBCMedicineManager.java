@@ -38,20 +38,13 @@ public class JDBCMedicineManager implements MedicineManager {
 
 	@Override
 	public void searchMedicine() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public Medicine getMedicine(int id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void assignMedicine() {
-		// TODO Auto-generated method stub
-
 	}
 
 }
