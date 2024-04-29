@@ -1,6 +1,8 @@
 package pharmacy.db.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import pharmacy.db.interfaces.PrescriptionManager;
 import pharmacy.db.pojos.*;
@@ -16,20 +18,24 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-	public void createPrescription(Patient patient) {
-		// TODO Auto-generated method stub
-
+	public void createPrescription() {
+		Prescription p= new Prescription();
+		try {
+			String template = "INSERT INTO prescription (id, quantity, issueDate, dateUsed) VALUES (?, ?, ?, ?)";
+			PreparedStatement pstmt;
+			pstmt = c.prepareStatement(template);
+			pstmt.setInt(1, p.getId());
+			pstmt.setInt(2, p.getQuantity());
+			pstmt.setString(3, p.getIssueDate());
+			pstmt.setString(4, p.getDateUsed());
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			System.out.println("Error creating the prescription");
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	public void modifyPrescription(Prescription prescription) {
-		// TODO Auto-generated method stub
 
-	}
-	
-	@Override
-	public void assignMedicine(Medicine medicine, Prescription prescription) {
-		// TODO Auto-generated method stub
 
-	}
 }

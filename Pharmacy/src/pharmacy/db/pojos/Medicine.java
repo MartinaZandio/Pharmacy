@@ -2,6 +2,9 @@ package pharmacy.db.pojos;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.*;
+
+import pharmacy.db.pojos.Prescription;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
@@ -10,10 +13,13 @@ public class Medicine implements Serializable {
 	private int numAsigned;
 	private Prescription prescription;
 	private Laboratory laboratory;
-	private ArrayList<Stock> stock;
-	
+	private ArrayList<Stock> stock;	
+	private ArrayList<Prescription> prescriptions;
+
+
 	public Medicine() {
 		super();
+		this.prescriptions= new ArrayList<Prescription>();
 	}
 	
 	
@@ -63,6 +69,16 @@ public class Medicine implements Serializable {
 	public void setLaboratory(Laboratory laboratory) {
 		this.laboratory = laboratory;
 	}
+	
+
+	public ArrayList<Prescription> getBorrowersPrescriptions() {
+		return prescriptions;
+	}
+
+	public void setBorrowers(ArrayList<Prescription> prescriptions) {
+		this.prescriptions = prescriptions;
+	}
+
 
 	public ArrayList<Stock> getStock() {
 		return stock;
@@ -72,10 +88,14 @@ public class Medicine implements Serializable {
 		this.stock = stock;
 	}
 
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(laboratory, name, numAsigned, prescription, stock);
+		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -88,18 +108,21 @@ public class Medicine implements Serializable {
 		Medicine other = (Medicine) obj;
 		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
 				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
-				&& Objects.equals(stock, other.stock);
+				&& Objects.equals(prescriptions, other.prescriptions) && Objects.equals(stock, other.stock);
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
-				+ ", laboratory=" + laboratory + ", stock=" + stock + "]";
+				+ ", laboratory=" + laboratory + ", stock=" + stock + ", prescriptions=" + prescriptions + "]";
 	}
 
 	
 	
 	
-	
 }
- 
+	
+	
+	
