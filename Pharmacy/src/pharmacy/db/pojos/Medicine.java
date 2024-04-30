@@ -18,14 +18,10 @@ public class Medicine implements Serializable {
 	private String name;
 	private int numAsigned;
 	private Prescription prescription;
-<<<<<<< HEAD
 	private Laboratory laboratory;
-	
-=======
 	private Laboratory laboratory;
 	private ArrayList<Stock> stock;	
 	private ArrayList<Prescription> prescriptions;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 
 
 	public Medicine() {
@@ -79,8 +75,6 @@ public class Medicine implements Serializable {
 	public void setLaboratory(Laboratory laboratory) {
 		this.laboratory = laboratory;
 	}
-<<<<<<< HEAD
-=======
 	
 
 	public ArrayList<Prescription> getBorrowersPrescriptions() {
@@ -95,8 +89,6 @@ public class Medicine implements Serializable {
 	public ArrayList<Stock> getStock() {
 		return stock;
 	}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-
 	public void setStock(ArrayList<Stock> stock) {
 		this.stock = stock;
 	}
@@ -105,11 +97,9 @@ public class Medicine implements Serializable {
 
 	@Override
 	public int hashCode() {
-<<<<<<< HEAD
+
 		return Objects.hash(laboratory, name, numAsigned, prescription);
-=======
 		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock);
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	}
 
 
@@ -124,27 +114,24 @@ public class Medicine implements Serializable {
 			return false;
 		Medicine other = (Medicine) obj;
 		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
-<<<<<<< HEAD
 				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription);
-=======
 				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
 				&& Objects.equals(prescriptions, other.prescriptions) && Objects.equals(stock, other.stock);
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+
 	}
 
-<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
 				+ ", laboratory=" + laboratory + "]";
-=======
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
 				+ ", laboratory=" + laboratory + ", stock=" + stock + ", prescriptions=" + prescriptions + "]";
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	}
 
 	

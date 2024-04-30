@@ -77,6 +77,28 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void assignMedicine(Medicine medicine) {
 		// TODO Auto-generated method stub
+		try {
+			String template = "SELECT * FROM patients WHERE name LIKE ?";
+			String template2= "SELECT * FROM medicine WHERE name LIKE ?";
+			PreparedStatement search = c.prepareStatement(template);
+			search.setString(1, "%" + name + "%");
+			ResultSet rs = search.executeQuery();
+			
+			PreparedStatement search = c.prepareStatement(template2);
+			search.setString(1, "%" + name + "%");
+			ResultSet rs = search.executeQuery();
+			
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				Date dateOfBirth = rs.getDate("dateOfBirth");
+				gender gender = rs.getgender("gender");
+				}
+			} catch (SQLException e) {
+				System.out.println("Error assigning the medicine");
+				e.printStackTrace();
+				}
+		}
 
 	}
 
