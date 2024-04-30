@@ -18,6 +18,7 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
+<<<<<<< HEAD
 
 	public enum gender{MALE, FEMALE}
 
@@ -29,13 +30,16 @@ public class Patient implements Serializable{
 	}
 >>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	private gender sex;
+=======
+	private String sex;
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	
 	public Patient() {
 		super();
 	}
 
 	
-	public Patient(Integer id, String name, Date dateOfBirth, gender sex) {
+	public Patient(Integer id, String name, Date dateOfBirth, String sex) {
 		super();
 		this.id=id;
 		this.name=name;
@@ -68,11 +72,11 @@ public class Patient implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public gender getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(gender sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -96,7 +100,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + "]";
+		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", Gender=" + sex + "]";
 	}
 	
 	

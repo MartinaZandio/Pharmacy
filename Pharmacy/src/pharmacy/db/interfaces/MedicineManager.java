@@ -11,7 +11,7 @@ public interface MedicineManager {
 	
 	
 	public void addMedicine(Medicine medicine);
-	public ArrayList<Medicine> searchMedicine(String name);
+	public ArrayList<Medicine> searchMedicineByName(String name);
 	public Medicine getMedicine(int id);
 	
 	

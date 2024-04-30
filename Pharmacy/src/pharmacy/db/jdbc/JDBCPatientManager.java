@@ -19,7 +19,6 @@ public class JDBCPatientManager implements PatientManager {
 
 	@Override
 	public void addPatient(Patient p) {
-		// TODO Auto-generated method stub
 		try {
 		String template= "INSERT INTO patient (id, name, dateOfBirth, sex)"
 				+ "VALUES (?,?,?,?);";
@@ -27,7 +26,7 @@ public class JDBCPatientManager implements PatientManager {
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
-		insert.setString(4, p.getSex().name());
+		insert.setString(4, p.getSex());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -38,8 +37,26 @@ public class JDBCPatientManager implements PatientManager {
 
 	@Override
 	public List<Patient> searchPatientByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients= new ArrayList<Patient>();
+		try {
+			String sql= "SELECT * FROM patient WHERE name = ?"; //this string is a template
+			PreparedStatement search=c.prepareStatement(sql);
+			search.setString(1, name); //Fills the question marks
+			ResultSet rs= search.executeQuery();
+			while(rs.next()) {
+				Integer identity= rs.getInt("id");
+				String nme= rs.getString("name");
+				Date DOB= rs.getDate("dateOfBirth");
+				String sex= rs.getString("Sex"); 
+				Patient Patient = new Patient(identity,nme,DOB,sex);
+			}
+			return patients;
+		}catch(SQLException e){
+			System.out.println("Error looking for a book");
+			e.printStackTrace();
+		}
+		
+		return patients;
 	}
 
 	@Override
@@ -54,8 +71,8 @@ public class JDBCPatientManager implements PatientManager {
 				Integer identity= rs.getInt("id");
 				String nme= rs.getString("name");
 				Date DOB= rs.getDate("dateOfBirth");
-				Patient.gender s= Patient.gender.valueOf(rs.getString("Gender")); //¿Como ponemos la enumeracion aqui?
-				Patient Patient = new Patient(identity,nme,DOB,s);
+				String sex= rs.getString("Sex"); 
+				Patient Patient = new Patient(identity,nme,DOB,sex);
 			}
 			return patients;
 		}catch(SQLException e){
@@ -67,31 +84,21 @@ public class JDBCPatientManager implements PatientManager {
 	}
 
 	@Override
-	public void deletePatient(Patient p) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void takeMedicine(int patientId, int medicineId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Medicine> getTakenMedicines(int patientId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deletePatient(Patient p) throws SQLException {
+		String template = "DELETE FROM patient WHERE id = ?";
+		PreparedStatement delete= c.prepareStatement(template);
+		delete.setInt(1,p.getId());
+		delete.executeUpdate();
 	}
 	
 	public Patient getPatient(int id) {
 		try {
-			String sql = "SELECT * FROM patients WHERE id = " + id;
+			String sql = "SELECT * FROM patient WHERE id = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("sex"));
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"));
 			return a;
 		}catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -100,10 +107,24 @@ public class JDBCPatientManager implements PatientManager {
 		return null;
 	}
 	@Override
-	public void identifyPatient(Patient patient) {
-		// TODO Auto-generated method stub
-
-	}
+	public void identifyPatient(Patient p) {
+		try {
+			String sql= "SELECT * FROM patient WHERE id LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				Date dateOfBirth = rs.getDate("dateOfBirth");
+				String sex = rs.getString("sex");
+				Patient patient = new Patient(id, name, dateOfBirth, sex);
+				System.out.println(patient);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 
 }
+

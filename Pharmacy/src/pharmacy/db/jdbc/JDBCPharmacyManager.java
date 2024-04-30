@@ -13,12 +13,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.db.pojos.Author;
-import library.db.pojos.Book;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
+<<<<<<< HEAD
 import pharmacy.db.pojos.Patient.gender;
 import sample.db.pojos.Department;
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
@@ -66,15 +67,20 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void checkStock(Medicine medicine) {
-		// TODO Auto-generated method stub
+	public void checkStock(String name) {
+		
 
 	}
 
 	@Override
 	public void orderStock(Medicine medicine) {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 	
+=======
+
+		
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	}
 
 	@Override
@@ -101,6 +107,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public void assignMedicine(Medicine medicine) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void checkStock(Medicine medicine) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

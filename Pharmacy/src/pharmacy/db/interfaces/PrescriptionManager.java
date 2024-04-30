@@ -5,4 +5,6 @@ public interface PrescriptionManager {
 	
 	public void createPrescription();
 
+	public Prescription getPrescription(int id);
+
 }
