@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +44,14 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			// Change a department's location: beginning
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Choose a prescription by typing its ID: ");
-			// Show all ids meethod??
+			// Show all id's method??
 			int presc_id = Integer.parseInt(reader.readLine());
 			
 			// useDate = CurrentDate
+			LocalDate useDate; 
+		
 			
+		
 			System.out.println("Update finished.");
 
 		} catch (Exception e) {
