@@ -43,15 +43,15 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void checkStock(Medicine medicine) {
-		// TODO Auto-generated method stub
+	public void checkStock(String name) {
+		
 
 	}
 
 	@Override
 	public void orderStock(Medicine medicine) {
-		// TODO Auto-generated method stub
 
+		
 	}
 
 	@Override

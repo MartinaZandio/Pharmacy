@@ -6,7 +6,6 @@ import java.util.*;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
 import pharmacy.db.pojos.*;
-import sample.db.pojos.Employee;
 
 public class JDBCPatientManager implements PatientManager {
 	
@@ -27,7 +26,7 @@ public class JDBCPatientManager implements PatientManager {
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
-		insert.setString(4, p.getSex().name());
+		insert.setString(4, p.getSex());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -90,7 +89,6 @@ public class JDBCPatientManager implements PatientManager {
 		PreparedStatement delete= c.prepareStatement(template);
 		delete.setInt(1,p.getId());
 		delete.executeUpdate();
-		
 	}
 	
 	public Patient getPatient(int id) {

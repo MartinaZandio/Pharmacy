@@ -12,6 +12,7 @@ public interface PharmacyManager {
 	public void orderStock(Medicine medicine);
 	public void identifyPatient(Patient patient);
 	void assignMedicine(Medicine medicine);
+	void checkStock(String name);
 	
 	
 	
