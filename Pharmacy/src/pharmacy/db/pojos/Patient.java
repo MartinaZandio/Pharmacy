@@ -18,20 +18,14 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
-	public enum gender{MALE, FEMALE};
-
-	gender valueOf(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private gender sex;
+	private String sex;
 	
 	public Patient() {
 		super();
 	}
 
 	
-	public Patient(Integer id, String name, Date dateOfBirth, gender sex) {
+	public Patient(Integer id, String name, Date dateOfBirth, String sex) {
 		super();
 		this.id=id;
 		this.name=name;
@@ -64,11 +58,11 @@ public class Patient implements Serializable{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public gender getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(gender sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -92,7 +86,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + "]";
+		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", Gender=" + sex + "]";
 	}
 	
 	
