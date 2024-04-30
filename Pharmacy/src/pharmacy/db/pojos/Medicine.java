@@ -1,9 +1,7 @@
 package pharmacy.db.pojos;
 
-import java.util.*;
-
-import pharmacy.db.pojos.Prescription;
-
+import java.util.ArrayList;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
@@ -12,11 +10,10 @@ public class Medicine implements Serializable {
 	private int numAsigned;
 	private Prescription prescription;
 	private Laboratory laboratory;
-	private ArrayList<Prescription> prescriptions;
+	
 
 	public Medicine() {
 		super();
-		this.prescriptions= new ArrayList<Prescription>();
 	}
 	
 	public Medicine(String name, int numAsigned){
@@ -59,25 +56,10 @@ public class Medicine implements Serializable {
 	public void setLaboratory(Laboratory laboratory) {
 		this.laboratory = laboratory;
 	}
-	
-
-	public ArrayList<Prescription> getBorrowersPrescriptions() {
-		return prescriptions;
-	}
-
-	public void setBorrowers(ArrayList<Prescription> prescriptions) {
-		this.prescriptions = prescriptions;
-	}
-
-	@Override
-	public String toString() {
-		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
-				+ ", laboratory=" + laboratory + ", prescriptions=" + prescriptions + "]";
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions);
+		return Objects.hash(laboratory, name, numAsigned, prescription);
 	}
 
 	@Override
@@ -90,12 +72,17 @@ public class Medicine implements Serializable {
 			return false;
 		Medicine other = (Medicine) obj;
 		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
-				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
-				&& Objects.equals(prescriptions, other.prescriptions);
+				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription);
 	}
+
+	@Override
+	public String toString() {
+		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
+				+ ", laboratory=" + laboratory + "]";
+	}
+
+	
 	
 	
 }
-	
-	
-	
+ 
