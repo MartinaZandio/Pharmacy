@@ -19,7 +19,6 @@ public class Medicine implements Serializable {
 	private int numAsigned;
 	private Prescription prescription;
 	private Laboratory laboratory;
-	private Laboratory laboratory;
 	private ArrayList<Stock> stock;	
 	private ArrayList<Prescription> prescriptions;
 

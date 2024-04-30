@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void checkAuthenticity(Prescription prescription) {
 		// TODO Auto-generated method stub
+		
+			
+		}
+		
+		
 
 	}
 
@@ -75,31 +81,26 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 
 	@Override
-	public void assignMedicine(Medicine medicine) {
+	public void assignMedicine(Medicine medicine, Prescription prescription) {
 		// TODO Auto-generated method stub
-		try {
-			String template = "SELECT * FROM patients WHERE name LIKE ?";
-			String template2= "SELECT * FROM medicine WHERE name LIKE ?";
-			PreparedStatement search = c.prepareStatement(template);
-			search.setString(1, "%" + name + "%");
-			ResultSet rs = search.executeQuery();
+		try { //open data base connection
+			Statement stmt=c.createStatement();
+			String sql;
+			sql = "INSERT INTO prescriptionMedicine (medicine_numAsigned, prescription_id)"
+					+ "VALUES (?,?);";
 			
-			PreparedStatement search = c.prepareStatement(template2);
-			search.setString(1, "%" + name + "%");
-			ResultSet rs = search.executeQuery();
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setInt(1, medicine.getNumAsigned());
+			insert.setInt(2, prescription.getId());
 			
-			while(rs.next()) {
-				Integer id = rs.getInt("id");
-				String name = rs.getString("name");
-				Date dateOfBirth = rs.getDate("dateOfBirth");
-				gender gender = rs.getgender("gender");
-				}
-			} catch (SQLException e) {
-				System.out.println("Error assigning the medicine");
-				e.printStackTrace();
-				}
-		}
-
+			insert.executeUpdate();
+			insert.close();
+		
+	}
+		catch (SQLException sqlE) {
+			System.out.println("Error");
+			sqlE.printStackTrace();
+			
 	}
 
 
