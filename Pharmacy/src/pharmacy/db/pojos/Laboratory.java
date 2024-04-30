@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.io.Serializable;
 
 public class Laboratory implements Serializable {
+	
+	private static final long serialVersionUID = 6266743280482303416L;
 	private Integer id;
 	private String name; 
 	private Integer postalCode; 

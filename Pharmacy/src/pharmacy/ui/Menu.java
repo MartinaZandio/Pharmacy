@@ -23,6 +23,7 @@ public class Menu {
 	private static PatientManager patientManager;
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
+	private static LaboratoryManager laboratoryManager;
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	

@@ -1,16 +1,14 @@
 package pharmacy.db.jdbc;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import library.db.pojos.Author;
-import library.db.pojos.Book;
-import pharmacy.db.interfaces.MedicineManager;
+import pharmacy.db.interfaces.*;
 import pharmacy.db.pojos.*;
 
 public class JDBCMedicineManager implements MedicineManager {
@@ -41,51 +39,30 @@ public class JDBCMedicineManager implements MedicineManager {
 			}
 
 	}
-
+	
 	@Override
-	public ArrayList<Medicine> searchMedicine(String name) {
+	public ArrayList<Medicine> searchMedicineByName(String name){
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setString(1, "%" + name + "%");
+			search.setString(1, "%" +name+ "%");
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer numAsigned = rs.getInt("numAsigned");
 				String medicineName = rs.getString("name");
-				Integer authorId = rs.getInt("author_id");
-				Prescription prescription = conMan.getPrescriptionMan().getPrescription().getId;
-				Author author = conMan.getAuthorMan().getAuthor(authorId);
-				Book newBook = new Book(isbn, bookTitle, pubDate, author);
-				books.add(newBook);
-		}
-		
-	}
-	
-	public List<Book> searchBookByTitle(String title) {
-		List<Book> books = new ArrayList<Book>();
-		try {
-			String sql = "SELECT * FROM books WHERE title LIKE ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setString(1, "%" + title + "%");
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer isbn = rs.getInt("isbn");
-				String bookTitle = rs.getString("title");
-				Date pubDate = rs.getDate("publicationDate");
-				Integer authorId = rs.getInt("author_id");
-				Author author = conMan.getAuthorMan().getAuthor(authorId);
-				Book newBook = new Book(isbn, bookTitle, pubDate, author);
-				books.add(newBook);
+				Array stock = rs.getArray("stock");
+				//Prescription prescription = conMan.getPrescriptionMan().getPrescription(prescriptionId);
+				//Laboratory laboratory = conMan.getLaboratoryMan().getLaboratory().getId;
 			}
-			return books;
-		} catch (SQLException e) {
-			System.out.println("Error looking for a book");
+		}catch(SQLException e) {
+			System.out.println("Error looking for a medicine");
 			e.printStackTrace();
 		}
-		return books;
+		return medicines;
 	}
 
+	
 	@Override
 	public Medicine getMedicine(int id) {
 		// TODO Auto-generated method stub

@@ -9,11 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.db.pojos.Author;
-import library.db.pojos.Book;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
-import pharmacy.db.pojos.Patient.gender;
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
@@ -49,15 +46,15 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void checkStock(Medicine medicine) {
-		// TODO Auto-generated method stub
+	public void checkStock(String name) {
+		
 
 	}
 
 	@Override
 	public void orderStock(Medicine medicine) {
-		// TODO Auto-generated method stub
 
+		
 	}
 
 	@Override
@@ -101,6 +98,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			System.out.println("Error");
 			sqlE.printStackTrace();
 			
+	}
+
+	@Override
+	public void checkStock(Medicine medicine) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
