@@ -18,9 +18,9 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
-<<<<<<< HEAD
+
 	public enum gender{MALE, FEMALE}
-=======
+
 	public enum gender{MALE, FEMALE};
 
 	gender valueOf(String string) {

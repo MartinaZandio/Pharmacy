@@ -1,10 +1,14 @@
 package pharmacy.db.jdbc;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +17,7 @@ import library.db.pojos.Book;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
 import pharmacy.db.pojos.Patient.gender;
+import sample.db.pojos.Department;
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
@@ -27,13 +32,27 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {
 		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void markPrescriptionAsUsed(Prescription prescription) {
 		// TODO Auto-generated method stub
+		try {
+			// Change a department's location: beginning
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Choose a prescription by typing its ID: ");
+			// Show all ids meethod??
+			int presc_id = Integer.parseInt(reader.readLine());
+			
+			// useDate = CurrentDate
+			
+			System.out.println("Update finished.");
 
+		} catch (Exception e) {
+			System.out.println("Error modifying prescription.");
+		}
 	}
 
 	@Override
@@ -51,7 +70,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void orderStock(Medicine medicine) {
 		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override
@@ -66,7 +85,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				gender gender = rs.getgender("gender");
+				gender sex = rs.getSex("sex");
 				}
 			} catch (SQLException e) {
 				System.out.println("Error creating the prescription");
