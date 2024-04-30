@@ -3,6 +3,7 @@ package pharmacy.db.interfaces;
 import java.beans.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 import pharmacy.db.pojos.*;
 
@@ -10,9 +11,13 @@ public interface MedicineManager {
 	
 	
 	public void addMedicine(Medicine medicine);
+<<<<<<< HEAD
 	public void searchMedicine( );
 <<<<<<< HEAD
 =======
+=======
+	public ArrayList<Medicine> searchMedicine(String name);
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public Medicine getMedicine(int id);
 >>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	

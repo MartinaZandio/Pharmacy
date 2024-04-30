@@ -10,7 +10,6 @@ public class ConnectionManager {
 
 	private Connection c;
 	private PatientManager patientMan;
-	private DoctorManager doctorMan;
 	private MedicineManager medicineMan;
 	private PrescriptionManager prescriptionMan;
 	
@@ -22,7 +21,6 @@ public class ConnectionManager {
 	public ConnectionManager() {
 		this.Connect();
 		this.patientMan = new JDBCPatientManager(this);
-		this.doctorMan = new JDBCDoctorManager(this);
 		this.medicineMan = new JDBCMedicineManager(this);
 		this.prescriptionMan = new JDBCPrescriptionManager(this);
 		this.createTables();
@@ -78,9 +76,6 @@ public class ConnectionManager {
 		return patientMan;
 	}
 
-	public DoctorManager getDoctorMan() {
-		return doctorMan;
-	}
 
 	public MedicineManager getMedicineMan() {
 		return medicineMan;
