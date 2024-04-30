@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 	public class Prescription implements Serializable{
 
+	
+	private static final long serialVersionUID = -758766051603616038L;
 	private int id;
 	private int quantity;
 	private String issueDate;

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.*;
 
-import pharmacy.db.pojos.Prescription;
+import pharmacy.db.pojos.*;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private int numAsigned;
 	private Prescription prescription;
