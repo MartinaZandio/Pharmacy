@@ -8,11 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.db.pojos.Author;
-import library.db.pojos.Book;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
-import pharmacy.db.pojos.Patient.gender;
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
@@ -78,6 +75,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public void assignMedicine(Medicine medicine) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void checkStock(Medicine medicine) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
