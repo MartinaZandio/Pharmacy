@@ -10,11 +10,10 @@ public class Pharmacy implements Serializable{
 	String location; 
 	Integer postalCode; 
 	Integer numberOfWorkers;
-	private ArrayList<Medicine> medicines;
+	private ArrayList<Stock> stock;
 	
 	public Pharmacy() {
 		super();
-		this.medicines= new ArrayList<Medicine>();
 		
 	}
 	
@@ -54,9 +53,17 @@ public class Pharmacy implements Serializable{
 		this.numberOfWorkers = numberOfWorkers;
 	}
 
+	public ArrayList<Stock> getStock() {
+		return stock;
+	}
+
+	public void setStock(ArrayList<Stock> stock) {
+		this.stock = stock;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(location, name, numberOfWorkers, postalCode);
+		return Objects.hash(location, name, numberOfWorkers, postalCode, stock);
 	}
 
 	@Override
@@ -69,13 +76,16 @@ public class Pharmacy implements Serializable{
 			return false;
 		Pharmacy other = (Pharmacy) obj;
 		return Objects.equals(location, other.location) && Objects.equals(name, other.name)
-				&& numberOfWorkers == other.numberOfWorkers && postalCode == other.postalCode;
+				&& Objects.equals(numberOfWorkers, other.numberOfWorkers)
+				&& Objects.equals(postalCode, other.postalCode) && Objects.equals(stock, other.stock);
 	}
 
 	@Override
 	public String toString() {
 		return "Pharmacy [name=" + name + ", location=" + location + ", postalCode=" + postalCode + ", numberOfWorkers="
-				+ numberOfWorkers + "]";
+				+ numberOfWorkers + ", stock=" + stock + "]";
 	}
+
+	
 	
 }

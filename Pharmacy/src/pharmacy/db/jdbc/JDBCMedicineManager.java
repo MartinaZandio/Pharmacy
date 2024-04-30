@@ -43,7 +43,22 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 
 	@Override
-	public void searchMedicine() {
+	public ArrayList<Medicine> searchMedicine(String name) {
+		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+		try {
+			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setString(1, "%" + name + "%");
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer numAsigned = rs.getInt("numAsigned");
+				String medicineName = rs.getString("name");
+				Integer authorId = rs.getInt("author_id");
+				Prescription prescription = conMan.getPrescriptionMan().getPrescription().getId;
+				Author author = conMan.getAuthorMan().getAuthor(authorId);
+				Book newBook = new Book(isbn, bookTitle, pubDate, author);
+				books.add(newBook);
+		}
 		
 	}
 	
