@@ -17,13 +17,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.db.pojos.Author;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
 import pharmacy.db.pojos.Patient.gender;
-import sample.db.graphics.ImageWindow;
-import sample.db.pojos.Department;
-import sample.db.pojos.Employee;
 
 
 public class JDBCPharmacyManager implements PharmacyManager {
