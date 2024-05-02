@@ -15,11 +15,9 @@ import java.util.List;
 
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
-<<<<<<< HEAD
 import pharmacy.db.pojos.Patient.gender;
 import sample.db.pojos.Department;
-=======
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	

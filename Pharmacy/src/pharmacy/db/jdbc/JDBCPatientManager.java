@@ -1,4 +1,5 @@
 package pharmacy.db.jdbc;
+
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
@@ -6,6 +7,7 @@ import java.util.*;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
 import pharmacy.db.pojos.*;
+
 
 public class JDBCPatientManager implements PatientManager {
 	

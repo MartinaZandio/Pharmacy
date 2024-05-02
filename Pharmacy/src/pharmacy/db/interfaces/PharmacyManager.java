@@ -1,7 +1,9 @@
 package pharmacy.db.interfaces;
 
 import java.util.List;
+
 import pharmacy.db.pojos.*;
+
 
 public interface PharmacyManager {
 

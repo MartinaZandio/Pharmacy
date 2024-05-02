@@ -1,7 +1,9 @@
 package pharmacy.db.jdbc;
 
 import java.sql.Connection;
+
 import pharmacy.db.interfaces.*;
+
 
 public class JDBCLaboratoryManager implements LaboratoryManager {
 	
