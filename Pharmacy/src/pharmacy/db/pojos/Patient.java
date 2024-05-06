@@ -18,6 +18,16 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
+	public enum gender{MALE, FEMALE}
+
+	public enum gender{MALE, FEMALE};
+
+	gender valueOf(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private gender sex;
 	private String sex;
 	
 	public Patient() {

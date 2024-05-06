@@ -1,8 +1,9 @@
 package pharmacy.db.interfaces;
-import pharmacy.db.pojos.*;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import pharmacy.db.pojos.*;
 
 
 public interface PatientManager {

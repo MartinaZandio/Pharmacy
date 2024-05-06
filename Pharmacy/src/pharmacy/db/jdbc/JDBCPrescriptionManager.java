@@ -5,15 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
 import java.sql.Statement;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-
 import pharmacy.db.interfaces.*;
 import pharmacy.db.pojos.*;
+
 
 public class JDBCPrescriptionManager implements PrescriptionManager {
 
