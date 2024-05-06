@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import library.db.pojos.Author;
+import library.db.pojos.Borrower;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
 import pharmacy.db.pojos.Patient.gender;
@@ -37,9 +39,20 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
+	// En las tabla prescription no hay nada que relacione una medicina especifica con un paciente tan solo la cantidad 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {
-		// TODO Auto-generated method stub
-		
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Choose a medicine by typing its ID: " );
+			// Show medicines's ID method 
+			int dep_id = Integer.parseInt(reader.readLine());
+			System.out.println("Choose a patient to assigng the medicine: ");
+			// Show patients method
+			String patient1 = reader.readLine();
+			String sql = "UPDATE prescriptions WHERE ";
+		} catch (Exception e) {
+			System.out.println("Error modifying prescription.");
+		}
 
 	}
 
@@ -64,19 +77,30 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 	}
 	
-
+	
 	@Override
-	public void checkAuthenticity(Prescription prescription) {
-		// TODO Auto-generated method stub
-
+	public boolean checkAuthenticity() {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Type the prescription id: ");
+			// Show prescription 
+			int prescription_id = Integer.parseInt(reader.readLine());
+			String sql = "SELECT useDate FROM prescriptions WHERE id LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql); 
+			search.setInt(1, prescription_id);
+			ResultSet rs = search.executeQuery();
+			rs.next();
+			Date useDate = rs.getDate("useDate");
+			if (useDate != null) {
+				return true;
+			} else return false;
+		} catch (SQLException | NumberFormatException | IOException e) {
+			System.out.println("Error creating the prescription");
+			e.printStackTrace();
+			}
 	}
 
-	@Override
-	public void checkStock(String name) {
-		
-
-	}
-
+	
 	@Override
 	public void orderStock(Medicine medicine) {
 		// TODO Auto-generated method stub
@@ -97,10 +121,10 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name1 = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				gender sex = rs.getSex("sex");
+				gender sex = gender.valueOf(rs.getString("sex"));
 				Patient p = new Patient(id, name, dateOfBirth, sex);
 				System.out.println(p);
-			}
+			} // to INSERT sex.name()
 			rs.close();
 			search.close();
 			System.out.println("Search finished.");
@@ -114,11 +138,17 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	
 	
 	@Override
-	public void assignMedicine(Medicine medicine) {
+	public void assignMedicine() {
 		// TODO Auto-generated method stub
-
+		try {
+			
+		} catch (SQLException e) {
+			System.out.println("Error creating the prescription");
+			e.printStackTrace();
+			}
 	}
-
+	
+	
 	@Override
 	public void checkStock(Medicine medicine) {
 		try {
@@ -133,7 +163,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			System.out.println("Search finished.");
 			c.close();
 			System.out.println("Database connection closed.");
-		} catch (SQLException e) {
+		} catch (SQLException | NumberFormatException | IOException e) {
 			System.out.println("Error creating the prescription");
 			e.printStackTrace();
 			}
