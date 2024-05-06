@@ -43,8 +43,6 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		
 		
 
-	}
-
 	@Override
 	public void checkStock(String name) {
 		
@@ -69,7 +67,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				gender gender = rs.getgender("gender");
+				String sex = rs.getString("gender");
 				}
 			} catch (SQLException e) {
 				System.out.println("Error creating the prescription");
@@ -102,5 +100,17 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 
 
+	}
+
+	@Override
+	public void checkStock(Medicine medicine) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void assignMedicine(Medicine medicine) {
+		// TODO Auto-generated method stub
+		
 	}
 	}
