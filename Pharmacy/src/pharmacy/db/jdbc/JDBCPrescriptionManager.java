@@ -50,7 +50,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Prescription p = new Prescription (rs.getInt("id"), rs.getInt("quantity"), rs.getString("issueDate"), rs.getString("dateUsed"), rs.getPatient().getId(id));
+			Prescription p = new Prescription (rs.getInt("id"), rs.getInt("quantity"), rs.getString("issueDate"), rs.getString("dateUsed"));
 			return p;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
