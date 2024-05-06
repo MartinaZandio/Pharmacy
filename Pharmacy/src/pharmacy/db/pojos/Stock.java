@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Stock implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5309087422405888889L;
 	private Pharmacy pharmacy;
 	private Medicine medicine;
 	private ArrayList<Stock> stock;
