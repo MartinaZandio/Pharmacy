@@ -105,7 +105,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	
 	@Override
 	public void orderStock(Medicine medicine) {
-
+		
 		
 	}
 
@@ -141,6 +141,9 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		}
 
+<<<<<<< HEAD
+}
+=======
 	@Override
 <<<<<<< HEAD
 	public void assignMedicine() {
@@ -214,3 +217,4 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 >>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	}
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy

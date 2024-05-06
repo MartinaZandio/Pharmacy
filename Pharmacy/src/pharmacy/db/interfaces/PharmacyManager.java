@@ -13,13 +13,8 @@ public interface PharmacyManager {
 	public void checkStock(Medicine medicine);
 	public void orderStock(Medicine medicine);
 	public void identifyPatient(Patient patient);
+
 	void assignMedicine(Medicine medicine);
-<<<<<<< HEAD
 	void assignMedicine(Medicine medicine, Prescription prescription);
-=======
-	void checkStock(String name);
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	
-	
-	
+
 }
