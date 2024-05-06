@@ -1,15 +1,8 @@
 package pharmacy.db.jdbc;
 
-<<<<<<< HEAD
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-=======
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,11 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import library.db.pojos.Author;
-import library.db.pojos.Borrower;
-=======
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
 
@@ -38,9 +26,13 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	// En las tabla prescription no hay nada que relacione una medicina especifica con un paciente tan solo la cantidad 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {
-<<<<<<< HEAD
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void markPrescriptionAsUsed(Prescription prescription) {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Choose a medicine by typing its ID: " );
@@ -53,25 +45,10 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		} catch (Exception e) {
 			System.out.println("Error modifying prescription.");
 		}
-=======
-		// TODO Auto-generated method stub
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 
 	}
 
 	@Override
-	public void markPrescriptionAsUsed(Prescription prescription) {
-		// TODO Auto-generated method stub
-
-	}
-<<<<<<< HEAD
-	
-	
-=======
-
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	@Override
-<<<<<<< HEAD
 	public boolean checkAuthenticity() {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -91,74 +68,39 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			System.out.println("Error creating the prescription");
 			e.printStackTrace();
 			}
-	}
-=======
-	public void checkAuthenticity(Prescription prescription) {
-		// TODO Auto-generated method stub
+		return false;
+	}	
 		
-			
-		}
-		
-		
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-
-	
 	@Override
 	public void orderStock(Medicine medicine) {
-		
 		
 	}
 
 	@Override
 	public void identifyPatient(Patient patient) {
-		// TODO Auto-generated method stub
 		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Type the patients name: ");
+			String name1 = reader.readLine();
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(template);
-			search.setString(1, "%" + name + "%");
+			search.setString(1, "%" + name1 + "%");
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-<<<<<<< HEAD
-				gender sex = gender.valueOf(rs.getString("sex"));
-				Patient p = new Patient(id, name, dateOfBirth, sex);
-				System.out.println(p);
-			} // to INSERT sex.name()
-			rs.close();
-			search.close();
-			System.out.println("Search finished.");
-			c.close();
-			System.out.println("Database connection closed.");
-=======
 				String sex = rs.getString("gender");
 				}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-			} catch (SQLException e) {
+			} catch (SQLException | IOException e) {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
 		}
 
-<<<<<<< HEAD
-}
-=======
+
 	@Override
-<<<<<<< HEAD
-	public void assignMedicine() {
-=======
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		try {
-			
-		} catch (SQLException e) {
-			System.out.println("Error creating the prescription");
-			e.printStackTrace();
-			}
-=======
 		try { //open data base connection
 			Statement stmt=c.createStatement();
 			String sql;
@@ -171,23 +113,14 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			
 			insert.executeUpdate();
 			insert.close();
-		
-	}
-		catch (SQLException sqlE) {
+			} catch (SQLException sqlE) {
 			System.out.println("Error");
 			sqlE.printStackTrace();
-			
-	}
+			}
+		}
 
-
-
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	}
-	
-	
 	@Override
 	public void checkStock(Medicine medicine) {
-<<<<<<< HEAD
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Type the medicine's id: ");
@@ -203,11 +136,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		} catch (SQLException | NumberFormatException | IOException e) {
 			System.out.println("Error creating the prescription");
 			e.printStackTrace();
-			}
-		}
-=======
-		// TODO Auto-generated method stub
-		
+			}	
 	}
 
 	@Override
@@ -215,6 +144,4 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		// TODO Auto-generated method stub
 		
 	}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+}
