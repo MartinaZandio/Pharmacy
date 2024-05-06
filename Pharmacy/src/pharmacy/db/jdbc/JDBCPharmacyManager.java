@@ -138,10 +138,4 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			e.printStackTrace();
 			}	
 	}
-
-	@Override
-	public void assignMedicine(Medicine medicine) {
-		// TODO Auto-generated method stub
-		
-	}
 }
