@@ -9,12 +9,12 @@ public interface PharmacyManager {
 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient);
 	public void markPrescriptionAsUsed(Prescription prescription);
-	public boolean checkAuthenticity();
+	public void checkAuthenticity(Prescription prescription);
 	public void checkStock(Medicine medicine);
 	public void orderStock(Medicine medicine);
 	public void identifyPatient(Patient patient);
-
 	void assignMedicine(Medicine medicine);
 	void assignMedicine(Medicine medicine, Prescription prescription);
-
+	void checkStock(String name);
+	
 }
