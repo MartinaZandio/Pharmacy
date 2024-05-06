@@ -18,21 +18,14 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private Date dateOfBirth;
-<<<<<<< HEAD
-
-	public enum gender{MALE, FEMALE}
-
-	public enum gender{MALE, FEMALE};
+	private String sex;
+	
 
 	gender valueOf(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	private gender sex;
-=======
-	private String sex;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+
 	
 	public Patient() {
 		super();

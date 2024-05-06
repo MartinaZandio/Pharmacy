@@ -21,21 +21,17 @@ public class Menu {
 =======
 	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
-	private static DoctorManager doctorManager;
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static LaboratoryManager laboratoryManager;
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
-	//CUIDADO: inicializar JDBC antes que JPA
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	
+
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		conMan = new ConnectionManager();
 		patientManager = conMan.getPatientMan();
-		doctorManager = conMan.getDoctorMan();
 		//pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 		medicineManager = conMan.getMedicineMan();
 		prescriptionManager = conMan.getPrescriptionMan();
@@ -90,7 +86,6 @@ public class Menu {
 		private static void pharmacyMenu(){
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan.getConnection());
-			doctorManager = new JDBCDoctorManager(conMan.getConnection());
 			pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 			
 			System.out.println("Choose your desired option");
