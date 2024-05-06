@@ -9,12 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.*;
 
-<<<<<<< HEAD
-import pharmacy.db.pojos.Prescription;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-=======
 import pharmacy.db.pojos.*;
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
