@@ -21,7 +21,6 @@ public class Menu {
 =======
 	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
-	private static DoctorManager doctorManager;
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static LaboratoryManager laboratoryManager;
@@ -87,7 +86,6 @@ public class Menu {
 		private static void pharmacyMenu(){
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan.getConnection());
-			doctorManager = new JDBCDoctorManager(conMan.getConnection());
 			pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 			
 			System.out.println("Choose your desired option");
