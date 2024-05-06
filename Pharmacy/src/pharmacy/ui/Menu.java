@@ -16,9 +16,7 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-<<<<<<< HEAD
 	private static PatientProfile patientManager = new JDBCPatientManager();
-=======
 	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
@@ -27,9 +25,6 @@ public class Menu {
 	private static LaboratoryManager laboratoryManager;
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
-	
-	//CUIDADO: inicializar JDBC antes que JPA
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		

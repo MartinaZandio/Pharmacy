@@ -7,4 +7,5 @@ public interface PrescriptionManager {
 
 	public Prescription getPrescription(int id);
 
+	public boolean medicineIsUsed(Medicine medicine);
 }

@@ -56,6 +56,12 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		return null;
 	}
 	
+	
+	public boolean medicineIsUsed(Medicine medicine) {
+		
+		
+		return false;
+	}
 
 
 

@@ -22,7 +22,6 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	@Override
 	public void addMedicine(Medicine medicine) {
-		// TODO Auto-generated method stub
 		try {
 			String template= "INSERT INTO medicine (id, name, prescription_id, laboratory_id)"
 					+ "VALUES (?,?,?,?);";
