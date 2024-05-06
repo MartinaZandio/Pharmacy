@@ -28,14 +28,11 @@ public class Menu {
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
-	//CUIDADO: inicializar JDBC antes que JPA
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-	
+
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		conMan = new ConnectionManager();
 		patientManager = conMan.getPatientMan();
-		doctorManager = conMan.getDoctorMan();
 		//pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
 		medicineManager = conMan.getMedicineMan();
 		prescriptionManager = conMan.getPrescriptionMan();
