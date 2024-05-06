@@ -3,8 +3,9 @@ import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
+import library.db.pojos.Author;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jdbc.*;
@@ -16,19 +17,15 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static PatientProfile patientManager = new JDBCPatientManager();
-	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
+	private static ConnectionManager conMan;
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static LaboratoryManager laboratoryManager;
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		conMan = new ConnectionManager();
@@ -59,6 +56,8 @@ public class Menu {
 		}
 		default:
 		}
+		
+	}
 		
 		private static void menuLogin() throws NumberFormatException, IOException{
 			System.out.println("Username: ");
@@ -133,7 +132,6 @@ public class Menu {
 			String sex= r.readLine();
 			Patient patient = new Patient(id, name, dob, sex);
 			patientManager.addPatient(patient);
-			break;
 		}
 		
 		private static void addMedicine() throws NumberFormatException, IOException{
@@ -141,20 +139,36 @@ public class Menu {
 			System.out.println("Name:");
 			String name= r.readLine();
 			System.out.println("NumberAssigned: ");
-			Integer id= Integer.parseInt(r.readLine());
+			Integer numAsigned= Integer.parseInt(r.readLine());
+			System.out.println("Prescription id:");
+			Integer prescriptionId= Integer.parseInt(r.readLine());
+			//Pedir prescripcion entera o llegar a la prescription por el id
+			System.out.println("Stock: ");
+			ArrayList<Stock> stock= 
+			//Pedir stock entero o escribir un numero y crear un stock simple
+			
 			
 			System.out.println("These are the available medicines, choose one by typing its id: ");
 			listMedicines();
 			Integer medId=Integer.parseInt(r.readLine());
-			Medicine medicine = new Medicine(name, id);
-			MedicineManager.addPatient(medicine);
+			Medicine medicine = new Medicine(name, numAsigned, prescription, stock);
+			medicineManager.addMedicine(medicine);
 			break;
 		}
 		
 		private static void listMedicines() throws IOException{
-			//TODO show available medicines
+			System.out.println("Medicine name (press enter to search all): ");
+			String name = r.readLine();
+			System.out.println("These are the available medicines, choose one by typing their id:");
+			List<Medicine> medicines = Man.getMedicineByName(name);
+			System.out.println(medicines);
+			
+			
 		}
-	}
+		
+	
 	
 	
 }
+	
+

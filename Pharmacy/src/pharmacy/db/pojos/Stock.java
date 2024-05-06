@@ -8,16 +8,19 @@ public class Stock implements Serializable{
 	private Pharmacy pharmacy;
 	private Medicine medicine;
 	private ArrayList<Stock> stock;
+	private int Amount;
 	
 	public Stock() {
 		super();
 	}
-	public Stock(Pharmacy pharmacy, Medicine medicine, ArrayList<Stock> stock) {
+	public Stock(Pharmacy pharmacy, Medicine medicine, ArrayList<Stock> stock, int Amount) {
 		super();
 		this.pharmacy = pharmacy;
 		this.medicine = medicine;
 		this.stock = stock;
+		this.Amount= Amount;
 	}
+	
 	public Pharmacy getPharmacy() {
 		return pharmacy;
 	}
@@ -36,9 +39,16 @@ public class Stock implements Serializable{
 	public void setStock(ArrayList<Stock> stock) {
 		this.stock = stock;
 	}
+	
+	public int getAmount() {
+		return Amount;
+	}
+	public void setAmount(int amount) {
+		Amount = amount;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(medicine, pharmacy, stock);
+		return Objects.hash(Amount, medicine, pharmacy, stock);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -49,14 +59,14 @@ public class Stock implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		return Objects.equals(medicine, other.medicine) && Objects.equals(pharmacy, other.pharmacy)
-				&& Objects.equals(stock, other.stock);
+		return Amount == other.Amount && Objects.equals(medicine, other.medicine)
+				&& Objects.equals(pharmacy, other.pharmacy) && Objects.equals(stock, other.stock);
 	}
 	@Override
 	public String toString() {
-		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", stock=" + stock + "]";
+		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", stock=" + stock + ", Amount=" + Amount
+				+ "]";
 	}
-	
 	
 	
 	
