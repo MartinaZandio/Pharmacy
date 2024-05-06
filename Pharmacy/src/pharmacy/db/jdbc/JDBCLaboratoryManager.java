@@ -2,7 +2,10 @@ package pharmacy.db.jdbc;
 
 import java.sql.Connection;
 
-public class JDBCLaboratoryManager {
+import pharmacy.db.interfaces.*;
+
+
+public class JDBCLaboratoryManager implements LaboratoryManager {
 	
 	private ConnectionManager conMan;
 	private Connection c;

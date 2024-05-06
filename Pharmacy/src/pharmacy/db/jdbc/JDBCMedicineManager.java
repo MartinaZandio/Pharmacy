@@ -11,6 +11,7 @@ import java.util.*;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.pojos.*;
 
+
 public class JDBCMedicineManager implements MedicineManager {
 
 	private ConnectionManager conMan;
@@ -39,6 +40,7 @@ public class JDBCMedicineManager implements MedicineManager {
 
 	}
 	
+	
 	@Override
 	public ArrayList<Medicine> searchMedicineByName(String name){
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
@@ -65,6 +67,14 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public Medicine getMedicine(int id) {
 		// TODO Auto-generated method stub
+		/*
+		 * public Medicine getmedicine(int id) { try{ String sql=
+		 * "SELECT * FROM patients WHERE id = " + id; Statement st= c.createStatement();
+		 * ResultSet rs= st.executeQuery(sql); rs.next(); Medicine m= new Medicine();
+		 * return m; } catch(SQLException e) {
+		 * System.out.println("Error in the database"); e.printStackTrace(); } }
+		 */
+		
 		return null;
 	}
 	@Override

@@ -1,7 +1,9 @@
 package pharmacy.db.interfaces;
 
 import java.util.List;
+
 import pharmacy.db.pojos.*;
+
 
 public interface PharmacyManager {
 
@@ -11,8 +13,8 @@ public interface PharmacyManager {
 	public void checkStock(Medicine medicine);
 	public void orderStock(Medicine medicine);
 	public void identifyPatient(Patient patient);
-	void checkStock(String name);
-	
-	
-	
+
+	void assignMedicine(Medicine medicine);
+	void assignMedicine(Medicine medicine, Prescription prescription);
+
 }

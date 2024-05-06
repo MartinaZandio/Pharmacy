@@ -5,14 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import library.db.pojos.Author;
-import library.db.pojos.Book;
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
-import pharmacy.db.pojos.Patient.gender;
 
 public class JDBCPharmacyManager implements PharmacyManager {
 	
@@ -39,6 +37,11 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void checkAuthenticity(Prescription prescription) {
 		// TODO Auto-generated method stub
+		
+			
+		}
+		
+		
 
 	}
 
@@ -74,4 +77,34 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		}
 
+<<<<<<< HEAD
 }
+=======
+	@Override
+	public void assignMedicine(Medicine medicine, Prescription prescription) {
+		// TODO Auto-generated method stub
+		try { //open data base connection
+			Statement stmt=c.createStatement();
+			String sql;
+			sql = "INSERT INTO prescriptionMedicine (medicine_numAsigned, prescription_id)"
+					+ "VALUES (?,?);";
+			
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setInt(1, medicine.getNumAsigned());
+			insert.setInt(2, prescription.getId());
+			
+			insert.executeUpdate();
+			insert.close();
+		
+	}
+		catch (SQLException sqlE) {
+			System.out.println("Error");
+			sqlE.printStackTrace();
+			
+	}
+
+
+
+	}
+	}
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
