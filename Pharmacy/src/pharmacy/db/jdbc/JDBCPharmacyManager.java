@@ -1,5 +1,11 @@
 package pharmacy.db.jdbc;
 
+<<<<<<< HEAD
+=======
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,10 +31,31 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
+=======
 
 	}
 
 	@Override
+	public void markPrescriptionAsUsed(Prescription prescription) {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Choose a medicine by typing its ID: " );
+			// Show medicines's ID method 
+			int dep_id = Integer.parseInt(reader.readLine());
+			System.out.println("Choose a patient to assigng the medicine: ");
+			// Show patients method
+			String patient1 = reader.readLine();
+			String sql = "UPDATE prescriptions WHERE ";
+		} catch (Exception e) {
+			System.out.println("Error modifying prescription.");
+		}
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+
+	}
+
+	@Override
+<<<<<<< HEAD
 	public void markPrescriptionAsUsed(Prescription prescription) {
 		// TODO Auto-generated method stub
 
@@ -37,7 +64,31 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void checkAuthenticity(Prescription prescription) {
 		// TODO Auto-generated method stub
+=======
+	public boolean checkAuthenticity() {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Type the prescription id: ");
+			// Show prescription 
+			int prescription_id = Integer.parseInt(reader.readLine());
+			String sql = "SELECT useDate FROM prescriptions WHERE id LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql); 
+			search.setInt(1, prescription_id);
+			ResultSet rs = search.executeQuery();
+			rs.next();
+			Date useDate = rs.getDate("useDate");
+			if (useDate != null) {
+				return true;
+			} else return false;
+		} catch (SQLException | NumberFormatException | IOException e) {
+			System.out.println("Error creating the prescription");
+			e.printStackTrace();
+			}
+		return false;
+	}	
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		
+<<<<<<< HEAD
 			
 		}
 		
@@ -49,19 +100,22 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	@Override
 	public void orderStock(Medicine medicine) {
-		
 		
 	}
 
 	@Override
 	public void identifyPatient(Patient patient) {
-		// TODO Auto-generated method stub
 		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Type the patients name: ");
+			String name1 = reader.readLine();
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(template);
-			search.setString(1, "%" + name + "%");
+			search.setString(1, "%" + name1 + "%");
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
@@ -69,17 +123,27 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Date dateOfBirth = rs.getDate("dateOfBirth");
 				String sex = rs.getString("gender");
 				}
+<<<<<<< HEAD
 			} catch (SQLException e) {
+=======
+			} catch (SQLException | IOException e) {
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
 		}
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		try { //open data base connection
 			Statement stmt=c.createStatement();
 			String sql;
@@ -92,22 +156,42 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			
 			insert.executeUpdate();
 			insert.close();
-		
-	}
-		catch (SQLException sqlE) {
+			} catch (SQLException sqlE) {
 			System.out.println("Error");
 			sqlE.printStackTrace();
-			
+			}
+		}
+
+<<<<<<< HEAD
+
+
 	}
 
-
-
-	}
-
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	@Override
 	public void checkStock(Medicine medicine) {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		
+=======
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Type the medicine's id: ");
+			// Show medicines id 
+			int medicine_id = Integer.parseInt(reader.readLine());
+			String sql = "SELECT name, id, stock FROM medicine WHERE id LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql); 
+			search.setInt(1, medicine_id);
+			search.close();
+			System.out.println("Search finished.");
+			c.close();
+			System.out.println("Database connection closed.");
+		} catch (SQLException | NumberFormatException | IOException e) {
+			System.out.println("Error creating the prescription");
+			e.printStackTrace();
+			}	
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	}
 
 	@Override
@@ -115,4 +199,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
 	}
+=======
+}
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
