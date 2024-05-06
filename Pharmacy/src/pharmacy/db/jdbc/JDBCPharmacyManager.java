@@ -51,7 +51,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	@Override
 	public void orderStock(Medicine medicine) {
-
+		
 		
 	}
 
@@ -75,6 +75,9 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		}
 
+<<<<<<< HEAD
+}
+=======
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
 		// TODO Auto-generated method stub
@@ -114,3 +117,4 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		
 	}
 	}
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy

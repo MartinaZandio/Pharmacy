@@ -16,9 +16,7 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-<<<<<<< HEAD
 	private static PatientProfile patientManager = new JDBCPatientManager();
-=======
 	private static ConnectionManager conMan;
 	private static PatientManager patientManager;
 	private static PharmacyManager pharmacyManager;
@@ -27,7 +25,10 @@ public class Menu {
 	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		conMan = new ConnectionManager();
