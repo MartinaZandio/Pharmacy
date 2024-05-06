@@ -1,11 +1,6 @@
 package pharmacy.db.pojos;
 
-
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.*;
-
-import pharmacy.db.pojos.*;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
@@ -92,17 +87,12 @@ public class Medicine implements Serializable {
 	public void setStock(ArrayList<Stock> stock) {
 		this.stock = stock;
 	}
-
-
+	
 
 	@Override
 	public int hashCode() {
-
-		return Objects.hash(laboratory, name, numAsigned, prescription);
 		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -114,19 +104,9 @@ public class Medicine implements Serializable {
 			return false;
 		Medicine other = (Medicine) obj;
 		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
-				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription);
 				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
 				&& Objects.equals(prescriptions, other.prescriptions) && Objects.equals(stock, other.stock);
-
 	}
-
-	@Override
-	public String toString() {
-		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
-				+ ", laboratory=" + laboratory + "]";
-	}
-
-
 
 	@Override
 	public String toString() {
