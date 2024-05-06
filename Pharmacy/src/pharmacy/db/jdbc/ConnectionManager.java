@@ -42,7 +42,7 @@ public class ConnectionManager {
 		}
 	}	
 		
-	private void close() {
+	public void close() {
 		try {
 			c.close();
 		}catch(SQLException e) {

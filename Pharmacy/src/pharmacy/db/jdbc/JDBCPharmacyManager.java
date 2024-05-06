@@ -1,13 +1,8 @@
 package pharmacy.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.sql.*;
+
 
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
@@ -69,7 +64,6 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}	
 		
 
-	}
 
 	@Override
 	public void orderStock(Medicine medicine) {
@@ -92,7 +86,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Date dateOfBirth = rs.getDate("dateOfBirth");
 				String sex = rs.getString("gender");
 				}
-			} catch (SQLException e) {
+			} catch (SQLException | IOException e) {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
@@ -122,5 +116,3 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 
 	}
-
-}

@@ -9,10 +9,9 @@ public interface PharmacyManager {
 
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient);
 	public void markPrescriptionAsUsed(Prescription prescription);
-	public void checkAuthenticity(Prescription prescription);
 	public void orderStock(Medicine medicine);
 	public void identifyPatient(Patient patient);
 	public void assignMedicine(Medicine medicine, Prescription prescription);
-
+	public boolean checkAuthenticity();
 	
 }

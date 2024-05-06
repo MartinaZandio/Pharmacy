@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import library.db.pojos.Author;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jdbc.*;
@@ -83,10 +82,10 @@ public class Menu {
 		
 		
 	
-		private static void pharmacyMenu(){
+		private static void pharmacyMenu() throws NumberFormatException, IOException{
 			ConnectionManager conMan = new ConnectionManager();
-			patientManager = new JDBCPatientManager(conMan.getConnection());
-			pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+			patientManager = new JDBCPatientManager(conMan);
+			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
 			System.out.println("Choose your desired option");
 			System.out.println("1. Add a new patient");
@@ -140,27 +139,22 @@ public class Menu {
 			String name= r.readLine();
 			System.out.println("NumberAssigned: ");
 			Integer numAsigned= Integer.parseInt(r.readLine());
-			System.out.println("Prescription id:");
+			/*System.out.println("Prescription id:");
 			Integer prescriptionId= Integer.parseInt(r.readLine());
-			//Pedir prescripcion entera o llegar a la prescription por el id
 			System.out.println("Stock: ");
-			ArrayList<Stock> stock= 
-			//Pedir stock entero o escribir un numero y crear un stock simple
-			
-			
+			ArrayList<Stock> stock;*/
 			System.out.println("These are the available medicines, choose one by typing its id: ");
 			listMedicines();
 			Integer medId=Integer.parseInt(r.readLine());
-			Medicine medicine = new Medicine(name, numAsigned, prescription, stock);
+			Medicine medicine = new Medicine(name, numAsigned);
 			medicineManager.addMedicine(medicine);
-			break;
 		}
 		
 		private static void listMedicines() throws IOException{
 			System.out.println("Medicine name (press enter to search all): ");
 			String name = r.readLine();
 			System.out.println("These are the available medicines, choose one by typing their id:");
-			List<Medicine> medicines = Man.getMedicineByName(name);
+			List<Medicine> medicines = medicineManager.searchMedicineByName(name);
 			System.out.println(medicines);
 			
 			
