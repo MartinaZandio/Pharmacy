@@ -1,9 +1,5 @@
 package pharmacy.db.pojos;
-<<<<<<< HEAD
 
-import java.util.ArrayList;
-import java.util.Objects;
-=======
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,6 +24,10 @@ public class Medicine implements Serializable {
 		super();
 	}
 	
+	public Medicine(String name, int numAsigned) {
+		this.name=name;
+		this.numAsigned= numAsigned;
+	}
 	
 	
 	public Medicine(String name, int numAsigned, Prescription prescription, Laboratory laboratory,
