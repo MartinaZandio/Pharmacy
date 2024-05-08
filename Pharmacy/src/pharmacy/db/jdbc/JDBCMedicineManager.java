@@ -22,6 +22,7 @@ public class JDBCMedicineManager implements MedicineManager {
 		this.conMan = conMan; 
 		this.c = conMan.getConnection();
 	}
+	
 	@Override
 	public void addMedicine(Medicine medicine) {
 		try {
@@ -86,7 +87,6 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public void assignMedicine() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -156,10 +156,32 @@ public class Menu {
 			System.out.println("These are the available medicines, choose one by typing their id:");
 			List<Medicine> medicines = medicineManager.searchMedicineByName(name);
 			System.out.println(medicines);
-			
-			
 		}
 		
+		private static void listPatients() throws IOException{
+			System.out.println("Patients name (press enter to search all): ");
+			String name = r.readLine();
+			System.out.println("These are the available patients, choose one by typing their id:");
+			List<Patient> patients = patientManager.searchPatientByName(name);
+			System.out.println(patients);
+		}
+		
+		/*private static Medicine chooseMedicine() throws IOException{
+			System.out.println("Choose a medicine by typing its ID: " );
+			listMedicines();
+			int dep_id = Integer.parseInt(r.readLine());
+			Medicine medicine = new Medicine(dep_id);
+			return medicine;
+		}
+		
+		private static Patient choosePatient() throws IOException{
+			System.out.println("Choose a patient to assigng the medicine: ");
+			listPatients();
+			String patient = r.readLine();
+			return patient;
+		}*/
+		
+	
 	
 	
 	
