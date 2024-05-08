@@ -12,12 +12,13 @@ public class Stock implements Serializable{
 	
 	public Stock() {
 		super();
+		this.stock = new ArrayList<Stock>();
 	}
 	public Stock(Pharmacy pharmacy, Medicine medicine, ArrayList<Stock> stock, int Amount) {
 		super();
 		this.pharmacy = pharmacy;
 		this.medicine = medicine;
-		this.stock = stock;
+		this.stock = new ArrayList<Stock>();
 		this.Amount= Amount;
 	}
 	
