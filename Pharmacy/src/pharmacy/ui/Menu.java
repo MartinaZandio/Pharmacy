@@ -16,12 +16,12 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static PatientManager patientManager;
 	private static ConnectionManager conMan;
-	private static PharmacyManager pharmacyManager;
-	private static PrescriptionManager prescriptionManager; 
 	private static LaboratoryManager laboratoryManager;
 	private static MedicineManager medicineManager;
+	private static PatientManager patientManager;
+	private static PharmacyManager pharmacyManager;
+	private static PrescriptionManager prescriptionManager; 
 	private static UserManager userMan;
 	
 
