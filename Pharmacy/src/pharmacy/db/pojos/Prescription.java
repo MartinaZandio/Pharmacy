@@ -2,7 +2,6 @@
 	package pharmacy.db.pojos;
 	import java.util.*;
 
-import pharmacy.db.pojos.Medicine;
 import pharmacy.db.pojos.*;
 
 import java.io.Serializable;
@@ -24,6 +23,17 @@ import java.io.Serializable;
 		this.issueDate=issueDate;
 		this.dateUsed=dateUsed;
 		this.patient=patient;
+		this.medicines = new ArrayList<Medicine>();
+
+	}
+	
+	public Prescription(int id, int quantity, String issueDate, String dateUsed) {
+		this.id=id;
+		this.quantity=quantity;
+		this.issueDate=issueDate;
+		this.dateUsed=dateUsed;
+		this.patient=patient;
+		this.medicines = new ArrayList<Medicine>();
 	}
 	
 	public Prescription() {

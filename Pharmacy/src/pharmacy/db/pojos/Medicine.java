@@ -1,15 +1,6 @@
 package pharmacy.db.pojos;
-<<<<<<< HEAD
 
-import java.util.ArrayList;
-import java.util.Objects;
-=======
-
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.*;
-
-import pharmacy.db.pojos.*;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
@@ -26,8 +17,16 @@ public class Medicine implements Serializable {
 
 	public Medicine() {
 		super();
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
 	}
 	
+	public Medicine(String name, int numAsigned) {
+		this.name=name;
+		this.numAsigned= numAsigned;
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
+	}
 	
 	
 	public Medicine(String name, int numAsigned, Prescription prescription, Laboratory laboratory,
@@ -37,9 +36,10 @@ public class Medicine implements Serializable {
 		this.numAsigned = numAsigned;
 		this.prescription = prescription;
 		this.laboratory = laboratory;
-		this.stock = stock;
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
+		
 	}
-
 
 
 	//Getters y Setters
@@ -92,17 +92,12 @@ public class Medicine implements Serializable {
 	public void setStock(ArrayList<Stock> stock) {
 		this.stock = stock;
 	}
-
-
+	
 
 	@Override
 	public int hashCode() {
-
-		return Objects.hash(laboratory, name, numAsigned, prescription);
 		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -114,19 +109,9 @@ public class Medicine implements Serializable {
 			return false;
 		Medicine other = (Medicine) obj;
 		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
-				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription);
 				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
 				&& Objects.equals(prescriptions, other.prescriptions) && Objects.equals(stock, other.stock);
-
 	}
-
-	@Override
-	public String toString() {
-		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
-				+ ", laboratory=" + laboratory + "]";
-	}
-
-
 
 	@Override
 	public String toString() {

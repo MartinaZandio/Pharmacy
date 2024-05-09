@@ -19,12 +19,6 @@ public class Patient implements Serializable{
 	private String name;
 	private Date dateOfBirth;
 	private String sex;
-	
-
-	gender valueOf(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 	public Patient() {

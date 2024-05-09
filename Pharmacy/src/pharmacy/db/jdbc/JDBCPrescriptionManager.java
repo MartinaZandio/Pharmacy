@@ -1,13 +1,7 @@
 package pharmacy.db.jdbc;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.*;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.pojos.*;
 
@@ -50,7 +44,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Prescription p = new Prescription (rs.getInt("id"), rs.getInt("quantity"), rs.getString("issueDate"), rs.getString("dateUsed"), rs.getPatient().getId(id));
+			Prescription p = new Prescription (rs.getInt("id"), rs.getInt("quantity"), rs.getString("issueDate"), rs.getString("dateUsed"));
 			return p;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -58,15 +52,6 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 		}
 		return null;
 	}
-	
-	
-	public boolean medicineIsUsed(Medicine medicine) {
-		
-		
-		return false;
-	}
-
-
 	
 
 

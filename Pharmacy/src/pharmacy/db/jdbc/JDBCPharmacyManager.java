@@ -1,16 +1,8 @@
 package pharmacy.db.jdbc;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.sql.*;
+
 
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
@@ -71,6 +63,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		return false;
 	}	
 		
+
+
 	@Override
 	public void orderStock(Medicine medicine) {
 		
@@ -99,8 +93,10 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 
 
+
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
+		// TODO Auto-generated method stub
 		try { //open data base connection
 			Statement stmt=c.createStatement();
 			String sql;
@@ -119,29 +115,4 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			}
 		}
 
-	@Override
-	public void checkStock(Medicine medicine) {
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("Type the medicine's id: ");
-			// Show medicines id 
-			int medicine_id = Integer.parseInt(reader.readLine());
-			String sql = "SELECT name, id, stock FROM medicine WHERE id LIKE ?";
-			PreparedStatement search = c.prepareStatement(sql); 
-			search.setInt(1, medicine_id);
-			search.close();
-			System.out.println("Search finished.");
-			c.close();
-			System.out.println("Database connection closed.");
-		} catch (SQLException | NumberFormatException | IOException e) {
-			System.out.println("Error creating the prescription");
-			e.printStackTrace();
-			}	
 	}
-
-	@Override
-	public void assignMedicine(Medicine medicine) {
-		// TODO Auto-generated method stub
-		
-	}
-}

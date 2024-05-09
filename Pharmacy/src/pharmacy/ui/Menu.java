@@ -3,7 +3,7 @@ import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
@@ -16,19 +16,15 @@ public class Menu {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static PatientProfile patientManager = new JDBCPatientManager();
 	private static ConnectionManager conMan;
+	private static LaboratoryManager laboratoryManager;
+	private static MedicineManager medicineManager;
 	private static PatientManager patientManager;
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
-	private static LaboratoryManager laboratoryManager;
-	private static MedicineManager medicineManager;
 	private static UserManager userMan;
 	
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public static void main(String[] args) throws NumberFormatException, IOException{
 		
 		conMan = new ConnectionManager();
@@ -60,6 +56,8 @@ public class Menu {
 		default:
 		}
 		
+	}
+		
 		private static void menuLogin() throws NumberFormatException, IOException{
 			System.out.println("Username: ");
 			String username=r.readLine();
@@ -84,10 +82,10 @@ public class Menu {
 		
 		
 	
-		private static void pharmacyMenu(){
+		private static void pharmacyMenu() throws NumberFormatException, IOException{
 			ConnectionManager conMan = new ConnectionManager();
-			patientManager = new JDBCPatientManager(conMan.getConnection());
-			pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+			patientManager = new JDBCPatientManager(conMan);
+			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
 			System.out.println("Choose your desired option");
 			System.out.println("1. Add a new patient");
@@ -133,7 +131,6 @@ public class Menu {
 			String sex= r.readLine();
 			Patient patient = new Patient(id, name, dob, sex);
 			patientManager.addPatient(patient);
-			break;
 		}
 		
 		private static void addMedicine() throws NumberFormatException, IOException{
@@ -141,20 +138,53 @@ public class Menu {
 			System.out.println("Name:");
 			String name= r.readLine();
 			System.out.println("NumberAssigned: ");
-			Integer id= Integer.parseInt(r.readLine());
-			
+			Integer numAsigned= Integer.parseInt(r.readLine());
+			/*System.out.println("Prescription id:");
+			Integer prescriptionId= Integer.parseInt(r.readLine());
+			System.out.println("Stock: ");
+			ArrayList<Stock> stock;*/
 			System.out.println("These are the available medicines, choose one by typing its id: ");
 			listMedicines();
 			Integer medId=Integer.parseInt(r.readLine());
-			Medicine medicine = new Medicine(name, id);
-			MedicineManager.addPatient(medicine);
-			break;
+			Medicine medicine = new Medicine(name, numAsigned);
+			medicineManager.addMedicine(medicine);
 		}
 		
 		private static void listMedicines() throws IOException{
-			//TODO show available medicines
+			System.out.println("Medicine name (press enter to search all): ");
+			String name = r.readLine();
+			System.out.println("These are the available medicines, choose one by typing their id:");
+			List<Medicine> medicines = medicineManager.searchMedicineByName(name);
+			System.out.println(medicines);
 		}
-	}
+		
+		private static void listPatients() throws IOException{
+			System.out.println("Patients name (press enter to search all): ");
+			String name = r.readLine();
+			System.out.println("These are the available patients, choose one by typing their id:");
+			List<Patient> patients = patientManager.searchPatientByName(name);
+			System.out.println(patients);
+		}
+		
+		/*private static Medicine chooseMedicine() throws IOException{
+			System.out.println("Choose a medicine by typing its ID: " );
+			listMedicines();
+			int dep_id = Integer.parseInt(r.readLine());
+			Medicine medicine = new Medicine(dep_id);
+			return medicine;
+		}
+		
+		private static Patient choosePatient() throws IOException{
+			System.out.println("Choose a patient to assigng the medicine: ");
+			listPatients();
+			String patient = r.readLine();
+			return patient;
+		}*/
+		
+	
+	
 	
 	
 }
+	
+

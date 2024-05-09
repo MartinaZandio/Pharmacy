@@ -22,6 +22,7 @@ public class JDBCMedicineManager implements MedicineManager {
 		this.conMan = conMan; 
 		this.c = conMan.getConnection();
 	}
+	
 	@Override
 	public void addMedicine(Medicine medicine) {
 		try {
@@ -52,9 +53,10 @@ public class JDBCMedicineManager implements MedicineManager {
 			while(rs.next()) {
 				Integer numAsigned = rs.getInt("numAsigned");
 				String medicineName = rs.getString("name");
-				Array stock = rs.getArray("stock");
-				Prescription prescription = conMan.getPrescriptionMan().getPrescription().getId;
-				Laboratory laboratory = conMan.getLaboratoryMan().getLaboratory().getId;
+		//		Array stock = rs.getArray("stock");
+//				Prescription prescription = conMan.getPrescriptionMan().getPrescription().getId;
+//				Laboratory laboratory = conMan.getLaboratoryMan().getLaboratory().getId;
+				
 			}
 		}catch(SQLException e) {
 			System.out.println("Error looking for a medicine");
@@ -72,7 +74,7 @@ public class JDBCMedicineManager implements MedicineManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numAsigned"), rs.getPrescription()); //laboratory stock prescriptions);
+			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numAsigned")); //rs.getPrescription()); //laboratory stock prescriptions);
 			return m;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -85,7 +87,6 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public void assignMedicine() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
