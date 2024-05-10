@@ -1,22 +1,24 @@
 	
 	package pharmacy.db.pojos;
-	import java.util.*;
 
 import pharmacy.db.pojos.Medicine;
 import pharmacy.db.pojos.*;
 
 import java.io.Serializable;
-
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+	
 	public class Prescription implements Serializable{
 
 	
 	private static final long serialVersionUID = -758766051603616038L;
 	private int id;
 	private int quantity;
-	private String issueDate;
-	private String dateUsed;
+	private Date issueDate;
+	private Date dateUsed;
 	private Patient patient;
-	private ArrayList<Medicine> medicines;
+	private List<Medicine> medicines;
 	
 	public Prescription(int id, int quantity, String issueDate, String dateUsed, Patient patient){
 		this.id= id;

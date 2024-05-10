@@ -2,11 +2,11 @@ package pharmacy.db.pojos;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-
 public class User implements Serializable{
 
 	/**
@@ -71,11 +71,15 @@ public class User implements Serializable{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -89,10 +93,14 @@ public class User implements Serializable{
 		return id == other.id;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", role=" + role + "]";
 	}
+	
+	
 	
 	
 }

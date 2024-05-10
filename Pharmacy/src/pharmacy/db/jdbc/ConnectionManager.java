@@ -17,7 +17,7 @@ public class ConnectionManager {
 
 	public Connection getConnection() {
 		return c;
-	}
+	}		
 	
 	public ConnectionManager() {
 		this.Connect();
@@ -57,7 +57,7 @@ public class ConnectionManager {
 			//Create the tables			
 			Statement createTables1=c.createStatement();
 			String create1="CREATE TABLE patient ( "
-					+ " id INTEGER PRIMARY KEY,"
+					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
 					+ " sex TEXT NOT NULL)";
