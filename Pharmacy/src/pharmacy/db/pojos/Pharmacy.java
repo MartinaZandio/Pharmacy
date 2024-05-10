@@ -14,7 +14,8 @@ public class Pharmacy implements Serializable{
 	
 	public Pharmacy() {
 		super();
-		
+		this.stock = new ArrayList<Stock>();
+
 	}
 	
 	public Pharmacy(String name, String location, int postalCode, int numberOfWorkers) {
@@ -23,6 +24,8 @@ public class Pharmacy implements Serializable{
 		this.location = location;
 		this.postalCode = postalCode;
 		this.numberOfWorkers = numberOfWorkers;
+		this.stock = new ArrayList<Stock>();
+
 	}
 	
 	public String getName() {

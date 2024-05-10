@@ -17,11 +17,15 @@ public class Medicine implements Serializable {
 
 	public Medicine() {
 		super();
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
 	}
 	
 	public Medicine(String name, int numAsigned) {
 		this.name=name;
 		this.numAsigned= numAsigned;
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
 	}
 	
 	
@@ -32,9 +36,10 @@ public class Medicine implements Serializable {
 		this.numAsigned = numAsigned;
 		this.prescription = prescription;
 		this.laboratory = laboratory;
-		this.stock = stock;
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
+		
 	}
-
 
 
 	//Getters y Setters

@@ -38,30 +38,6 @@ public class JDBCPatientManager implements PatientManager {
 	}
 
 	@Override
-	public List<Patient> searchPatientByName(String name) {
-		List<Patient> patients= new ArrayList<Patient>();
-		try {
-			String sql= "SELECT * FROM patient WHERE name = ?"; //this string is a template
-			PreparedStatement search=c.prepareStatement(sql);
-			search.setString(1, name); //Fills the question marks
-			ResultSet rs= search.executeQuery();
-			while(rs.next()) {
-				Integer identity= rs.getInt("id");
-				String nme= rs.getString("name");
-				Date DOB= rs.getDate("dateOfBirth");
-				String sex= rs.getString("Sex"); 
-				Patient Patient = new Patient(identity,nme,DOB,sex);
-			}
-			return patients;
-		}catch(SQLException e){
-			System.out.println("Error looking for a book");
-			e.printStackTrace();
-		}
-		
-		return patients;
-	}
-
-	@Override
 	public List<Patient> searchPatientById(int id) {
 		List<Patient> patients= new ArrayList<Patient>();
 		try {
@@ -84,7 +60,7 @@ public class JDBCPatientManager implements PatientManager {
 		
 		return patients;
 	}
-
+	
 	@Override
 	public void deletePatient(Patient p) throws SQLException {
 		String template = "DELETE FROM patient WHERE id = ?";
@@ -127,6 +103,33 @@ public class JDBCPatientManager implements PatientManager {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Patient> searchPatientByName(String name) {
+		// TODO Auto-generated method stub
+		/*List<Patient> patients= new ArrayList<Patient>();
+		try {
+			
+			String sql= "SELECT * FROM patient WHERE id = ?"; 
+			PreparedStatement search=c.prepareStatement(sql);
+			search.setInt(1, id); //Fills the question marks
+			ResultSet rs= search.executeQuery();
+			while(rs.next()) {
+				Integer identity= rs.getInt("id");
+				String nme= rs.getString("name");
+				Date DOB= rs.getDate("dateOfBirth");
+				String sex= rs.getString("Sex"); 
+				Patient Patient = new Patient(identity,nme,DOB,sex);
+			}
+			return patients;
+		}catch(SQLException e){
+			System.out.println("Error looking for a book");
+			e.printStackTrace();
+		}
+		
+		return patients;*/
+		return null;
 	}
 
 }

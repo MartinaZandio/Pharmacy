@@ -52,7 +52,6 @@ public class ConnectionManager {
 	}
 	
 	private void createTables() {
-		//If the tables are already created, skip this step
 		try {
 			//Create the tables			
 			Statement createTables1=c.createStatement();
