@@ -26,7 +26,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 			pstmt.setInt(1, p.getId());
 			pstmt.setInt(2, p.getQuantity());
 			pstmt.setDate(3, p.getIssueDate());
-			pstmt.setString(4, p.getDateUsed());
+			pstmt.setDate(4, p.getDateUsed());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

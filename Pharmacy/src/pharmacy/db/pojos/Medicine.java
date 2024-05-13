@@ -11,8 +11,8 @@ public class Medicine implements Serializable {
 	private int numAsigned;
 	private Prescription prescription;
 	private Laboratory laboratory;
-	private ArrayList<Stock> stock;	
-	private ArrayList<Prescription> prescriptions;
+	private List<Stock> stock;	
+	private List<Prescription> prescriptions;
 
 
 	public Medicine() {
@@ -30,7 +30,7 @@ public class Medicine implements Serializable {
 	
 	
 	public Medicine(String name, int numAsigned, Prescription prescription, Laboratory laboratory,
-			ArrayList<Stock> stock) {
+			List<Stock> stock) {
 		super();
 		this.name = name;
 		this.numAsigned = numAsigned;
@@ -77,19 +77,19 @@ public class Medicine implements Serializable {
 	}
 	
 
-	public ArrayList<Prescription> getBorrowersPrescriptions() {
+	public List<Prescription> getBorrowersPrescriptions() {
 		return prescriptions;
 	}
 
-	public void setBorrowers(ArrayList<Prescription> prescriptions) {
+	public void setBorrowers(List<Prescription> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
 
 
-	public ArrayList<Stock> getStock() {
+	public List<Stock> getStock() {
 		return stock;
 	}
-	public void setStock(ArrayList<Stock> stock) {
+	public void setStock(List<Stock> stock) {
 		this.stock = stock;
 	}
 	

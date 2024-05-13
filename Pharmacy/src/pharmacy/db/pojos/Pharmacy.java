@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Pharmacy implements Serializable{
 	
+	int id;
 	String name; 
 	String location; 
 	Integer postalCode; 
@@ -18,8 +19,9 @@ public class Pharmacy implements Serializable{
 
 	}
 	
-	public Pharmacy(String name, String location, int postalCode, int numberOfWorkers) {
+	public Pharmacy(int id, String name, String location, int postalCode, int numberOfWorkers) {
 		super();
+		this.id=id;
 		this.name = name;
 		this.location = location;
 		this.postalCode = postalCode;
@@ -28,6 +30,15 @@ public class Pharmacy implements Serializable{
 
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -66,7 +77,7 @@ public class Pharmacy implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(location, name, numberOfWorkers, postalCode, stock);
+		return Objects.hash(id, location, name, numberOfWorkers, postalCode, stock);
 	}
 
 	@Override
@@ -78,17 +89,19 @@ public class Pharmacy implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Pharmacy other = (Pharmacy) obj;
-		return Objects.equals(location, other.location) && Objects.equals(name, other.name)
+		return id == other.id && Objects.equals(location, other.location) && Objects.equals(name, other.name)
 				&& Objects.equals(numberOfWorkers, other.numberOfWorkers)
 				&& Objects.equals(postalCode, other.postalCode) && Objects.equals(stock, other.stock);
 	}
 
 	@Override
 	public String toString() {
-		return "Pharmacy [name=" + name + ", location=" + location + ", postalCode=" + postalCode + ", numberOfWorkers="
-				+ numberOfWorkers + ", stock=" + stock + "]";
+		return "Pharmacy [id=" + id + ", name=" + name + ", location=" + location + ", postalCode=" + postalCode
+				+ ", numberOfWorkers=" + numberOfWorkers + ", stock=" + stock + "]";
 	}
 
+	
+	
 	
 	
 }

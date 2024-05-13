@@ -19,19 +19,20 @@ public class Patient implements Serializable{
 	private String name;
 	private Date dateOfBirth;
 	private String sex;
-
+	private String userName;
 	
 	public Patient() {
 		super();
 	}
 
 	
-	public Patient(Integer id, String name, Date dateOfBirth, String sex) {
+	public Patient(Integer id, String name, Date dateOfBirth, String sex, String userName) {
 		super();
 		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
 		this.sex= sex;
+		this.userName = userName;
 		
 	}
 
@@ -67,10 +68,21 @@ public class Patient implements Serializable{
 		this.sex = sex;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateOfBirth, id, name, sex);
+		return Objects.hash(dateOfBirth, id, name, sex, userName);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,13 +94,19 @@ public class Patient implements Serializable{
 			return false;
 		Patient other = (Patient) obj;
 		return Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && sex == other.sex;
+				&& Objects.equals(name, other.name) && Objects.equals(sex, other.sex)
+				&& Objects.equals(userName, other.userName);
 	}
+
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", Gender=" + sex + "]";
+		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", userName="
+				+ userName + "]";
 	}
+
+
+	
 	
 	
 }

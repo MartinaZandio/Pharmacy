@@ -2,7 +2,8 @@ package pharmacy.db.jdbc;
 
 import java.io.*;
 import java.sql.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.pojos.*;
@@ -63,7 +64,19 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		return false;
 	}	
 		
-
+	public void reduceStock(int medicine_id, int pharmacy_id, int qty) {	
+		try{
+			String sql = "UPDATE stock SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, qty);
+			prep.setInt(2, medicine_id);
+			prep.setInt(3, pharmacy_id);
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+		}catch(Exception e){
+			System.out.println("Error reducing the stock");
+		}
+	}
 
 	@Override
 	public void orderStock(Medicine medicine) {
@@ -71,25 +84,30 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void identifyPatient(Patient patient) {
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("Type the patients name: ");
-			String name1 = reader.readLine();
+	public List<Patient> identifyPatient(String name) {
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+	try {
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(template);
-			search.setString(1, "%" + name1 + "%");
+			search.setString(1, "%" + name + "%");
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
-				String name = rs.getString("name");
+				String name1 = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
 				String sex = rs.getString("gender");
+				String userName = rs.getString("userName");
+				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
+				patients.add(p);
 				}
-			} catch (SQLException | IOException e) {
+			rs.close();
+			search.close();
+			} catch (SQLException e) {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
+	
+			return patients;
 		}
 
 
