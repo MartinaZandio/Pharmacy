@@ -1,8 +1,7 @@
 package pharmacy.db.pojos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class Stock implements Serializable{
 	/**
@@ -11,19 +10,19 @@ public class Stock implements Serializable{
 	private static final long serialVersionUID = -5309087422405888889L;
 	private Pharmacy pharmacy;
 	private Medicine medicine;
-	private ArrayList<Stock> stock;
-	private int Amount;
+	private List<Stock> stock;
+	private int amount;
 	
 	public Stock() {
 		super();
 		this.stock = new ArrayList<Stock>();
 	}
-	public Stock(Pharmacy pharmacy, Medicine medicine, ArrayList<Stock> stock, int Amount) {
+	public Stock(Pharmacy pharmacy, Medicine medicine, List<Stock> stock, int amount) {
 		super();
 		this.pharmacy = pharmacy;
 		this.medicine = medicine;
 		this.stock = new ArrayList<Stock>();
-		this.Amount= Amount;
+		this.amount= amount;
 	}
 	
 	public Pharmacy getPharmacy() {
@@ -38,22 +37,22 @@ public class Stock implements Serializable{
 	public void setMedicine(Medicine medicine) {
 		this.medicine = medicine;
 	}
-	public ArrayList<Stock> getStock() {
+	public List<Stock> getStock() {
 		return stock;
 	}
-	public void setStock(ArrayList<Stock> stock) {
+	public void setStock(List<Stock> stock) {
 		this.stock = stock;
 	}
 	
 	public int getAmount() {
-		return Amount;
+		return amount;
 	}
 	public void setAmount(int amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(Amount, medicine, pharmacy, stock);
+		return Objects.hash(amount, medicine, pharmacy, stock);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -64,12 +63,12 @@ public class Stock implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		return Amount == other.Amount && Objects.equals(medicine, other.medicine)
+		return amount == other.amount && Objects.equals(medicine, other.medicine)
 				&& Objects.equals(pharmacy, other.pharmacy) && Objects.equals(stock, other.stock);
 	}
 	@Override
 	public String toString() {
-		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", stock=" + stock + ", Amount=" + Amount
+		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", stock=" + stock + ", Amount=" + amount
 				+ "]";
 	}
 	

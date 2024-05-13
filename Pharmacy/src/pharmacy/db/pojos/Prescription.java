@@ -1,12 +1,11 @@
 	
 	package pharmacy.db.pojos;
 
-import pharmacy.db.pojos.*;
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 	
 	public class Prescription implements Serializable{
 
@@ -19,7 +18,7 @@ import java.util.List;
 	private Patient patient;
 	private List<Medicine> medicines;
 	
-	public Prescription(int id, int quantity, String issueDate, String dateUsed, Patient patient){
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, Patient patient){
 		this.id= id;
 		this.quantity=quantity;
 		this.issueDate=issueDate;
@@ -29,12 +28,11 @@ import java.util.List;
 
 	}
 	
-	public Prescription(int id, int quantity, String issueDate, String dateUsed) {
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed) {
 		this.id=id;
 		this.quantity=quantity;
 		this.issueDate=issueDate;
 		this.dateUsed=dateUsed;
-		this.patient=patient;
 		this.medicines = new ArrayList<Medicine>();
 	}
 	
@@ -62,19 +60,19 @@ import java.util.List;
 		this.quantity=quantity;
 	}
 	
-	public String getIssueDate(){
+	public Date getIssueDate(){
 		return issueDate;
 	}
 	
-	public void setIssueDate(String issueDate) {
+	public void setIssueDate(Date issueDate) {
 		this.issueDate=issueDate;
 	}
 	
-	public String getDateUsed(){
+	public Date getDateUsed(){
 		return dateUsed;
 	}
 	
-	public void setDateUsed(String dateUsed) {
+	public void setDateUsed(Date dateUsed) {
 		this.dateUsed=dateUsed;
 	}
 	
@@ -86,7 +84,7 @@ import java.util.List;
 		this.patient=p;
 	}
 	
-	public ArrayList<Medicine> getMedicines() {
+	public List<Medicine> getMedicines() {
 		return medicines;
 	}
 
@@ -119,6 +117,7 @@ import java.util.List;
 				&& quantity == other.quantity;
 	}
 
+	
 	
 	
 	

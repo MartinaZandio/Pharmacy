@@ -10,7 +10,7 @@ public interface PharmacyManager {
 	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient);
 	public void markPrescriptionAsUsed(Prescription prescription);
 	public void orderStock(Medicine medicine);
-	public void identifyPatient(Patient patient);
+	public List<Patient> identifyPatient(String name);
 	public void assignMedicine(Medicine medicine, Prescription prescription);
 	public boolean checkAuthenticity();
 	
