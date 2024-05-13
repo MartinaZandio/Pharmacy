@@ -11,7 +11,7 @@
  
 		<!-- Entity Class --> 
 		<class>pharmacy.db.pojos.User</class>
-		<class>pharmacy.db.pojos.Role.</class>
+		<class>pharmacy.db.pojos.Role</class>
 		 
  Department
 		<properties>	
