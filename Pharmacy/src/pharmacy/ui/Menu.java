@@ -33,11 +33,12 @@ public class Menu {
 		medicineManager = conMan.getMedicineMan();
 		prescriptionManager = conMan.getPrescriptionMan();
 		userMan = new JPAUserManager();
-		
-		System.out.println("Choose your desired option");
-		System.out.println("1. Login");
-		System.out.println("2. Register");
-		System.out.println("0. Exit");
+
+		System.out.println("Welcome!");
+		System.out.println("Select an option by typing a number: ");
+		System.out.println("1. Login.");
+		System.out.println("2. Sing up.");
+		System.out.println("0. Save & exit.");
 
 		int choice=Integer.parseInt(r.readLine());
 		switch(choice) {
@@ -46,7 +47,7 @@ public class Menu {
 			break;
 		}
 		case 2: {
-			menuRegister();
+			menuSingUp();
 			break;
 		}
 		case 0: {
@@ -60,15 +61,20 @@ public class Menu {
 		
 		private static void menuLogin() throws NumberFormatException, IOException{
 			System.out.println("Username: ");
-			String username=r.readLine();
+			String username = r.readLine();
 			System.out.println("Password: ");
-			String password=r.readLine();
+			String password = r.readLine();
 			User u= userMan.login(username, password);
+			if (u.getRole().getName().equals()) {
+				
+			} else {
+				pharmacistMenu();
+			}
 		}
 		
-		private static void menuRegister() throws NumberFormatException, IOException{
+		private static void menuSingUp() throws NumberFormatException, IOException{
 			System.out.println("Choose a username: ");
-			String username=r.readLine();
+			String username = r.readLine();
 			System.out.println("Choose a password: ");
 			String password = r.readLine();
 			System.out.println("Choose your role (type its name): ");
@@ -80,35 +86,22 @@ public class Menu {
 			userMan.register(u);
 		}
 		
-		
-	
-		private static void pharmacyMenu() throws NumberFormatException, IOException{
+		private static void patientMenu() throws NumberFormatException, IOException{
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan);
-			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
-			System.out.println("Choose your desired option");
-			System.out.println("1. Add a new patient");
-			System.out.println("2. Search a patient by its name");
-			System.out.println("3. Search a patient by its id");
-			System.out.println("4. Add a new medicine");
-
+			System.out.println("Select an option by typing a number: ");
+			System.out.println("1. Check medical history.");
+			System.out.println("2. Check medicine.");
 			System.out.println("0. Exit");
 
 			int choice=Integer.parseInt(r.readLine());
 			switch(choice) {
-			case 1: {
-				addPatient();
+			case 1: {;
 				break;
 			}
 			case 2: {
 				break;
-			}
-			case 3: {
-				break;
-			}
-			case 4: {
-				addMedicine();
 			}
 			case 0: {
 				return;
@@ -118,7 +111,58 @@ public class Menu {
 			
 		}
 		
-		private static void addPatient() throws NumberFormatException, IOException{
+	
+		private static void pharmacistMenu() throws NumberFormatException, IOException{
+			ConnectionManager conMan = new ConnectionManager();
+			//patientManager = new JDBCPatientManager(conMan);
+			pharmacyManager = new JDBCPharmacyManager(conMan);
+			
+			System.out.println("Select an option by typing a number: ");
+			System.out.println("1. Identify a pacient.");
+			System.out.println("2. Check stock.");
+			System.out.println("0. Exit");
+
+			int choice=Integer.parseInt(r.readLine());
+			switch(choice) {
+			case 1: {
+				identifyPatient();
+				break;
+			}
+			case 2: {
+				checkStock();
+				break;
+			}
+			case 0: {
+				return;
+			}
+			default:
+			}
+			
+		}
+		
+		private static void identifyPatient() throws IOException {
+			System.out.println("Type the patient's name: ");
+			String patientName = r.readLine();
+			List<Patient> patients = pharmacyManager.identifyPatient(patientName);
+			System.out.println(patients);
+			System.out.println("Type the patient's id that you want to select: ");
+			int patientId = Integer.parseInt(r.readLine());
+			Patient p = patientManager.getPatient(patientId);
+			System.out.println(p);
+		}
+		
+		private static void checkStock() throws IOException {
+			System.out.println("Type the medicine name: ");
+			String medicineName = r.readLine();
+			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
+			System.out.println(meds);
+			System.out.println("Type the medicine id that you want to select: ");
+			int medicineId = Integer.parseInt(r.readLine());
+			Medicine m = medicineManager.getMedicine(medicineId);
+			System.out.println(m);
+		}
+		
+		/*private static void addPatient() throws NumberFormatException, IOException{
 			System.out.println("Please, write the Patient info: ");
 			System.out.println("Id:");
 			Integer id= Integer.parseInt(r.readLine());
@@ -142,7 +186,7 @@ public class Menu {
 			/*System.out.println("Prescription id:");
 			Integer prescriptionId= Integer.parseInt(r.readLine());
 			System.out.println("Stock: ");
-			ArrayList<Stock> stock;*/
+			ArrayList<Stock> stock;
 			System.out.println("These are the available medicines, choose one by typing its id: ");
 			listMedicines();
 			Integer medId=Integer.parseInt(r.readLine());
@@ -166,7 +210,7 @@ public class Menu {
 			System.out.println(patients);
 		}
 		
-		/*private static Medicine chooseMedicine() throws IOException{
+		private static Medicine chooseMedicine() throws IOException{
 			System.out.println("Choose a medicine by typing its ID: " );
 			listMedicines();
 			int dep_id = Integer.parseInt(r.readLine());
