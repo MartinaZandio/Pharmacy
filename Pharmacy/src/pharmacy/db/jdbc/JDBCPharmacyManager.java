@@ -27,7 +27,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	
 	@Override 
 	public void markPrescriptionAsUsed (int prescription_id) {
-		Date localDate;
+		Date localDate = null;
 		try{
 			String sql = "UPDATE prescription SET useDate=localDate WHERE precription_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);

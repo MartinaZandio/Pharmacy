@@ -1,6 +1,7 @@
 package pharmacy.db.jdbc;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.pojos.*;
@@ -37,22 +38,28 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-	public Prescription getPrescription(int id) {
+	public ArrayList<Prescription> getPrescription(int id) {
+		ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
 		try {
-			String sql = "SELECT * FROM prescriptions WHERE id = " + id;
-			Statement st;
-			st = c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			rs.next();
-			Prescription p = new Prescription (rs.getInt("id"), rs.getInt("quantity"), rs.getString("issueDate"), rs.getString("dateUsed"));
-			return p;
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
+			String sql = "SELECT * FROM prescriptions WHERE id = ?";
+			PreparedStatement search = c.prepareStatement(sql); 
+			search.setInt(1, id);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer id1 = rs.getInt("id");
+				Integer medicineQuantity = rs.getInt("medicineQuantity");
+				Date issueDate = rs.getDate("issueDate");
+				Date useDate = rs.getDate("useDate");
+				Prescription p = new Prescription(id, medicineQuantity, issueDate, useDate);
+				prescriptions.add(p);
+				}
+			rs.close();
+			search.close();
+			return prescriptions;
+			} catch (SQLException e) {
+				System.out.println("Error creating the prescription");
+				e.printStackTrace();
+				}
 		return null;
 	}
-	
-
-
 }

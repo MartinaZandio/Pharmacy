@@ -139,7 +139,7 @@ public class Menu {
 			
 		}
 		
-		private static void identifyPatient() throws IOException {
+		private static int identifyPatient() throws IOException {
 			System.out.println("Type the patient's name: ");
 			String patientName = r.readLine();
 			List<Patient> patients = pharmacyManager.identifyPatient(patientName);
@@ -149,6 +149,7 @@ public class Menu {
 			Patient p = patientManager.getPatient(patientId);
 			System.out.println(p);
 			pharmacist_patientMenu();
+			return patientId;
 		}
 		
 		private static void checkStock() throws IOException {
@@ -189,8 +190,14 @@ public class Menu {
 			}
 		}
 		
-		private static void markPrescriptionAsUsed(){
-			
+		private static void markPrescriptionAsUsed() throws IOException{
+			ConnectionManager conMan = new ConnectionManager();
+			prescriptionManager = new JDBCPrescriptionManager(conMan);
+		
+			System.out.println("Select the prescription you want to mark as used, by typing its id.");
+			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+			prescriptions = prescriptionManager.getPrescription(identifyPatient());
+			Integer idPrescription = Integer.parseInt(r.readLine());
 		}
 		
 		private static void stockMenu() throws NumberFormatException, IOException{
