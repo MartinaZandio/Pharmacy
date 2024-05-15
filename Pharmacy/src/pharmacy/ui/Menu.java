@@ -199,7 +199,7 @@ public class Menu {
 				}
 				default:
 				}
-			} while (choice != 0),
+			} while (choice != 0);
 		}
 	
 		
