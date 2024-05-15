@@ -3,14 +3,27 @@ package pharmacy.db.pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
+
+@Entity
+@Table(name="stock")
+
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Stock implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -5309087422405888889L;
+
+	private static final long serialVersionUID = 4731831667008411270L;
+	@XmlTransient
 	private Pharmacy pharmacy;
+	@XmlElement
 	private Medicine medicine;
+	@XmlTransient
 	private List<Stock> stock;
+	@XmlAttribute
 	private int amount;
 	
 	public Stock() {

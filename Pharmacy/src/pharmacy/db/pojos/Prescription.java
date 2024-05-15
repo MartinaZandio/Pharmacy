@@ -42,8 +42,20 @@ import java.util.Objects;
 	}
 	
 	
-	//Getters y Setters
 	
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, Patient patient,
+			List<Medicine> medicines) {
+		super();
+		this.id = id;
+		this.quantity = quantity;
+		this.issueDate = issueDate;
+		this.dateUsed = dateUsed;
+		this.patient = patient;
+		this.medicines = new ArrayList<Medicine>();
+	}
+
+	//Getters y Setters
+
 	public int getId() {
 		return id;
 	}

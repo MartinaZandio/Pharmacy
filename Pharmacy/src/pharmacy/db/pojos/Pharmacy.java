@@ -1,16 +1,38 @@
 package pharmacy.db.pojos;
 
 import java.util.*;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 
+@Entity
+@Table(name="pharmacies")
 
+
+@XmlAccessorType(XmlAccessType.FIELD) 
+@XmlRootElement(name = "Pharmacy") 
+@XmlType(propOrder = { "name", "location", "postalCode", "stock" })
 public class Pharmacy implements Serializable{
 	
-	int id;
-	String name; 
-	String location; 
-	Integer postalCode; 
-	Integer numberOfWorkers;
+	private static final long serialVersionUID = -4622538807700766019L;
+	
+	@XmlTransient
+	private int id;
+	@XmlElement
+	private String name; 
+	@XmlElement
+	private String location; 
+	@XmlElement
+	private Integer postalCode; 
+	@XmlAttribute
+	private Integer numberOfWorkers;
+	@ManyToMany
+	@JoinTable(name="stock",
+		joinColumns= {@JoinColumn(name="medicine_id", referencedColumnName="id")},
+		inverseJoinColumns= {@JoinColumn(name="pharmacy_id", referencedColumnName="id")})
+	@XmlTransient
 	private ArrayList<Stock> stock;
 	
 	public Pharmacy() {
