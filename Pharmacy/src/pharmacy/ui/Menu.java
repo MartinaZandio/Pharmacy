@@ -29,7 +29,7 @@ public class Menu {
 		
 		conMan = new ConnectionManager();
 		patientManager = conMan.getPatientMan();
-		//pharmacyManager = new JDBCPharmacyManager(conMan.getConnection());
+		pharmacyManager = conMan.getPharmacyMan();
 		medicineManager = conMan.getMedicineMan();
 		prescriptionManager = conMan.getPrescriptionMan();
 		userMan = new JPAUserManager();
