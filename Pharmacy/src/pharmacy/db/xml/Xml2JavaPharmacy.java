@@ -2,6 +2,7 @@ package pharmacy.db.xml;
 
 import java.io.File;
 
+import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +15,7 @@ public class Xml2JavaPharmacy {
 	private static 
 
 	
-	public static void main(String[] args) throws JAXBException{
+        //public static void main (String[] args) throws Exception {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		
@@ -22,11 +23,15 @@ public class Xml2JavaPharmacy {
 		Pharmacy pharmacy= (Pharmacy) unmarshaller.unmarshal(file);
 		
 		System.out.println("Pharmacy:");
-		System.out.println("Name:"+ Pharmacy.getName());
-		System.out.println("Location:" +Pharmacy.getLocation());
-		System.out.println("PostalCode:" + Pharmacy.getPostalCode());
-		List<Stock> stock = Pharmacy.getStock();
+		//System.out.println("Name:"+ Pharmacy.getName());
+		//System.out.println("Location:" +Pharmacy.getLocation());
+		//System.out.println("PostalCode:" + Pharmacy.getPostalCode());
+		//List<Stock> stock = Pharmacy.getStock();
+		//for (Stock st :stock ) {
+			System.out.println("Stock:"+ st.getStock());
+		}
 		
+	//create connection
 		
 	}
 }
