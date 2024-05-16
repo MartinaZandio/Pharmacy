@@ -13,7 +13,8 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Stock implements Serializable{
-	
+
+
 	private static final long serialVersionUID = 4731831667008411270L;
 	@XmlTransient
 	private Pharmacy pharmacy;
