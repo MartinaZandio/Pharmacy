@@ -45,7 +45,7 @@ public class Java2XmlPharmacy {
 			Integer numberOfWorkers=rs.getInt("numberOfWorkers");
 			Medicine medicine= new Medicine(rs.getString("name"), rs.getInt("numAssigned")); 
 			Stock stock= new Stock(rs.getInt("amount"));
-			Pharmacy ph= new Pharmacy(id, name, location, postalCode, numberOfWorkers, );
+			Pharmacy ph= new Pharmacy(id, name, location, postalCode, numberOfWorkers,???????);
 		}
 		
 			
@@ -72,7 +72,7 @@ public class Java2XmlPharmacy {
 		printPharmacies();
 		System.out.print("Choose a pharmacy to turn into an XML file:");
 		int id=Integer.parseInt(reader.readLine());
-		PreparedStatement prep2= c.prepareStatement("SELECT * FROM reports WHERE id= ?");//, Pharmacy.class
+		PreparedStatement prep2= c.prepareStatement("SELECT * FROM reports WHERE id= ?");
 		prep2.setInt(1, id);
 		ResultSet rs = prep2.executeQuery();
 		rs.next();
@@ -81,7 +81,6 @@ public class Java2XmlPharmacy {
 		File file = new File("./xmls/Sample-Pharmacy.xml");
 		marshaller.marshal(pharmacy,file);
 		marshaller.marshal(pharmacy, System.out);
-		
 		
 	}
 	
