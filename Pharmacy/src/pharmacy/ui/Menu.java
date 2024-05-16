@@ -45,6 +45,9 @@ public class Menu {
 				menuSignUp();
 				break;
 				}
+			case 3: {
+				break;
+			}
 			case 0: {
 				conMan.close();
 				return;
@@ -59,6 +62,7 @@ public class Menu {
 		System.out.println("Select an option by typing a number: ");
 		System.out.println("1. Login.");
 		System.out.println("2. Sign up.");
+		System.out.println("3. Turn pharmacy into an XML file.");
 		System.out.println("0. Save & exit.");
 
 		int choice=Integer.parseInt(r.readLine());
@@ -70,14 +74,23 @@ public class Menu {
 			String username = r.readLine();
 			System.out.println("Password: ");
 			String password = r.readLine();
-			User u= userMan.login(username, password);
-			// if (u.getRole().getName().equals()) {
-				
-		} //else {
-				//pharmacistMenu();
-			//}
-		//}
-			
+			User u = userMan.login(username, password);
+			if (u.getRole().getName() == "patient" ) {
+				System.out.println("Please type your name: ");
+				String name = r.readLine();
+				System.out.println("Please type your date of birth (dd-MM-yyyy): ");
+				String date = r.readLine();
+				Date dateOfBirth = (Date) formatter.parse(date);
+				System.out.println("Please type your gender: ");
+				String sex = r.readLine();
+				Patient p = new Patient(username);
+				patientMenu(p);
+			} else {
+			pharmacistMenu();
+			}
+		}
+		
+		
 		private static void menuSignUp() throws IOException {
 			System.out.println("Choose a username: ");
 			String username = r.readLine();
@@ -92,7 +105,7 @@ public class Menu {
 			userMan.register(u);
 		}
 			
-		private static void patientMenu() throws NumberFormatException, IOException{
+		private static void patientMenu(Patient p) throws NumberFormatException, IOException{
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan);
 			

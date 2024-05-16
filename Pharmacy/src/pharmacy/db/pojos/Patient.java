@@ -36,6 +36,13 @@ public class Patient implements Serializable{
 		
 	}
 
+
+	public Patient(String userName) {
+		super();
+		this.userName = userName;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

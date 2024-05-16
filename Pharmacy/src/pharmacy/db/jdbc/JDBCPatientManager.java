@@ -50,7 +50,8 @@ public class JDBCPatientManager implements PatientManager {
 				String nme= rs.getString("name");
 				Date DOB= rs.getDate("dateOfBirth");
 				String sex= rs.getString("Sex"); 
-				Patient Patient = new Patient(identity,nme,DOB,sex);
+				String userName= rs.getString("userName");
+				Patient Patient = new Patient(identity,nme,DOB,sex, userName);
 			}
 			return patients;
 		}catch(SQLException e){
@@ -76,7 +77,7 @@ public class JDBCPatientManager implements PatientManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"));
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"), rs.getString("userName"));
 			return a;
 		}catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -97,7 +98,8 @@ public class JDBCPatientManager implements PatientManager {
 				String name = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
 				String sex = rs.getString("sex");
-				Patient patient = new Patient(id, name, dateOfBirth, sex);
+				String userName = rs.getString("userName");
+				Patient patient = new Patient(id, name, dateOfBirth, sex, userName);
 				System.out.println(patient);
 			}
 		}catch(Exception e) {
