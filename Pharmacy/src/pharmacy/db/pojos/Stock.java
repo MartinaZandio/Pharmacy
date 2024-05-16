@@ -35,6 +35,10 @@ public class Stock implements Serializable{
 		this.stock = new ArrayList<Stock>();
 		this.amount= amount;
 	}
+	public Stock(int amount) {
+		super();
+		this.amount=amount;
+	}
 	
 	public Pharmacy getPharmacy() {
 		return pharmacy;

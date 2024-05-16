@@ -3,6 +3,7 @@ package pharmacy.db.xml;
 import java.beans.Statement;
 import java.io.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import javax.persistence.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import library.db.pojos.Author;
+import library.db.pojos.Book;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
 
@@ -31,13 +34,21 @@ public class Java2XmlPharmacy {
 	private static void printPharmacies() {
 	
 		String sql = "SELECT * FROM pharmacies";
-		PreparedStatement prep= c.prepareStatement(sql); //pharmacy.class
+		PreparedStatement prep= c.prepareStatement(sql);
 		ResultSet rs = prep.executeQuery();
 		rs.next();
-		List<Pharmacy> pharmacies = (List<Pharmacy>) prep.getResultList();
-		for(Pharmacy ph: pharmacies) {
-			System.out.println(ph);
+		while(rs.next()) {
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			String location=rs.getString("location");
+			Integer postalCode = rs.getInt("postalCode");
+			Integer numberOfWorkers=rs.getInt("numberOfWorkers");
+			Medicine medicine= new Medicine(rs.getString("name"), rs.getInt("numAssigned")); 
+			Stock stock= new Stock(rs.getInt("amount"));
+			Pharmacy ph= new Pharmacy(id, name, location, postalCode, numberOfWorkers, );
 		}
+		
+			
 	}
 	
 	public static void main (String[]args ) throws Exception{
