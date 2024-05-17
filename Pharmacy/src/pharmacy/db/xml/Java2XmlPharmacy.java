@@ -2,20 +2,11 @@ package pharmacy.db.xml;
 
 import java.beans.Statement;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
-import library.db.pojos.Author;
-import library.db.pojos.Book;
+import javax.xml.bind.*;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
 
@@ -48,7 +39,6 @@ public class Java2XmlPharmacy {
 			Pharmacy ph= new Pharmacy(id, name, location, postalCode, numberOfWorkers,???????);
 		}
 		
-			
 	}
 	
 	public static void main (String[]args ) throws Exception{
