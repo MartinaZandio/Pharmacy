@@ -8,13 +8,13 @@ import pharmacy.db.interfaces.UserManager;
 import pharmacy.db.pojos.Role;
 import pharmacy.db.pojos.User;
 
+
 public class JPAUserManager implements UserManager {
 
 	private EntityManager em;
 	
 	public JPAUserManager() {
 		em = Persistence.createEntityManagerFactory("pharmacy-provider").createEntityManager();
-		
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
