@@ -61,7 +61,7 @@ public class ConnectionManager {
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " name TEXT NOT NULL,"
 					+ " dateOfBirth DATE NOT NULL,"
-					+ " sex TEXT NOT NULL"
+					+ " sex TEXT NOT NULL,"
 					+ " userName TEXT NOT NULL)";
 			createTables1.executeUpdate(create1);
 			createTables1.close();	

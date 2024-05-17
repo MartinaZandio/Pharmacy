@@ -6,13 +6,20 @@ import java.sql.*;
 import java.util.List;
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import javax.xml.bind.*;
+=======
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
 
 public class Java2XmlPharmacy {
 
 	
+<<<<<<< HEAD
 	private static Connection c; 
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private ConnectionManager conMan; 
@@ -54,19 +61,14 @@ public class Java2XmlPharmacy {
 		}
 
 	
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 		
-		printPharmacies();
-		System.out.print("Choose a pharmacy to turn into an XML file:");
-		int id=Integer.parseInt(reader.readLine());
-		PreparedStatement prep2= c.prepareStatement("SELECT * FROM reports WHERE id= ?");
-		prep2.setInt(1, id);
-		ResultSet rs = prep2.executeQuery();
-		rs.next();
-		Pharmacy pharmacy = (Pharmacy) prep2.getResultSet();
+		 // Pharmacy pharmacy you got from somewhere;
 		
 		File file = new File("./xmls/Sample-Pharmacy.xml");
 		marshaller.marshal(pharmacy,file);
@@ -74,4 +76,3 @@ public class Java2XmlPharmacy {
 		
 	}
 	
-}
