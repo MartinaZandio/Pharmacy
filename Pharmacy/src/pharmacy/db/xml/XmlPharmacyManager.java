@@ -17,8 +17,9 @@ import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
 
 public class XmlPharmacyManager implements XmlManager {
-
-
+	
+	private static Connection c;
+	
 	@Override 
 	public File pharmacy2Xml(Pharmacy pharmacy) {
 	
@@ -26,15 +27,15 @@ public class XmlPharmacyManager implements XmlManager {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Marshaller marshaller = JAXBContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		File file = new File ("./xmls/External-Pharamcy"); 
+		File file = new File ("./xmls/External-Pharmacy"); 
 		marshaller.marshal(pharmacy, file);
 		return file;
 		
 		}catch(Exception e) {
 		e.printStackTrace();
-	}
+		}
 	
-	return null;
+		return null;
 	}
 
 	@Override
@@ -52,7 +53,6 @@ public class XmlPharmacyManager implements XmlManager {
 	}
 	return null;
 	}
-	
 
 		
 	@Override
@@ -69,23 +69,26 @@ public class XmlPharmacyManager implements XmlManager {
 		}
 	}
 	
-	private static void printPharmacies() {
+	public static void printPharmacies() throws SQLException {
 		
 		String sql = "SELECT * FROM pharmacies";
 		PreparedStatement prep= c.prepareStatement(sql);
 		ResultSet rs = prep.executeQuery();
 		rs.next();
-		List<Pharmacy> phs = (List<Pharmacy>) prep.getResultSet();
 		while(rs.next()) {
 			Integer id = rs.getInt("id");
 			String name = rs.getString("name");
 			String location=rs.getString("location");
 			Integer postalCode = rs.getInt("postalCode");
 			Integer numberOfWorkers=rs.getInt("numberOfWorkers");
-			Medicine medicine= new Medicine(rs.getString("name"), rs.getInt("numAssigned")); 
-			Stock stock= new Stock(rs.getInt("amount"));
+			Stock stock= new Stock (rs.getInt("amount"));
 			Pharmacy ph= new Pharmacy(id, name, location, postalCode, numberOfWorkers);
+			System.out.println(ph);
+			System.out.println(stock);
 		}
+		
+		rs.close();
+		prep.close();
 		
 	}
 	

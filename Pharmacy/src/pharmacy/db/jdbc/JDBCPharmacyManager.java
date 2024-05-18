@@ -128,9 +128,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
-		// TODO Auto-generated method stub
-		try { //open data base connection
-			Statement stmt=c.createStatement();
+		try { 
 			String sql;
 			sql = "INSERT INTO prescriptionMedicine (medicine_numAsigned, prescription_id)"
 					+ "VALUES (?,?);";
