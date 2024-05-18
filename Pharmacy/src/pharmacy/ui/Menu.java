@@ -177,8 +177,7 @@ public class Menu {
 			System.out.println(patients);
 			System.out.println("Type the patient's id that you want to select: ");
 			int patientId = Integer.parseInt(r.readLine());
-			Patient p = patientManager.getPatient(patientId);
-			System.out.println(p);
+			patientManager.identifyPatient(patientId);
 			pharmacist_patientMenu();
 			return patientId;
 		}

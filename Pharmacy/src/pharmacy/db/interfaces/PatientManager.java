@@ -13,7 +13,7 @@ public interface PatientManager {
 	public List<Patient> searchPatientById(int id);
 	public void deletePatient(Patient p) throws SQLException;
 	public Patient getPatient(int id);
-	public void identifyPatient(Patient p);
+	public void identifyPatient(int patientId);
 	public Patient getPatient(String username);
 	
 }
