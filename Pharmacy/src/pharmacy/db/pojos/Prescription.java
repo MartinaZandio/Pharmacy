@@ -15,10 +15,10 @@ import java.util.Objects;
 	private int quantity;
 	private Date issueDate;
 	private Date dateUsed;
-	private Patient patient;
+	private int patient;
 	private List<Medicine> medicines;
 	
-	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, Patient patient){
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient){
 		this.id= id;
 		this.quantity=quantity;
 		this.issueDate=issueDate;
@@ -43,7 +43,7 @@ import java.util.Objects;
 	
 	
 	
-	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, Patient patient,
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient,
 			List<Medicine> medicines) {
 		super();
 		this.id = id;
@@ -88,11 +88,11 @@ import java.util.Objects;
 		this.dateUsed=dateUsed;
 	}
 	
-	public Patient getPatient() {
+	public int getPatient() {
 		return patient;
 	}
 	
-	public void setPatient(Patient p) {
+	public void setPatient(int p) {
 		this.patient=p;
 	}
 	
@@ -107,7 +107,7 @@ import java.util.Objects;
 	@Override
 	public String toString() {
 		return "Prescription [id=" + id + ", quantity=" + quantity + ", issueDate=" + issueDate + ", dateUsed="
-				+ dateUsed + ", patient=" + patient + ", medicines=" + medicines + "]";
+				+ dateUsed + ", patientId=" + patient + ", medicines=" + medicines + "]";
 	}
 
 	@Override
