@@ -8,9 +8,6 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
-@Entity
-@Table(name="medicines")
-
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Medicine implements Serializable {
@@ -26,7 +23,8 @@ public class Medicine implements Serializable {
 	@XmlTransient
 	private Laboratory laboratory;
 	@XmlElement
-	private List<Stock> stock;	
+	private List<Stock> stock;
+	@XmlTransient
 	private List<Prescription> prescriptions;
 
 

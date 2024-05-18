@@ -7,10 +7,6 @@ import javax.xml.bind.annotation.*;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name="pharmacies")
-
-
 @XmlAccessorType(XmlAccessType.FIELD) 
 @XmlRootElement(name = "Pharmacy") 
 @XmlType(propOrder = { "name", "location", "postalCode", "stock" })
@@ -28,10 +24,6 @@ public class Pharmacy implements Serializable{
 	private Integer postalCode; 
 	@XmlAttribute
 	private Integer numberOfWorkers;
-	@ManyToMany
-	@JoinTable(name="stock",
-		joinColumns= {@JoinColumn(name="medicine_id", referencedColumnName="id")},
-		inverseJoinColumns= {@JoinColumn(name="pharmacy_id", referencedColumnName="id")})
 	@XmlTransient
 	private ArrayList<Stock> stock;
 	

@@ -6,10 +6,6 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-
-@Entity
-@Table(name="stock")
-
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Stock implements Serializable{
@@ -18,7 +14,7 @@ public class Stock implements Serializable{
 	private static final long serialVersionUID = 4731831667008411270L;
 	@XmlTransient
 	private Pharmacy pharmacy;
-	@XmlElement
+	@XmlElementWrapper(name="stock")
 	private Medicine medicine;
 	@XmlTransient
 	private List<Stock> stock;
