@@ -43,7 +43,7 @@ public class Pharmacy implements Serializable{
 		this.stock = new ArrayList<Stock>();
 	}
 	
-<<<<<<< HEAD
+
 	public Pharmacy(int id, String name, String location, int postalCode) {
 		super();
 		this.id=id;
@@ -54,9 +54,6 @@ public class Pharmacy implements Serializable{
 	}
 	
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public int getId() {
 		return id;
 	}
