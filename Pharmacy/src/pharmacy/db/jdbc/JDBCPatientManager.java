@@ -7,6 +7,7 @@ import java.util.*;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.PatientManager;
 import pharmacy.db.pojos.*;
+import pharmacy.ui.Menu;
 
 
 public class JDBCPatientManager implements PatientManager {
@@ -20,7 +21,7 @@ public class JDBCPatientManager implements PatientManager {
 	}
 
 	@Override
-	public void addPatient(Patient p) {
+	public void addPatient(Patient p) {    //SE USA 
 		try {
 		String template= "INSERT INTO patient (id, name, dateOfBirth, sex, userName)"
 				+ "VALUES (?,?,?,?, ?);";
@@ -88,7 +89,11 @@ public class JDBCPatientManager implements PatientManager {
 	}
 	
 	@Override
-	public void identifyPatient(Patient p) {
+<<<<<<< HEAD
+	public void identifyPatient(Patient p) {       //SE USA
+=======
+	public void identifyPatient(int patientId) {
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		try {
 			String sql= "SELECT * FROM patient WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);

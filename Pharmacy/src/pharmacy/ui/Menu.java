@@ -177,13 +177,12 @@ public class Menu {
 			System.out.println(patients);
 			System.out.println("Type the patient's id that you want to select: ");
 			int patientId = Integer.parseInt(r.readLine());
-			Patient p = patientManager.getPatient(patientId);
-			System.out.println(p);
+			patientManager.identifyPatient(patientId);
 			pharmacist_patientMenu();
 			return patientId;
 		}
 		
-		private static void checkStockMenu() throws IOException {
+		private static int checkStockMenu() throws IOException {
 			System.out.println("Type the medicine name: ");
 			String medicineName = r.readLine();
 			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
@@ -193,6 +192,7 @@ public class Menu {
 			Medicine m = medicineManager.getMedicine(medicineId);
 			System.out.println(m);
 			stockMenu();
+			return medicineId;
 		}
 		
 		private static void java2Xml() throws NumberFormatException, IOException {
@@ -278,6 +278,7 @@ public class Menu {
 		}
 
 		private static void orderStockMenu() throws NumberFormatException, IOException {
+			int medicineId = checkStockMenu();
 			System.out.println("Type the amount of medicine you want to order: ");
 			int quantity = Integer.parseInt(r.readLine());
 		}
