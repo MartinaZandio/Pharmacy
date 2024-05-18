@@ -22,10 +22,9 @@ public class XmlPharmacyManager implements XmlManager {
 	
 	@Override 
 	public File pharmacy2Xml(Pharmacy pharmacy) {
-	
 	try {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-		Marshaller marshaller = JAXBContext.createMarshaller();
+		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		File file = new File ("./xmls/External-Pharmacy"); 
 		marshaller.marshal(pharmacy, file);
