@@ -88,16 +88,12 @@ public class JDBCPatientManager implements PatientManager {
 		return null;
 	}
 	
-	@Override
-<<<<<<< HEAD
-	public void identifyPatient(Patient p) {       //SE USA
-=======
+	@Override //SE USA
 	public void identifyPatient(int patientId) {
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
-		try {
+    try {
 			String sql= "SELECT * FROM patient WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, p.getId());
+			prep.setInt(1, patientId);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("id");

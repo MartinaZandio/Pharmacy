@@ -1,5 +1,6 @@
 package pharmacy.db.interfaces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pharmacy.db.pojos.*;
@@ -14,5 +15,7 @@ public interface PharmacyManager {
 	public void assignMedicine(Medicine medicine, Prescription prescription);
 	public boolean checkAuthenticity(int prescription_id);
 	public Pharmacy getPharmacy(int id);
+	ArrayList<Pharmacy> getPharmacy(String name);
+
 	
 }

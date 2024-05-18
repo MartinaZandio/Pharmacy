@@ -142,7 +142,7 @@ public class Menu {
 			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
 			System.out.println("Select an option by typing a number: ");
-			System.out.println("1. Identify a pacient.");
+			System.out.println("1. Identify a patient.");
 			System.out.println("2. Check stock.");
 			System.out.println("3. Print Xml.");
 			System.out.println("0. Exit");			
@@ -211,6 +211,7 @@ public class Menu {
 			ConnectionManager conMan = new ConnectionManager();
 			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
+			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Mark prescription as used.");
 			System.out.println("2. Check autenticity.");
@@ -239,18 +240,32 @@ public class Menu {
 		private static void markPrescriptionAsUsedMenu() throws IOException{
 			ConnectionManager conMan = new ConnectionManager();
 			prescriptionManager = new JDBCPrescriptionManager(conMan);
+			
+			int patientId = identifyPatientMenu();
 		
 			System.out.println("Select the prescription you want to mark as used, by typing its id.");
 			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
-			prescriptions = prescriptionManager.getPrescription(identifyPatientMenu());
+			prescriptions = prescriptionManager.getPrescription(patientId);
+			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
+			
+			pharmacyManager.markPrescriptionAsUsed(idPrescription);
 		}
 		
 		private static void checkAutenticityMenu() throws IOException {
 			ConnectionManager conMan = new ConnectionManager();
 			pharmacyManager = new JDBCPharmacyManager(conMan);
+			
+			int patientId = identifyPatientMenu();
+
+			System.out.println("Select the prescription you check its autenticity, by typing its id.");
+			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+			prescriptions = prescriptionManager.getPrescription(patientId);
+			System.out.println(prescriptions);
+			Integer idPrescription = Integer.parseInt(r.readLine());
 		
-			boolean autenticity = pharmacyManager.checkAuthenticity(identifyPatientMenu());
+		
+			boolean autenticity = pharmacyManager.checkAuthenticity(idPrescription);
 			System.out.println(autenticity);
 		}
 		
@@ -279,7 +294,19 @@ public class Menu {
 
 		private static void orderStockMenu() throws NumberFormatException, IOException {
 			int medicineId = checkStockMenu();
+			
 			System.out.println("Type the amount of medicine you want to order: ");
 			int quantity = Integer.parseInt(r.readLine());
+			
+			System.out.println("Type the pharmacy name: ");
+			String name = r.readLine();
+			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+			pharmacies = pharmacyManager.getPharmacy(name);
+			System.out.println(pharmacies);
+			Integer idPharmacy = Integer.parseInt(r.readLine());
+		
+		
+	
+			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
 		}
 }
