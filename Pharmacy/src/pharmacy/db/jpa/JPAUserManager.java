@@ -10,14 +10,10 @@ import pharmacy.db.pojos.User;
 
 
 public class JPAUserManager implements UserManager {
-	
-	// private static final String PERSISTENCE_PROVIDER = "pharmacy-provider";
-	// private static EntityManagerFactory factory;
 
 	private EntityManager em;
 	
 	public JPAUserManager() {
-		// factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
 		em = Persistence.createEntityManagerFactory("pharmacy-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
@@ -34,17 +30,17 @@ public class JPAUserManager implements UserManager {
 	}
 	
 	@Override
-	public void register(User u) {
-		em.getTransaction().begin();  //before every change
-		em.persist(u);
-		em.getTransaction().commit();
-	}
-
-	@Override
 	public void createRole(Role r) {
 		em.getTransaction().begin();  //before every change
 		em.persist(r);
 		em.getTransaction().commit();  //after every change
+		em.close();
+	}
+
+	public void register(User u) {
+		em.getTransaction().begin();  
+		em.persist(u);
+		em.getTransaction().commit();
 	}
 
 	@Override
@@ -82,6 +78,5 @@ public class JPAUserManager implements UserManager {
 			return null;
 		}
 		return u;
-
 	}
 }

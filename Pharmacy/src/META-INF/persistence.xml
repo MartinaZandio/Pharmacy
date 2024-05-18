@@ -13,7 +13,6 @@
 		<class>pharmacy.db.pojos.User</class>
 		<class>pharmacy.db.pojos.Role</class>
 		 
- Department
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
