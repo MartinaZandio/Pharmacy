@@ -41,10 +41,9 @@ public class Pharmacy implements Serializable{
 		this.postalCode = postalCode;
 		this.numberOfWorkers = numberOfWorkers;
 		this.stock = new ArrayList<Stock>();
-
 	}
 	
-	
+
 	public int getId() {
 		return id;
 	}
