@@ -24,7 +24,7 @@ public class User implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 	
-	public User() {
+	public User(String username2, String password2, String roleName) {
 		super();
 	}
 	

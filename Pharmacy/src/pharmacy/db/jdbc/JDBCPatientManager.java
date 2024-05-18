@@ -22,13 +22,14 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient p) {
 		try {
-		String template= "INSERT INTO patient (id, name, dateOfBirth, sex)"
-				+ "VALUES (?,?,?,?);";
+		String template= "INSERT INTO patient (id, name, dateOfBirth, sex, userName)"
+				+ "VALUES (?,?,?,?, ?);";
 		PreparedStatement insert= c.prepareStatement(template);		
 		insert.setInt(1,p.getId());
 		insert.setString(2, p.getName());
 		insert.setDate(3, p.getDateOfBirth());
 		insert.setString(4, p.getSex());
+		insert.setString (5, p.getUserName());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -131,6 +132,23 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		
 		return patients;*/
+		return null;
+	}
+
+	@Override
+	public Patient getPatient(String username) {
+		try {
+			String sql = "SELECT * FROM patient WHERE username = " + username;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			rs.next();
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"), rs.getString("userName"));
+			return a;
+		}catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
 		return null;
 	}
 

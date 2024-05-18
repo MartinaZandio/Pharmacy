@@ -14,5 +14,6 @@ public interface PatientManager {
 	public void deletePatient(Patient p) throws SQLException;
 	public Patient getPatient(int id);
 	public void identifyPatient(Patient p);
+	public Patient getPatient(String username);
 	
 }
