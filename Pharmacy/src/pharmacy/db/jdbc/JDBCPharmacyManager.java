@@ -128,9 +128,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
-		// TODO Auto-generated method stub
-		try { //open data base connection
-			Statement stmt=c.createStatement();
+		try { 
 			String sql;
 			sql = "INSERT INTO prescriptionMedicine (medicine_numAsigned, prescription_id)"
 					+ "VALUES (?,?);";
@@ -146,9 +144,33 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			sqlE.printStackTrace();
 			}
 		}
-
 	
-
+	@Override
+	public ArrayList<Pharmacy> getPharmacy(String name) {
+		ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+		try {
+			String sql = "SELECT * FROM pharmacies WHERE name LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql); 
+			search.setString(1, "%"+name+"%");
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer id1 = rs.getInt("id");
+				String name1 = rs.getString("name");
+				String location = rs.getString("location");
+				Integer postalCode = rs.getInt("postalCode");
+				Pharmacy phs = new Pharmacy(id1, name1, location, postalCode);
+				pharmacies.add(phs);
+				}
+			rs.close();
+			search.close();
+			return pharmacies;
+			} catch (SQLException e) {
+				System.out.println("Error creating the pharmacy");
+				e.printStackTrace();
+				}
+		return null;
+	}
+	
 	
 	
 }
