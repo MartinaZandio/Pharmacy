@@ -44,6 +44,15 @@ public class Pharmacy implements Serializable{
 
 	}
 	
+	public Pharmacy(int id, String name, String location, int postalCode) {
+		super();
+		this.id=id;
+		this.name = name;
+		this.location = location;
+		this.postalCode = postalCode;
+		this.stock = new ArrayList<Stock>();
+	}
+	
 	
 	public int getId() {
 		return id;
