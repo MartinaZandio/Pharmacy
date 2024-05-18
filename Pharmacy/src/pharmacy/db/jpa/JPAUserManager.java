@@ -10,10 +10,14 @@ import pharmacy.db.pojos.User;
 
 
 public class JPAUserManager implements UserManager {
+	
+	// private static final String PERSISTENCE_PROVIDER = "pharmacy-provider";
+	// private static EntityManagerFactory factory;
 
 	private EntityManager em;
 	
 	public JPAUserManager() {
+		// factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
 		em = Persistence.createEntityManagerFactory("pharmacy-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();

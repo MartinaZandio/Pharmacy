@@ -18,11 +18,23 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		this.conMan = conMan; 
 		this.c = conMan.getConnection();
 	}
-
-	@Override
-	public void giveMedicine(Medicine medicine, Prescription prescription, Patient patient) {
-		// TODO Auto-generated method stub
-
+	
+	@Override 
+	public Pharmacy getPharmacy(int id) {
+		
+		try {
+			String template= "SELECT * FROM pharmacies WHERE numAssigned = " + id;
+			Statement st;
+			st = c.createStatement();
+			ResultSet rs = st.executeQuery(template);
+			rs.next();
+			Pharmacy p = new Pharmacy (rs.getInt("id"), rs.getString("name"),rs.getString("location"), rs.getInt("postalCode"), rs.getInt("numberOfWorkers")); 
+			return p;
+			}catch (SQLException e) {
+				System.out.println("Error in the database");
+				e.printStackTrace();
+			}
+			return null;
 	}
 	
 	@Override 
@@ -114,8 +126,6 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			return patients;
 		}
 
-
-
 	@Override
 	public void assignMedicine(Medicine medicine, Prescription prescription) {
 		// TODO Auto-generated method stub
@@ -137,4 +147,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			}
 		}
 
-	}
+	
+
+	
+	
+}

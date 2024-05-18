@@ -23,7 +23,7 @@ public class Menu {
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static UserManager userMan;
-	
+	private static XmlManager xmlMan;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
@@ -144,8 +144,9 @@ public class Menu {
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Identify a pacient.");
 			System.out.println("2. Check stock.");
-			System.out.println("0. Exit");
-
+			System.out.println("3. Print Xml.");
+			System.out.println("0. Exit");			
+			
 			int choice=Integer.parseInt(r.readLine());
 			do {
 				switch(choice) {
@@ -156,6 +157,9 @@ public class Menu {
 				case 2: {
 					checkStockMenu();
 					break;
+				}
+				case 3:{
+					java2Xml();
 				}
 				case 0: {
 					return;
@@ -173,13 +177,12 @@ public class Menu {
 			System.out.println(patients);
 			System.out.println("Type the patient's id that you want to select: ");
 			int patientId = Integer.parseInt(r.readLine());
-			Patient p = patientManager.getPatient(patientId);
-			System.out.println(p);
+			patientManager.identifyPatient(patientId);
 			pharmacist_patientMenu();
 			return patientId;
 		}
 		
-		private static void checkStockMenu() throws IOException {
+		private static int checkStockMenu() throws IOException {
 			System.out.println("Type the medicine name: ");
 			String medicineName = r.readLine();
 			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
@@ -189,7 +192,20 @@ public class Menu {
 			Medicine m = medicineManager.getMedicine(medicineId);
 			System.out.println(m);
 			stockMenu();
+			return medicineId;
 		}
+		
+		private static void java2Xml() throws NumberFormatException, IOException {
+			System.out.print("Choose a pharmacy to turn into an XML file:");
+			int id = Integer.parseInt(r.readLine());
+			Pharmacy p= pharmacyManager.getPharmacy(id);
+			xmlMan.pharmacy2Xml(p);
+		}
+		
+		private static void xml2Java(){
+			
+		}
+		
 		
 		private static void pharmacist_patientMenu() throws IOException {
 			ConnectionManager conMan = new ConnectionManager();
@@ -262,6 +278,7 @@ public class Menu {
 		}
 
 		private static void orderStockMenu() throws NumberFormatException, IOException {
+			int medicineId = checkStockMenu();
 			System.out.println("Type the amount of medicine you want to order: ");
 			int quantity = Integer.parseInt(r.readLine());
 		}
