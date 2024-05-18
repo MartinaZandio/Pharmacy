@@ -43,6 +43,15 @@ public class Patient implements Serializable{
 	}
 
 
+	public Patient(String name2, Date dateOfBirth2, String sex2, String username2) {
+		super();
+		this.name=name2;
+		this.dateOfBirth=dateOfBirth2;
+		this.sex= sex2;
+		this.userName = username2;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

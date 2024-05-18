@@ -8,35 +8,32 @@ import pharmacy.db.interfaces.UserManager;
 import pharmacy.db.pojos.Role;
 import pharmacy.db.pojos.User;
 
+
 public class JPAUserManager implements UserManager {
 
 	private EntityManager em;
-
+	
 	public JPAUserManager() {
-		em=Persistence.createEntityManagerFactory("pharmacy-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("pharmacy-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		//Create default roles
-		//if they don't exist already
+		// Create default roles
+		// If they don't exist already
 		try {
-			this.getRole("pharmacy");
+			this.getRole("Pharmacist");
 		} catch(NoResultException e) {
-			this.createRole(new Role ("pharmacy"));
-			this.createRole(new Role ("patient"));
+			this.createRole(new Role ("Pharmacist"));
+			this.createRole(new Role ("Patient"));
 		}
-		//if(this.getRole("pharmacy") == null) {
-		//this.createRole(new Role ("pharmacy"));
-		//this.createRole(new Role ("patient"));
-		//}
+	
 	}
 	
 	@Override
 	public void register(User u) {
 		em.getTransaction().begin();  //before every change
 		em.persist(u);
-		em.getTransaction().commit();  //after every change
-
+		em.getTransaction().commit();
 	}
 
 	@Override
@@ -44,20 +41,20 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().begin();  //before every change
 		em.persist(r);
 		em.getTransaction().commit();  //after every change
-
 	}
 
 	@Override
 	public Role getRole(String username) {
-		/*Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
+		Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, username);
-		Role r= (Role) q.getSingleResult();*/
-		return null;
+		Role r= (Role) q.getSingleResult();
+		return r;
 	}
 	
 	public List<Role> getAllRoles(){
 		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
-		List<Role> roles = (List<Role>) q.getResultList();
+		List<Role> resultList = (List<Role>) q.getResultList();
+		List<Role> roles = resultList;
 		return roles;
 	}
 
@@ -83,5 +80,4 @@ public class JPAUserManager implements UserManager {
 		return u;
 
 	}
-
 }
