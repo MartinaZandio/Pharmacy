@@ -1,41 +1,48 @@
 package pharmacy.db.xml;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.sql.*;
-import java.util.List;
-import javax.xml.bind.*;
-import javax.xml.transform.*;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
-import org.eclipse.persistence.internal.oxm.Marshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.interfaces.XmlManager;
-import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
+
 
 public class XmlPharmacyManager implements XmlManager {
 	
 	private static Connection c;
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
-	private static PharmacyManager phMan;
-	private static XmlManager xmlMan;
+	private static PharmacyManager pharmacyManager;
 
-	@Override
-	public Pharmacy xml2Pharmacy(File xml) {
-	try {
+	public static void pharmacy2Xml() throws Exception {
+		
+		System.out.print("Choose a pharmacy to turn into an XML file:");
+		int id = Integer.parseInt(r.readLine());
+		Pharmacy p= pharmacyManager.getPharmacy(id);
+		File xml = new File ("./xmls/External-Pharmacy"); 
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		Marshaller marshaller= jaxbContext.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		marshaller.marshal(p, xml);
+		marshaller.marshal(p,System.out);
+	}
+	
+	
+	public static Pharmacy xml2Pharmacy() throws Exception{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
+		File xml = new File("./xmls/External-Report.xml");
 		Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
 		return pharmacy;
+	}
 	
-	}catch(Exception e) {
-		System.out.println("Unable to load the xml file");
-		e.printStackTrace();
-	}
-	return null;
-	}
+	
 	
 	public void printPharmacies() throws SQLException {
 		

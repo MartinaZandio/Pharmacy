@@ -32,7 +32,6 @@ public class Menu {
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static UserManager userMan;
-	private static XmlPharmacyManager xmlMan;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
@@ -212,23 +211,13 @@ public class Menu {
 		}
 		
 		public static void pharmacy2Xml() throws Exception {
+			XmlPharmacyManager.pharmacy2Xml();
 			
-			System.out.print("Choose a pharmacy to turn into an XML file:");
-			int id = Integer.parseInt(r.readLine());
-			Pharmacy p= pharmacyManager.getPharmacy(id);
-			File xml = new File ("./xmls/External-Pharmacy"); 
-			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-			Marshaller marshaller= jaxbContext.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			marshaller.marshal(p, xml);
 		}
 		
 		
 		private static Pharmacy xml2Pharmacy() throws Exception{
-			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
-			File xml = new File("./xmls/External-Report.xml");
-			Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
+			Pharmacy pharmacy= XmlPharmacyManager.xml2Pharmacy();
 			return pharmacy;
 		}
 		
