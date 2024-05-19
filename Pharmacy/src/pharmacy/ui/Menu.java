@@ -31,7 +31,6 @@ public class Menu {
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static UserManager userMan;
-	private static XmlPharmacyManager xmlMan;
 
 	public static void main(String[] args) throws Exception {
 		
@@ -192,11 +191,11 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					pharmacy2Xml();
+					XmlPharmacyManager.pharmacy2Xml();
 					break;
 				}
 				case 4:{
-					xml2Pharmacy();
+					XmlPharmacyManager.xml2Pharmacy();
 					break;
 				}
 				case 0: {
@@ -233,27 +232,6 @@ public class Menu {
 			stockMenu();
 			return medicineId;
 			
-		}
-		
-		public static void pharmacy2Xml() throws Exception {
-			
-			System.out.print("Choose a pharmacy to turn into an XML file:");
-			int id = Integer.parseInt(r.readLine());
-			Pharmacy p= pharmacyManager.getPharmacy(id);
-			File xml = new File ("./xmls/External-Pharmacy"); 
-			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-			Marshaller marshaller= jaxbContext.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			marshaller.marshal(p, xml);
-		}
-		
-		
-		private static Pharmacy xml2Pharmacy() throws Exception{
-			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
-			File xml = new File("./xmls/External-Report.xml");
-			Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
-			return pharmacy;
 		}
 		
 		
