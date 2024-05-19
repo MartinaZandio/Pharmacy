@@ -14,6 +14,7 @@ public interface MedicineManager {
 	public ArrayList<Medicine> searchMedicineByName(String name);
 	public Medicine getMedicine(int id);
 	public void assignMedicine();
+	ArrayList<Medicine> getMedicines(int patient_id);
 		
 }
 

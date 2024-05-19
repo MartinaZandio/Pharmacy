@@ -152,6 +152,7 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return null;
 	}
+	
 
 }
 

@@ -18,7 +18,6 @@ import pharmacy.db.jdbc.*;
 import pharmacy.db.jpa.JPAUserManager;
 import pharmacy.db.pojos.*;
 import pharmacy.db.xml.XmlPharmacyManager;
-import sample.db.pojos.Report;
 
 public class Menu {
 
@@ -34,7 +33,7 @@ public class Menu {
 	private static UserManager userMan;
 	private static XmlPharmacyManager xmlMan;
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws Exception {
 		
 		conMan = new ConnectionManager();
 		patientManager = conMan.getPatientMan();
@@ -71,14 +70,13 @@ public class Menu {
 		System.out.println("Select an option by typing a number: ");
 		System.out.println("1. Login.");
 		System.out.println("2. Sign up.");
-		// System.out.println("3. Turn pharmacy into an XML file.");
 		System.out.println("0. Save & exit.");
 
 		int choice=Integer.parseInt(r.readLine());
 		return choice;
 	}
 		
-		private static void menuLogin() throws NumberFormatException, IOException{
+		private static Patient menuLogin() throws Exception{
 			System.out.println("Username: ");
 			String username = r.readLine();
 			System.out.println("Password: ");
@@ -86,10 +84,12 @@ public class Menu {
 			User u = userMan.login(username, password);
 			if (u.getRole().getName() == "Patient" ) {
 				Patient p = patientManager.getPatient(username);
-				patientMenu(p);
+				patientMenu();
+				return p;
 			} else {
 			pharmacistMenu();
 			}
+			return null;
 		}
 		
 		
@@ -118,9 +118,12 @@ public class Menu {
 			}
 		}
 			
-		private static void patientMenu(Patient p) throws NumberFormatException, IOException{
+		private static void patientMenu() throws Exception{
 			ConnectionManager conMan = new ConnectionManager();
 			patientManager = new JDBCPatientManager(conMan);
+			
+			Patient p = menuLogin();
+			int patient_id=p.getId();
 			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Check medical history.");
@@ -130,13 +133,16 @@ public class Menu {
 			int choice=Integer.parseInt(r.readLine());
 			do {
 				switch(choice) {
-				case 1: {;
+				case 1: {
+					checkMedicalHistoryMenu(patient_id);
 					break;
 				}
 				case 2: {
+					checkMedicineMenu(patient_id);
 					break;
 				}
 				case 0: {
+					mainMenu();
 					return;
 				}
 				default:
@@ -145,10 +151,26 @@ public class Menu {
 			
 		}
 		
+		private static void checkMedicalHistoryMenu(int patient_id) throws Exception {
+			
+			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+			prescriptions = prescriptionManager.getPrescription(patient_id);
+			System.out.println(prescriptions);
+			
+			patientMenu();
+			
+		}
+		
+		private static void checkMedicineMenu(int patient_id) throws Exception {
+			
+			ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+			medicines = medicineManager.getMedicines(patient_id);
+			System.out.println(medicines);
+			
+			patientMenu();
+		}
+		
 		private static void pharmacistMenu() throws Exception{
-			ConnectionManager conMan = new ConnectionManager();
-			//patientManager = new JDBCPatientManager(conMan);
-			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Identify a patient.");
@@ -178,6 +200,7 @@ public class Menu {
 					break;
 				}
 				case 0: {
+					mainMenu();
 					return;
 				}
 				default:
@@ -198,7 +221,7 @@ public class Menu {
 			return patientId;
 		}
 		
-		private static int checkStockMenu() throws IOException {
+		private static int checkStockMenu() throws Exception {
 			System.out.println("Type the medicine name: ");
 			String medicineName = r.readLine();
 			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
@@ -209,6 +232,7 @@ public class Menu {
 			System.out.println(m);
 			stockMenu();
 			return medicineId;
+			
 		}
 		
 		public static void pharmacy2Xml() throws Exception {
@@ -241,7 +265,7 @@ public class Menu {
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Mark prescription as used.");
 			System.out.println("2. Check autenticity.");
-			System.out.println("0. Exit");
+			System.out.println("0. Go back.");
 
 			int choice=Integer.parseInt(r.readLine());
 			do {
@@ -255,6 +279,7 @@ public class Menu {
 					break;
 				}
 				case 0: {
+					identifyPatientMenu();
 					return;
 				}
 				default:
@@ -276,6 +301,8 @@ public class Menu {
 			Integer idPrescription = Integer.parseInt(r.readLine());
 			
 			pharmacyManager.markPrescriptionAsUsed(idPrescription);
+			
+			pharmacist_patientMenu();
 		}
 		
 		private static void checkAutenticityMenu() throws IOException {
@@ -284,7 +311,7 @@ public class Menu {
 			
 			int patientId = identifyPatientMenu();
 
-			System.out.println("Select the prescription you check its autenticity, by typing its id.");
+			System.out.println("Select the prescription you want to check by typing its id: ");
 			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
 			prescriptions = prescriptionManager.getPrescription(patientId);
 			System.out.println(prescriptions);
@@ -293,9 +320,11 @@ public class Menu {
 		
 			boolean autenticity = pharmacyManager.checkAuthenticity(idPrescription);
 			System.out.println(autenticity);
+			
+			pharmacist_patientMenu();
 		}
 		
-		private static void stockMenu() throws NumberFormatException, IOException{
+		private static void stockMenu() throws Exception{
 			ConnectionManager conMan = new ConnectionManager();
 			pharmacyManager = new JDBCPharmacyManager(conMan);
 			
@@ -311,6 +340,7 @@ public class Menu {
 					break;
 				}
 				case 0: {
+					pharmacistMenu();
 					return;
 				}
 				default:
@@ -318,7 +348,7 @@ public class Menu {
 			} while (choice != 0);
 		}
 
-		private static void orderStockMenu() throws NumberFormatException, IOException {
+		private static void orderStockMenu() throws Exception {
 			int medicineId = checkStockMenu();
 			
 			System.out.println("Type the amount of medicine you want to order: ");
@@ -332,5 +362,7 @@ public class Menu {
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 		
 			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
+			
+			pharmacistMenu();
 		}
 }

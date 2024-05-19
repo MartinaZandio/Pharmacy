@@ -42,7 +42,7 @@ public class JDBCMedicineManager implements MedicineManager {
 
 	}
 	
-	
+	@Override
 	public ArrayList<Medicine> searchMedicineByName(String name){   //SE USA
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
 		try {
@@ -84,8 +84,49 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
+	public ArrayList<Medicine> getMedicines(int patient_id){   //SE USA
+		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+		try {
+			String sql = "SELECT id FROM prescriptions WHERE id LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, patient_id);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				
+				String sql2 = "SELECT * FROM pres_id WHERE id LIKE ?";
+				PreparedStatement search2 = c.prepareStatement(sql2);
+				search.setInt(1, id);
+				ResultSet rs2 = search2.executeQuery();
+				
+				while (rs2.next()) {
+					Integer med_id = rs2.getInt("medicine_id");
+					
+					String sql3 = "SELECT name FROM medicines WHERE id LIKE ?";
+					PreparedStatement search3 = c.prepareStatement(sql3);
+					search.setInt(1, med_id);
+					ResultSet rs3 = search3.executeQuery();
+
+				rs.close();
+				rs2.close();
+				rs3.close();
+				search.close();
+				search2.close();
+				search3.close();
+				}
+			}
+		}catch(SQLException e) {
+			System.out.println("Error looking for a medicine");
+			e.printStackTrace();
+		}
+		return medicines;
+	}
+
+	@Override
 	public void assignMedicine() {
 		// TODO Auto-generated method stub
+		
 	}
+	
 
 }
