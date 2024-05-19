@@ -169,11 +169,11 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					pharmacy2Xml();
+					XmlPharmacyManager.pharmacy2Xml();
 					break;
 				}
 				case 4:{
-					xml2Pharmacy();
+					XmlPharmacyManager.xml2Pharmacy();
 					break;
 				}
 				case 0: {
@@ -208,17 +208,6 @@ public class Menu {
 			System.out.println(m);
 			stockMenu();
 			return medicineId;
-		}
-		
-		public static void pharmacy2Xml() throws Exception {
-			XmlPharmacyManager.pharmacy2Xml();
-			
-		}
-		
-		
-		private static Pharmacy xml2Pharmacy() throws Exception{
-			Pharmacy pharmacy= XmlPharmacyManager.xml2Pharmacy();
-			return pharmacy;
 		}
 		
 		
