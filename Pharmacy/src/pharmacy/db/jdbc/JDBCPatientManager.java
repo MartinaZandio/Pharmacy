@@ -72,7 +72,7 @@ public class JDBCPatientManager implements PatientManager {
 		delete.executeUpdate();
 	}
 	
-	public Patient getPatient(int id) {
+	public Patient getPatient(int id) {     //SE USA 
 		try {
 			String sql = "SELECT * FROM patient WHERE id = " + id;
 			Statement st;
@@ -88,8 +88,8 @@ public class JDBCPatientManager implements PatientManager {
 		return null;
 	}
 	
-	@Override //SE USA
-	public void identifyPatient(int patientId) {
+	@Override 
+	public void identifyPatient(int patientId) {    //SE USA
     try {
 			String sql= "SELECT * FROM patient WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);

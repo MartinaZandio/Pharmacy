@@ -1,4 +1,4 @@
-package pharmacy.db.jpa;
+	package pharmacy.db.jpa;
 
 import java.util.*;
 
@@ -44,14 +44,14 @@ public class JPAUserManager implements UserManager {
 	}
 
 	@Override
-	public Role getRole(String username) {
+	public Role getRole(String username) {    //SE USA 
 		Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, username);
 		Role r= (Role) q.getSingleResult();
 		return r;
 	}
 	
-	public List<Role> getAllRoles(){
+	public List<Role> getAllRoles(){    //SE USA
 		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
 		List<Role> resultList = (List<Role>) q.getResultList();
 		List<Role> roles = resultList;

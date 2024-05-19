@@ -41,7 +41,6 @@ public class Medicine implements Serializable {
 		this.prescriptions = new ArrayList<Prescription>();
 	}
 	
-	
 	public Medicine(String name, int numAsigned, Prescription prescription, Laboratory laboratory,
 			List<Stock> stock) {
 		super();
@@ -56,7 +55,6 @@ public class Medicine implements Serializable {
 
 
 	//Getters y Setters
-	
 	public String getName() {
 		return name;
 	}
