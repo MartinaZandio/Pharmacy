@@ -114,7 +114,6 @@ public class JDBCPatientManager implements PatientManager {
 		// TODO Auto-generated method stub
 		/*List<Patient> patients= new ArrayList<Patient>();
 		try {
-			
 			String sql= "SELECT * FROM patient WHERE id = ?"; 
 			PreparedStatement search=c.prepareStatement(sql);
 			search.setInt(1, id); //Fills the question marks
