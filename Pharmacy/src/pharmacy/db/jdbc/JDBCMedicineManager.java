@@ -43,7 +43,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	
-	public ArrayList<Medicine> searchMedicineByName(String name){
+	public ArrayList<Medicine> searchMedicineByName(String name){   //SE USA
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
@@ -53,10 +53,9 @@ public class JDBCMedicineManager implements MedicineManager {
 			while(rs.next()) {
 				Integer numAsigned = rs.getInt("numAsigned");
 				String medicineName = rs.getString("name");
-		//		Array stock = rs.getArray("stock");
-//				Prescription prescription = conMan.getPrescriptionMan().getPrescription().getId;
-//				Laboratory laboratory = conMan.getLaboratoryMan().getLaboratory().getId;
-				
+		
+			Medicine medicine = new Medicine (medicineName, numAsigned);
+			medicines.add(medicine);
 			}
 		}catch(SQLException e) {
 			System.out.println("Error looking for a medicine");
@@ -67,14 +66,14 @@ public class JDBCMedicineManager implements MedicineManager {
 
 	
 	@Override
-	public Medicine getMedicine(int id) {
+	public Medicine getMedicine(int id) {  //SE USA
 		try {
 			String sql = "SELECT * FROM medicines WHERE id = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numAsigned")); //rs.getPrescription()); //laboratory stock prescriptions);
+			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numAsigned")); 
 			return m;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");

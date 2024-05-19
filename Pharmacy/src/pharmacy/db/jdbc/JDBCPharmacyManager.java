@@ -20,7 +20,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 	
 	@Override 
-	public Pharmacy getPharmacy(int id) {
+	public Pharmacy getPharmacy(int id) {  //SE USA
 		
 		try {
 			String template= "SELECT * FROM pharmacies WHERE numAssigned = " + id;
@@ -38,7 +38,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 	
 	@Override 
-	public void markPrescriptionAsUsed (int prescription_id) {
+	public void markPrescriptionAsUsed (int prescription_id) {  //SE USA
 		Date localDate = null;
 		try{
 			String sql = "UPDATE prescription SET useDate=localDate WHERE precription_id=?";
@@ -52,7 +52,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 
 	@Override
-	public boolean checkAuthenticity(int prescription_id) {
+	public boolean checkAuthenticity(int prescription_id) {  //SE USA
 		try {
 			String sql = "SELECT useDate FROM prescriptions WHERE id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
@@ -85,7 +85,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void orderStock(int medicine_id, int pharmacy_id, int qty) {
+	public void orderStock(int medicine_id, int pharmacy_id, int qty) {  //SE USA
+	
 		try{
 			String sql = "UPDATE stock SET amount=amount+? WHERE medicine_id=? AND pharmacy_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -146,7 +147,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 	
 	@Override
-	public ArrayList<Pharmacy> getPharmacy(String name) {
+	public ArrayList<Pharmacy> getPharmacy(String name) {  //SE USA
 		ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 		try {
 			String sql = "SELECT * FROM pharmacies WHERE name LIKE ?";
