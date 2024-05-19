@@ -1,7 +1,6 @@
 package pharmacy.db.xml;
 
 import java.io.*;
-import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.List;
 import javax.xml.bind.*;
@@ -11,6 +10,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.eclipse.persistence.internal.oxm.Marshaller;
 
+import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.interfaces.XmlManager;
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.pojos.*;
@@ -18,11 +18,12 @@ import pharmacy.db.pojos.*;
 public class XmlPharmacyManager implements XmlManager {
 	
 	private static Connection c;
-
+	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
+	private static PharmacyManager phMan;
+	private static XmlManager xmlMan;
 
 	@Override
 	public Pharmacy xml2Pharmacy(File xml) {
-		
 	try {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -34,21 +35,6 @@ public class XmlPharmacyManager implements XmlManager {
 		e.printStackTrace();
 	}
 	return null;
-	}
-
-		
-	@Override
-	public void pharmacy2Html(Pharmacy pharmacy) throws Exception {
-		
-		File file = pharmacy2Xml(pharmacy);
-		TransformerFactory tf= TransformerFactory.newInstance();
-		try {
-			Transformer t= tf.newTransformer(new StreamSource(new File("./xmls/External-Pharamcy")));
-			t.transform(new StreamSource(file), new StreamResult(new File("./xmls/External-Pharamcy")));
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void printPharmacies() throws SQLException {

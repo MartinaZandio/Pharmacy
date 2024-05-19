@@ -5,8 +5,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
@@ -166,11 +170,11 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					java2Xml();
+					pharmacy2Xml();
 					break;
 				}
 				case 4:{
-					xml2Java();
+					xml2Pharmacy();
 					break;
 				}
 				case 0: {
@@ -207,22 +211,25 @@ public class Menu {
 			return medicineId;
 		}
 		
-		private static File java2Xml() throws Exception {
+		public static void pharmacy2Xml() throws Exception {
+			
 			System.out.print("Choose a pharmacy to turn into an XML file:");
 			int id = Integer.parseInt(r.readLine());
 			Pharmacy p= pharmacyManager.getPharmacy(id);
-			File xml = xmlMan.pharmacy2Xml(p);
-			return xml;
-		}
-		
-		private static Pharmacy xml2Java() throws Exception{
 			File xml = new File ("./xmls/External-Pharmacy"); 
-			Pharmacy ph =xmlMan.xml2Pharmacy(xml);
 			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 			Marshaller marshaller= jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			marshaller.marshal(ph, xml);
-			return ph;
+			marshaller.marshal(p, xml);
+		}
+		
+		
+		private static Pharmacy xml2Pharmacy() throws Exception{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
+			File xml = new File("./xmls/External-Report.xml");
+			Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
+			return pharmacy;
 		}
 		
 		
