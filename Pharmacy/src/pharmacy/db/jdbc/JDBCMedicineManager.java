@@ -122,11 +122,7 @@ public class JDBCMedicineManager implements MedicineManager {
 		return medicines;
 	}
 
-	@Override
-	public void assignMedicine() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 
 }

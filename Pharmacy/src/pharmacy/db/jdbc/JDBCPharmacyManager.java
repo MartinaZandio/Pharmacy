@@ -70,13 +70,56 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		return false;
 	}	
 		
-	public void reduceStock(int medicine_id, int pharmacy_id, int qty) {	
+
+	public void sellMedicine(int patient_id, int pharmacy_id) {	// SE USA
 		try{
-			String sql = "UPDATE stock SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
+			String sql = "SELECT id, quantity FROM prescriptions WHERE patient_id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, qty);
-			prep.setInt(2, medicine_id);
-			prep.setInt(3, pharmacy_id);
+			prep.setInt(1, patient_id);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				Integer quantity = rs.getInt("quantity");
+				
+				String sql2 = "SELECT medicine_id FROM pres_med WHERE prescription_id LIKE ?";
+				PreparedStatement prep2 = c.prepareStatement(sql2);
+				prep.setInt(1, id);
+				ResultSet rs2 = prep2.executeQuery();
+				
+				while (rs2.next()) {
+					Integer medicine_id = rs.getInt("medicine_id");
+					
+					String sql3 = "SELECT amount FROM stock WHERE medicine_id LIKE ?";
+					PreparedStatement prep3 = c.prepareStatement(sql2);
+					prep.setInt(1, medicine_id);
+					ResultSet rs3 = prep3.executeQuery(); 
+					
+					while (rs3.next()) {
+						Integer amount = rs3.getInt("amount");
+					
+						try {
+						String sql4 = "UPDATE stock SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
+						PreparedStatement prep4 = c.prepareStatement(sql4);
+						prep4.setInt(1, amount);
+						prep4.setInt(2, medicine_id);
+						prep4.setInt(3, pharmacy_id);
+						prep4.executeUpdate();
+						prep4.close();
+						System.out.println("Update finished.");
+						} catch(Exception e){
+							System.out.println("Error reducing the stock");
+						} 
+					
+					rs.close();
+					rs2.close();
+					rs3.close();
+					prep.close();
+					prep2.close();
+					prep3.close();
+					}
+
+				}
+			}
 			prep.executeUpdate();
 			System.out.println("Update finished.");
 		}catch(Exception e){
@@ -127,16 +170,16 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			return patients;
 		}
 
-	@Override
-	public void assignMedicine(Medicine medicine, Prescription prescription) {
+	/*@Override
+	public void assignMedicine(int medicineId, int prescriptionId) {
 		try { 
 			String sql;
-			sql = "INSERT INTO prescriptionMedicine (medicine_numAsigned, prescription_id)"
+			sql = "INSERT INTO pres_med (medicine_numAsigned, prescription_id)"
 					+ "VALUES (?,?);";
 			
 			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setInt(1, medicine.getNumAsigned());
-			insert.setInt(2, prescription.getId());
+			insert.setInt(1, medicineId);
+			insert.setInt(2,prescriptionId);
 			
 			insert.executeUpdate();
 			insert.close();
@@ -144,7 +187,27 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			System.out.println("Error");
 			sqlE.printStackTrace();
 			}
-		}
+		}*/
+	
+	/*@Override
+	public void assignPrescription(int prescriptionId) {
+		try { 
+			
+			String sql;
+			sql = "INSERT INTO prescriptions (id, patient_id)"
+					+ "VALUES (?,?);";
+			
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setInt(1, prescription.getId());
+			insert.setInt(2, patient.getId());
+			
+			insert.executeUpdate();
+			insert.close();
+			} catch (SQLException sqlE) {
+			System.out.println("Error");
+			sqlE.printStackTrace();
+			}
+		}*/
 	
 	@Override
 	public ArrayList<Pharmacy> getPharmacy(String name) {  //SE USA
@@ -171,7 +234,6 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		return null;
 	}
-	
-	
-	
+
+
 }
