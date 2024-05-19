@@ -305,8 +305,6 @@ public class Menu {
 			System.out.println(pharmacies);
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 		
-		
-	
 			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
 		}
 }
