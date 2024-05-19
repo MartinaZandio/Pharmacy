@@ -4,7 +4,6 @@ import java.io.*;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.List;
-
 import javax.xml.bind.*;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
@@ -19,23 +18,7 @@ import pharmacy.db.pojos.*;
 public class XmlPharmacyManager implements XmlManager {
 	
 	private static Connection c;
-	
-	@Override 
-	public File pharmacy2Xml(Pharmacy pharmacy) {
-	try {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
-		Marshaller marshaller = jaxbContext.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		File file = new File ("./xmls/External-Pharmacy"); 
-		marshaller.marshal(pharmacy, file);
-		return file;
-		
-		}catch(Exception e) {
-		e.printStackTrace();
-		}
-	
-		return null;
-	}
+
 
 	@Override
 	public Pharmacy xml2Pharmacy(File xml) {
@@ -55,7 +38,7 @@ public class XmlPharmacyManager implements XmlManager {
 
 		
 	@Override
-	public void pharmacy2Html(Pharmacy pharmacy) {
+	public void pharmacy2Html(Pharmacy pharmacy) throws Exception {
 		
 		File file = pharmacy2Xml(pharmacy);
 		TransformerFactory tf= TransformerFactory.newInstance();
@@ -68,7 +51,7 @@ public class XmlPharmacyManager implements XmlManager {
 		}
 	}
 	
-	public static void printPharmacies() throws SQLException {
+	public void printPharmacies() throws SQLException {
 		
 		String sql = "SELECT * FROM pharmacies";
 		PreparedStatement prep= c.prepareStatement(sql);

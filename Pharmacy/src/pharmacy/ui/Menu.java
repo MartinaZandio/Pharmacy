@@ -5,11 +5,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
 import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jdbc.*;
 import pharmacy.db.jpa.JPAUserManager;
 import pharmacy.db.pojos.*;
+import pharmacy.db.xml.XmlPharmacyManager;
+import sample.db.pojos.Report;
 
 public class Menu {
 
@@ -23,7 +28,7 @@ public class Menu {
 	private static PharmacyManager pharmacyManager;
 	private static PrescriptionManager prescriptionManager; 
 	private static UserManager userMan;
-	private static XmlManager xmlMan;
+	private static XmlPharmacyManager xmlMan;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
@@ -136,7 +141,7 @@ public class Menu {
 			
 		}
 		
-		private static void pharmacistMenu() throws NumberFormatException, IOException{
+		private static void pharmacistMenu() throws Exception{
 			ConnectionManager conMan = new ConnectionManager();
 			//patientManager = new JDBCPatientManager(conMan);
 			pharmacyManager = new JDBCPharmacyManager(conMan);
@@ -145,6 +150,8 @@ public class Menu {
 			System.out.println("1. Identify a patient.");
 			System.out.println("2. Check stock.");
 			System.out.println("3. Print Xml.");
+			System.out.println("4. Change Xml to Java.");
+
 			System.out.println("0. Exit");			
 			
 			int choice=Integer.parseInt(r.readLine());
@@ -160,6 +167,11 @@ public class Menu {
 				}
 				case 3:{
 					java2Xml();
+					break;
+				}
+				case 4:{
+					xml2Java();
+					break;
 				}
 				case 0: {
 					return;
@@ -195,15 +207,22 @@ public class Menu {
 			return medicineId;
 		}
 		
-		private static void java2Xml() throws NumberFormatException, IOException {
+		private static File java2Xml() throws Exception {
 			System.out.print("Choose a pharmacy to turn into an XML file:");
 			int id = Integer.parseInt(r.readLine());
 			Pharmacy p= pharmacyManager.getPharmacy(id);
-			xmlMan.pharmacy2Xml(p);
+			File xml = xmlMan.pharmacy2Xml(p);
+			return xml;
 		}
 		
-		private static void xml2Java(){
-			
+		private static Pharmacy xml2Java() throws Exception{
+			File xml = new File ("./xmls/External-Pharmacy"); 
+			Pharmacy ph =xmlMan.xml2Pharmacy(xml);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
+			Marshaller marshaller= jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			marshaller.marshal(ph, xml);
+			return ph;
 		}
 		
 		
