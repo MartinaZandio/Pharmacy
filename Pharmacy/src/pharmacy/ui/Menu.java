@@ -337,6 +337,7 @@ public class Menu {
 			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 			pharmacies = pharmacyManager.getPharmacy(name);
 			System.out.println(pharmacies);
+			System.out.println("Type the id of the pharmacy where you want to order the new stock.");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 		
 			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
