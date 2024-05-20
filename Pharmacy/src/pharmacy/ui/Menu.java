@@ -244,6 +244,7 @@ public class Menu {
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Mark prescription as used.");
 			System.out.println("2. Check autenticity.");
+			System.out.println("3. Sell medicine.");
 			System.out.println("0. Go back.");
 
 			int choice=Integer.parseInt(r.readLine());
@@ -303,6 +304,19 @@ public class Menu {
 			pharmacist_patientMenu();
 		}
 		
+		private static void sellMedicine() throws IOException {
+			int patientId = identifyPatientMenu();
+			
+			System.out.println("Type the pharmacy name: ");
+			String name = r.readLine();
+			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+			pharmacies = pharmacyManager.getPharmacy(name);
+			System.out.println(pharmacies);
+			Integer idPharmacy = Integer.parseInt(r.readLine());
+			
+			pharmacyManager.sellMedicine(patientId, idPharmacy);
+		}
+		
 		private static void stockMenu() throws Exception{
 			ConnectionManager conMan = new ConnectionManager();
 			pharmacyManager = new JDBCPharmacyManager(conMan);
@@ -338,6 +352,7 @@ public class Menu {
 			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 			pharmacies = pharmacyManager.getPharmacy(name);
 			System.out.println(pharmacies);
+			System.out.println("Type the id of the pharmacy where you want to order the new stock.");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 		
 			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
