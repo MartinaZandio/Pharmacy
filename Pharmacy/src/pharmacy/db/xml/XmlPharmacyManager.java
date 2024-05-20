@@ -13,7 +13,6 @@ import pharmacy.db.interfaces.PharmacyManager;
 import pharmacy.db.interfaces.XmlManager;
 import pharmacy.db.pojos.*;
 
-
 public class XmlPharmacyManager implements XmlManager {
 	
 	private static Connection c;
@@ -37,12 +36,11 @@ public class XmlPharmacyManager implements XmlManager {
 	public static Pharmacy xml2Pharmacy() throws Exception{
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
-		File xml = new File("./xmls/External-Report.xml");
+		File xml = new File("./xmls/External-Pharmacy.xml");
 		Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
 		return pharmacy;
 	}
-	
-	
+
 	
 	public void printPharmacies() throws SQLException {
 		
