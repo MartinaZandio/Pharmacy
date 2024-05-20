@@ -78,7 +78,7 @@ public class Menu {
 		return choice;
 	}
 		
-		private static Patient menuLogin() throws Exception { 
+		private static Patient menuLogin() throws Exception{
 			System.out.println("Username: ");
 			String username = r.readLine();
 			System.out.println("Password: ");
