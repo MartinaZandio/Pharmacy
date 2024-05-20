@@ -64,6 +64,7 @@ public class Menu {
 			} while (choice != 0);
 	}
 	
+	
 	private static int mainMenu() throws NumberFormatException, IOException {
 		System.out.println("Welcome!");
 		System.out.println("Select an option by typing a number: ");

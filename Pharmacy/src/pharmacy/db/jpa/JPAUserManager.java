@@ -1,4 +1,4 @@
-	package pharmacy.db.jpa;
+package pharmacy.db.jpa;
 
 import java.util.*;
 
@@ -34,7 +34,6 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().begin();  //before every change
 		em.persist(r);
 		em.getTransaction().commit();  //after every change
-		em.close();
 	}
 
 	public void register(User u) {
