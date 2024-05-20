@@ -17,9 +17,5 @@ public class XML2HtmlPharmacy {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main (String[] args) {
-		simpleTransfrom("./xmls/External-Pharmacy.xml","./xmls/Pharmacy-Style.xslt","./xmls/External-Pharmacy.html");
-		
-	}
+
 }
