@@ -41,13 +41,15 @@ public class Menu {
 		prescriptionManager = conMan.getPrescriptionMan();
 		userMan = new JPAUserManager();
 
-		int choice = mainMenu();
+		int choice;
 		do {
+			choice = mainMenu();
 			switch(choice) {
 			case 1: {
 				menuLogin();
-				}
-			break;
+				break;
+			}
+			
 			case 2: {
 				menuSignUp();
 				break;
@@ -82,7 +84,7 @@ public class Menu {
 			System.out.println("Password: ");
 			String password = r.readLine();
 			User u = userMan.login(username, password);
-			if (u.getRole().getName() == "Patient" ) {
+			if (u.getRole().getName().equals("Patient")) {
 				Patient p = patientManager.getPatient(username);
 				patientMenu();
 				return p;
@@ -105,7 +107,7 @@ public class Menu {
 			Role role = userMan.getRole(roleName);
 			User u = new User (username,password, role);
 			userMan.register(u);
-			if (u.getRole().getName() == "Patient" ) {
+			if (u.getRole().getName().equals("Patient")) {
 				System.out.println("Please type your name: ");
 				String name = r.readLine();
 				System.out.println("Please type your date of birth (dd-MM-yyyy): ");
