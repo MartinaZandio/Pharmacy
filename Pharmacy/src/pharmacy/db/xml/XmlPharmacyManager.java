@@ -19,12 +19,7 @@ public class XmlPharmacyManager implements XmlManager {
 	private static BufferedReader r= new BufferedReader(new InputStreamReader(System.in));
 	private static PharmacyManager pharmacyManager;
 
-	public static void pharmacy2Xml() throws Exception {
-		
-		System.out.print("Choose a pharmacy to turn into an XML file:");
-		int id = Integer.parseInt(r.readLine());
-		Pharmacy p= pharmacyManager.getPharmacy(id);
-		File xml = new File ("./xmls/External-Pharmacy"); 
+	public static void pharmacy2Xml(Pharmacy p, File xml) throws Exception {
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Marshaller marshaller= jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -33,10 +28,9 @@ public class XmlPharmacyManager implements XmlManager {
 	}
 	
 	
-	public static Pharmacy xml2Pharmacy() throws Exception{
+	public static Pharmacy xml2Pharmacy(File xml) throws Exception{
 		JAXBContext jaxbContext = JAXBContext.newInstance(Pharmacy.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
-		File xml = new File("./xmls/External-Pharmacy.xml");
 		Pharmacy pharmacy = (Pharmacy)unmarshaller.unmarshal(xml);
 		return pharmacy;
 	}

@@ -194,11 +194,11 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					XmlPharmacyManager.pharmacy2Xml();
+					pharmacy2Xml();
 					break;
 				}
 				case 4:{
-					XmlPharmacyManager.xml2Pharmacy();
+					xml2Pharmacy();
 					break;
 				}
 				case 0: {
@@ -210,6 +210,20 @@ public class Menu {
 			} while (choice != 0);
 		}
 		
+		private static void pharmacy2Xml() throws Exception {
+			System.out.print("Choose a pharmacy to turn into an XML file:");
+			int id = Integer.parseInt(r.readLine());
+			Pharmacy p= pharmacyManager.getPharmacy(id);
+			File xml = new File ("./xmls/External-Pharmacy"); 
+			XmlPharmacyManager.pharmacy2Xml(p,xml);
+		}
+		
+		private static void xml2Pharmacy() throws Exception {
+			System.out.print("Introduce an Xml to turn into a Java file:");
+			String rute = r.readLine();
+			File xml= new File(rute);
+			XmlPharmacyManager.xml2Pharmacy(xml);
+		}
 		
 		private static int identifyPatientMenu() throws IOException {
 			System.out.println("Type the patient's name: ");
@@ -236,7 +250,6 @@ public class Menu {
 			return medicineId;
 			
 		}
-		
 		
 		private static void pharmacist_patientMenu() throws IOException {
 			ConnectionManager conMan = new ConnectionManager();
