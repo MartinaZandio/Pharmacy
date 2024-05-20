@@ -21,7 +21,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	public void createPrescription() {
 		Prescription p= new Prescription();
 		try {
-			String template = "INSERT INTO prescription (id, quantity, issueDate, dateUsed) VALUES (?, ?, ?, ?)";
+			String template = "INSERT INTO prescriptions (id, quantity, issueDate, dateUsed) VALUES (?, ?, ?, ?)";
 			PreparedStatement pstmt;
 			pstmt = c.prepareStatement(template);
 			pstmt.setInt(1, p.getId());
@@ -38,19 +38,19 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-	public ArrayList<Prescription> getPrescription(int id){  //SE USA
+	public ArrayList<Prescription> getPrescription(int patient_id){  //SE USA
 		ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
 		try {
-			String sql = "SELECT * FROM prescriptions WHERE id = ?";
+			String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
 			PreparedStatement search = c.prepareStatement(sql); 
-			search.setInt(1, id);
+			search.setInt(1, patient_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				Integer id1 = rs.getInt("id");
-				Integer medicineQuantity = rs.getInt("medicineQuantity");
+				Integer id = rs.getInt("id");
+				Integer medicineQuantity = rs.getInt("quantity");
 				Date issueDate = rs.getDate("issueDate");
-				Date useDate = rs.getDate("useDate");
-				Prescription p = new Prescription(id, medicineQuantity, issueDate, useDate);
+				Date dateUsed = rs.getDate("dateUsed");
+				Prescription p = new Prescription(id, medicineQuantity, issueDate, dateUsed);
 				prescriptions.add(p);
 				}
 			rs.close();

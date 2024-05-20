@@ -71,7 +71,7 @@ public class Role implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Roles: id of the role: " + id + ", Name of the role: " + name;
+		return "Name of the role: " + name;
 	}
 	
 	//Methods added

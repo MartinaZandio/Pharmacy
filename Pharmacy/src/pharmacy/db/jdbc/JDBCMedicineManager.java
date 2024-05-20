@@ -26,13 +26,12 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public void addMedicine(Medicine medicine) {
 		try {
-			String template= "INSERT INTO medicine (id, name, prescription_id, laboratory_id)"
-					+ "VALUES (?,?,?,?);";
+			String template= "INSERT INTO medicines (numberAssigned, name, laboratory_id)"
+					+ "VALUES (?,?,?);";
 			PreparedStatement insert= c.prepareStatement(template);		
 			insert.setInt(1,medicine.getNumAsigned());
 			insert.setString(2, medicine.getName());
-			insert.setInt(3, medicine.getPrescription().getId());
-			insert.setInt(4, medicine.getLaboratory().getId());
+			insert.setInt(3, medicine.getLaboratory().getId());
 			insert.executeUpdate();	
 			insert.close();
 			}catch(SQLException sqlE) {
@@ -51,7 +50,7 @@ public class JDBCMedicineManager implements MedicineManager {
 			search.setString(1, "%" +name+ "%");
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				Integer numAsigned = rs.getInt("numAsigned");
+				Integer numAsigned = rs.getInt("numberAssigned");
 				String medicineName = rs.getString("name");
 		
 			Medicine medicine = new Medicine (medicineName, numAsigned);
@@ -73,7 +72,7 @@ public class JDBCMedicineManager implements MedicineManager {
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numAsigned")); 
+			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numberAssigned")); 
 			return m;
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -83,18 +82,19 @@ public class JDBCMedicineManager implements MedicineManager {
 	
 	}
 	
+	// TODO revisar
 	@Override
 	public ArrayList<Medicine> getMedicines(int patient_id){   //SE USA
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
 		try {
-			String sql = "SELECT id FROM prescriptions WHERE id LIKE ?";
+			String sql = "SELECT id FROM prescriptions WHERE patient_id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, patient_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				
-				String sql2 = "SELECT * FROM pres_id WHERE id LIKE ?";
+				String sql2 = "SELECT * FROM pres_med WHERE id LIKE ?";
 				PreparedStatement search2 = c.prepareStatement(sql2);
 				search.setInt(1, id);
 				ResultSet rs2 = search2.executeQuery();
@@ -102,7 +102,7 @@ public class JDBCMedicineManager implements MedicineManager {
 				while (rs2.next()) {
 					Integer med_id = rs2.getInt("medicine_id");
 					
-					String sql3 = "SELECT name FROM medicines WHERE id LIKE ?";
+					String sql3 = "SELECT name FROM medicines WHERE numberAssigned LIKE ?";
 					PreparedStatement search3 = c.prepareStatement(sql3);
 					search.setInt(1, med_id);
 					ResultSet rs3 = search3.executeQuery();

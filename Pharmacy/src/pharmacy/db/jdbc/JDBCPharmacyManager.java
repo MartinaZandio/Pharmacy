@@ -23,7 +23,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public Pharmacy getPharmacy(int id) {  //SE USA
 		
 		try {
-			String template= "SELECT * FROM pharmacies WHERE numAssigned = " + id;
+			String template= "SELECT * FROM pharmacies WHERE id = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(template);
@@ -41,7 +41,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public void markPrescriptionAsUsed (int prescription_id) {  //SE USA
 		Date localDate = null;
 		try{
-			String sql = "UPDATE prescription SET useDate=localDate WHERE precription_id=?";
+			String sql = "UPDATE prescriptions SET dateUsed = localDate WHERE id =?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setDate(1, localDate);
 			prep.setInt(2, prescription_id);
@@ -54,12 +54,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public boolean checkAuthenticity(int prescription_id) {  //SE USA
 		try {
-			String sql = "SELECT useDate FROM prescriptions WHERE id LIKE ?";
+			String sql = "SELECT dateUsed FROM prescriptions WHERE id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
 			search.setInt(1, prescription_id);
 			ResultSet rs = search.executeQuery();
 			rs.next();
-			Date useDate = rs.getDate("useDate");
+			Date useDate = rs.getDate("dateUsed");
 			if (useDate != null) {
 				return true;
 			} else return false;
@@ -155,7 +155,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name1 = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				String sex = rs.getString("gender");
+				String sex = rs.getString("sex");
 				String userName = rs.getString("userName");
 				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
 				patients.add(p);

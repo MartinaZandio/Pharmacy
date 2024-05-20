@@ -23,14 +23,13 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient p) {    //SE USA 
 		try {
-		String template= "INSERT INTO patient (id, name, dateOfBirth, sex, userName)"
-				+ "VALUES (?,?,?,?, ?);";
+		String template= "INSERT INTO patients (name, dateOfBirth, sex, userName)"
+				+ "VALUES (?,?,?, ?);";
 		PreparedStatement insert= c.prepareStatement(template);		
-		insert.setInt(1,p.getId());
-		insert.setString(2, p.getName());
-		insert.setDate(3, p.getDateOfBirth());
-		insert.setString(4, p.getSex());
-		insert.setString (5, p.getUserName());
+		insert.setString(1, p.getName());
+		insert.setDate(2, p.getDateOfBirth());
+		insert.setString(3, p.getSex());
+		insert.setString (4, p.getUserName());
 		insert.executeUpdate();	
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -43,7 +42,7 @@ public class JDBCPatientManager implements PatientManager {
 	public List<Patient> searchPatientById(int id) {
 		List<Patient> patients= new ArrayList<Patient>();
 		try {
-			String sql= "SELECT * FROM patient WHERE id = ?"; //this string is a template
+			String sql= "SELECT * FROM patients WHERE id = ?"; //this string is a template
 			PreparedStatement search=c.prepareStatement(sql);
 			search.setInt(1, id); //Fills the question marks
 			ResultSet rs= search.executeQuery();
@@ -51,7 +50,7 @@ public class JDBCPatientManager implements PatientManager {
 				Integer identity= rs.getInt("id");
 				String nme= rs.getString("name");
 				Date DOB= rs.getDate("dateOfBirth");
-				String sex= rs.getString("Sex"); 
+				String sex= rs.getString("sex"); 
 				String userName= rs.getString("userName");
 				Patient Patient = new Patient(identity,nme,DOB,sex, userName);
 			}
@@ -66,7 +65,7 @@ public class JDBCPatientManager implements PatientManager {
 	
 	@Override
 	public void deletePatient(Patient p) throws SQLException {
-		String template = "DELETE FROM patient WHERE id = ?";
+		String template = "DELETE FROM patients WHERE id = ?";
 		PreparedStatement delete= c.prepareStatement(template);
 		delete.setInt(1,p.getId());
 		delete.executeUpdate();
@@ -74,12 +73,11 @@ public class JDBCPatientManager implements PatientManager {
 	
 	public Patient getPatient(int id) {     //SE USA 
 		try {
-			String sql = "SELECT * FROM patient WHERE id = " + id;
-			Statement st;
-			st = c.createStatement();
+			String sql = "SELECT * FROM patients WHERE id = " + id;
+			Statement st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"), rs.getString("userName"));
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBirth"), rs.getString("sex"), rs.getString("userName"));
 			return a;
 		}catch (SQLException e) {
 			System.out.println("Error in the database");
@@ -91,7 +89,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override 
 	public void identifyPatient(int patientId) {    //SE USA
     try {
-			String sql= "SELECT * FROM patient WHERE id LIKE ?";
+			String sql= "SELECT * FROM patients WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patientId);
 			ResultSet rs = prep.executeQuery();
@@ -138,12 +136,12 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public Patient getPatient(String username) {
 		try {
-			String sql = "SELECT * FROM patient WHERE username = " + username;
-			Statement st;
-			st = c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			String sql = "SELECT * FROM patients WHERE userName = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, username);
+			ResultSet rs = prep.executeQuery();
 			rs.next();
-			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("date of birth"), rs.getString("Sex"), rs.getString("userName"));
+			Patient a = new Patient (rs.getInt("id"), rs.getString("name"), rs.getDate("dateOfBirth"), rs.getString("sex"), rs.getString("userName"));
 			return a;
 		}catch (SQLException e) {
 			System.out.println("Error in the database");
