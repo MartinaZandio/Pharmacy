@@ -7,7 +7,7 @@ import pharmacy.db.pojos.*;
 public interface PrescriptionManager {
 	
 	public void createPrescription();
-	public ArrayList<Prescription> getPrescription(int id);
+	public List<Prescription> getPrescription(int id);
 
 	
 }
