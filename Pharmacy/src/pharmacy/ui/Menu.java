@@ -86,7 +86,7 @@ public class Menu {
 		}
 		
 		
-		private static void menuSignUp() throws IOException {
+		private static void menuSignUp() throws Exception {
 			System.out.println("Choose a username: ");
 			String username = r.readLine();
 			System.out.println("Choose a password: ");
@@ -109,6 +109,10 @@ public class Menu {
 				String sex = r.readLine();
 				Patient p = new Patient(name, dateOfBirth, sex, username);
 				patientManager.addPatient(p);
+			}
+			else if(u.getRole().getName().equals("Pharmacist")) {
+				System.out.println("Pharmacist user created");
+				pharmacistMenu();
 			}
 		}
 			
@@ -155,13 +159,15 @@ public class Menu {
 		}
 		
 		private static void checkMedicineMenu(int patient_id) throws Exception {
-			
 			// List<Medicine> medicines = new ArrayList<Medicine>();
-			String medicine;
-			medicine = medicineManager.getMedicines(patient_id);
-			System.out.println(medicine);
-			
-			menuLogin();
+			List<Prescription> prs= new ArrayList<Prescription>();
+			prs = medicineManager.getPrescription(patient_id);
+			for(Prescription p: prs) {
+				System.out.println(medicineManager.getMedicines(p.getId()));
+			}
+			System.out.println("Press 0 to go back to the Principal Menu");
+			int n= Integer.parseInt(r.readLine());
+			if(n==0) menuLogin();
 		}
 		
 		private static void pharmacistMenu() throws Exception{

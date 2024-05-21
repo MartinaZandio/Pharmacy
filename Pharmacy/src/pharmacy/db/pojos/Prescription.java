@@ -32,6 +32,14 @@ import java.util.Objects;
 		this.medicines = new ArrayList<Medicine>();
 	}
 	
+	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient) {
+		this.id=id;
+		this.quantity=quantity;
+		this.issueDate=issueDate;
+		this.dateUsed=dateUsed;
+		this.patient = patient;
+	}
+	
 	//Getters y Setters
 
 	public int getId() {

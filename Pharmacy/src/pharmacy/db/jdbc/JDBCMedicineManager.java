@@ -83,8 +83,53 @@ public class JDBCMedicineManager implements MedicineManager {
 		return null;
 	
 	}
+		
+	@Override 
+	public List<Prescription> getPrescription(int patient_id){
+		List<Prescription> prescriptions= new ArrayList<Prescription>();
+		try {
+			String sql= "SELECT * FROM prescriptions WHERE patient_id LIKE ?";
+			PreparedStatement search= c.prepareStatement(sql);
+			search.setInt(1,patient_id);
+			ResultSet rs= search.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				Integer quantity = rs.getInt("quantity");
+				Date issueDate = rs.getDate("issueDate");
+				Date dateUsed = rs.getDate("dateUsed");
+				Integer patientId= rs.getInt("patient_id");
+
+				Prescription prescription = new Prescription(id, quantity, issueDate, dateUsed, patientId);
+				prescriptions.add(prescription);
+				return prescriptions;
+			}
+		}catch(SQLException e) {
+			System.out.println("Error looking for a prescription");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
-	// Split in 2 methods; 1. Get a list of prec for a patient id. 2. get a list of medicines for a presc id
+	@Override
+	
+	public List<String> getMedicines(int prescription_id) {
+		List<String> medicines= new ArrayList<String>();
+		try {
+			String sql= "SELECT name FROM medicines INNER JOIN pres_med ON medicines.numberAssigned = pres_med.medicine_id WHERE prescription_id = ?";
+			PreparedStatement search=c.prepareStatement(sql);
+			search.setInt(1, prescription_id);
+			ResultSet rs = search.executeQuery();
+			String nombreMed = rs.getString("name");
+			medicines.add(nombreMed);
+			return medicines;
+		}catch(SQLException e) {
+			System.out.println("Error looking for a prescription");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/* Split in 2 methods; 1. Get a list of prec for a patient id. 2. get a list of medicines for a presc id
 	@Override
 	public String getMedicines(int patient_id){   //SE USA
 		List<Medicine> medicines = new ArrayList<Medicine>();
@@ -95,7 +140,6 @@ public class JDBCMedicineManager implements MedicineManager {
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
 				Integer idPres = rs.getInt("id");
-				
 				String sql2 = "SELECT * FROM pres_med WHERE prescription_id LIKE ?";
 				PreparedStatement search2 = c.prepareStatement(sql2);
 				search2.setInt(1, idPres);
@@ -120,6 +164,7 @@ public class JDBCMedicineManager implements MedicineManager {
 		} 
 		return null;
 	}
+	*/
 
 
 	
