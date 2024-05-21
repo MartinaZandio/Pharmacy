@@ -86,7 +86,8 @@ public class Menu {
 			User u = userMan.login(username, password);
 			if (u.getRole().getName().equals("Patient")) {
 				Patient p = patientManager.getPatient(username);
-				patientMenu(p);
+				patientMenu();
+				return p;
 			} else {
 			pharmacistMenu();
 			}
@@ -111,8 +112,7 @@ public class Menu {
 				String name = r.readLine();
 				System.out.println("Please type your date of birth (dd-MM-yyyy): ");
 				String date = r.readLine();
-				LocalDate localDate = LocalDate.parse(date, formatter);
-				Date dateOfBirth = Date.valueOf(localDate);
+				Date dateOfBirth = (Date) formatter.parse(date);
 				System.out.println("Please type your gender: ");
 				String sex = r.readLine();
 				Patient p = new Patient(name, dateOfBirth, sex, username);
@@ -120,7 +120,11 @@ public class Menu {
 			}
 		}
 			
-		private static void patientMenu(Patient p) throws Exception{
+		private static void patientMenu() throws Exception{
+			ConnectionManager conMan = new ConnectionManager();
+			patientManager = new JDBCPatientManager(conMan);
+			
+			Patient p = menuLogin();
 			int patient_id=p.getId();
 			
 			System.out.println("Select an option by typing a number: ");
@@ -128,9 +132,8 @@ public class Menu {
 			System.out.println("2. Check medicine.");
 			System.out.println("0. Exit");
 
-			int choice;
+			int choice=Integer.parseInt(r.readLine());
 			do {
-				 choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
 					checkMedicalHistoryMenu(patient_id);
@@ -179,9 +182,8 @@ public class Menu {
 
 			System.out.println("0. Exit");			
 			
-			int choice;
+			int choice=Integer.parseInt(r.readLine());
 			do {
-				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
 					identifyPatientMenu();
@@ -192,14 +194,10 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					sellMedicineMenu();
-					break;
-				}
-				case 4:{
 					pharmacy2Xml();
 					break;
 				}
-				case 5:{
+				case 4:{
 					xml2Pharmacy();
 					break;
 				}
@@ -254,15 +252,18 @@ public class Menu {
 		}
 		
 		private static void pharmacist_patientMenu() throws IOException {
+			ConnectionManager conMan = new ConnectionManager();
+			pharmacyManager = new JDBCPharmacyManager(conMan);
+			
+			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Mark prescription as used.");
 			System.out.println("2. Check autenticity.");
 			System.out.println("3. Sell medicine.");
 			System.out.println("0. Go back.");
 
-			int choice;
+			int choice=Integer.parseInt(r.readLine());
 			do {
-				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
 					markPrescriptionAsUsedMenu();
@@ -283,6 +284,9 @@ public class Menu {
 	
 		
 		private static void markPrescriptionAsUsedMenu() throws IOException{
+			ConnectionManager conMan = new ConnectionManager();
+			prescriptionManager = new JDBCPrescriptionManager(conMan);
+			
 			int patientId = identifyPatientMenu();
 		
 			System.out.println("Select the prescription you want to mark as used, by typing its id.");
@@ -297,6 +301,9 @@ public class Menu {
 		}
 		
 		private static void checkAutenticityMenu() throws IOException {
+			ConnectionManager conMan = new ConnectionManager();
+			pharmacyManager = new JDBCPharmacyManager(conMan);
+			
 			int patientId = identifyPatientMenu();
 
 			System.out.println("Select the prescription you want to check by typing its id: ");
@@ -312,7 +319,7 @@ public class Menu {
 			pharmacist_patientMenu();
 		}
 		
-		private static void sellMedicineMenu() throws IOException {
+		private static void sellMedicine() throws IOException {
 			int patientId = identifyPatientMenu();
 			
 			System.out.println("Type the pharmacy name: ");
@@ -320,20 +327,21 @@ public class Menu {
 			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 			pharmacies = pharmacyManager.getPharmacy(name);
 			System.out.println(pharmacies);
-			System.out.println("Type the pharmacy id: ");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 			
 			pharmacyManager.sellMedicine(patientId, idPharmacy);
 		}
 		
 		private static void stockMenu() throws Exception{
+			ConnectionManager conMan = new ConnectionManager();
+			pharmacyManager = new JDBCPharmacyManager(conMan);
+			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Order new stock.");
 			System.out.println("0. Exit");
 
-			int choice;
+			int choice=Integer.parseInt(r.readLine());
 			do {
-				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
 					orderStockMenu();
