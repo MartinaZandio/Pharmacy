@@ -112,7 +112,7 @@ public class ConnectionManager {
 			Statement createTables7=c.createStatement();
 			String create7="CREATE TABLE pres_med ( "
 					+ " prescription_id REFERENCES prescriptions(id),"
-					+ " medicine_id REFERENCES medicines(id))";
+					+ " medicine_id REFERENCES medicines(numberAssigned))";
 			createTables7.executeUpdate(create7);
 			createTables7.close();			
 			

@@ -155,9 +155,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name1 = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				String sex = rs.getString("sex");
 				String userName = rs.getString("userName");
-				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
+				Patient p = new Patient(id, name1, dateOfBirth, userName);
 				patients.add(p);
 				return patients;
 				}

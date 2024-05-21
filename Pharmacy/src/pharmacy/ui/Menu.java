@@ -191,14 +191,10 @@ public class Menu {
 					break;
 				}
 				case 3:{
-					sellMedicineMenu();
-					break;
-				}
-				case 4:{
 					pharmacy2Xml();
 					break;
 				}
-				case 5:{
+				case 4:{
 					xml2Pharmacy();
 					break;
 				}
@@ -274,6 +270,10 @@ public class Menu {
 					checkAutenticityMenu(patient_id);
 					break;
 				}
+				case 3: {
+					sellMedicineMenu();
+					break;
+				}
 				case 0: {
 					pharmacistMenu();
 					return;
@@ -304,7 +304,6 @@ public class Menu {
 			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
-		
 		
 			boolean autenticity = pharmacyManager.checkAuthenticity(idPrescription);
 			System.out.println(autenticity);

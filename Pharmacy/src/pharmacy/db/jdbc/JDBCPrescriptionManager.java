@@ -39,7 +39,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	
 	@Override
 	public List<Prescription> getPrescription(int patient_id){  //SE USA
-		ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+		List<Prescription> prescriptions = new ArrayList<Prescription>();
 		try {
 			String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
 			PreparedStatement search = c.prepareStatement(sql); 
@@ -53,13 +53,11 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 				Prescription p = new Prescription(id, medicineQuantity, issueDate, dateUsed);
 				prescriptions.add(p);
 				}
-			rs.close();
-			search.close();
 			return prescriptions;
 			} catch (SQLException e) {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
 		return null;
-	}
+		}
 }

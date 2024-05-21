@@ -24,38 +24,26 @@ public class Patient implements Serializable{
 	public Patient() {
 		super();
 	}
-
 	
-	public Patient(Integer id, String name, Date dateOfBirth, String userName) {
-		super();
-		this.id=id;
-		this.name=name;
-		this.dateOfBirth=dateOfBirth;
-		this.userName = userName;
-		
-	}
-
-
 	public Patient(String userName) {
 		super();
 		this.userName = userName;
 	}
 
-
-	public Patient(String name2, Date dateOfBirth2, String sex2, String username2) {
+	public Patient(Integer id, String name, Date dateOfBirth, String userName) {
 		super();
-		this.name=name2;
-		this.dateOfBirth=dateOfBirth2;
-		this.sex= sex2;
-		this.userName = username2;
+		this.id=id;
+		this.name=name;
+		this.dateOfBirth=dateOfBirth;
+		this.userName = userName;	
 	}
-
-	public Patient(Integer id2, String name1, Date dateOfBirth3, String sex2, String userName2) {
+	
+	public Patient(String name2, Date dateOfBirth2, String sex, String userName2) {
 		super();
-		this.name = name1;
-		this.dateOfBirth = dateOfBirth3;
-		this.sex = sex2;
-		this.userName = userName2;
+		this.name = name2;
+		this.dateOfBirth = dateOfBirth2;
+		this.sex = sex;
+		this.userName = userName2;	
 	}
 
 

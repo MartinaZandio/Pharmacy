@@ -18,14 +18,10 @@ import java.util.Objects;
 	private int patient;
 	private List<Medicine> medicines;
 	
-	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient){
-		this.id= id;
-		this.quantity=quantity;
-		this.issueDate=issueDate;
-		this.dateUsed=dateUsed;
-		this.patient=patient;
+	
+	public Prescription() {
+		super();
 		this.medicines = new ArrayList<Medicine>();
-
 	}
 	
 	public Prescription(int id, int quantity, Date issueDate, Date dateUsed) {
@@ -36,24 +32,6 @@ import java.util.Objects;
 		this.medicines = new ArrayList<Medicine>();
 	}
 	
-	public Prescription() {
-		super();
-		this.medicines = new ArrayList<Medicine>();
-	}
-	
-	
-	
-	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient,
-			List<Medicine> medicines) {
-		super();
-		this.id = id;
-		this.quantity = quantity;
-		this.issueDate = issueDate;
-		this.dateUsed = dateUsed;
-		this.patient = patient;
-		this.medicines = new ArrayList<Medicine>();
-	}
-
 	//Getters y Setters
 
 	public int getId() {
