@@ -67,13 +67,14 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public Medicine getMedicine(int id) {  //SE USA
 		try {
-			String sql = "SELECT * FROM medicines WHERE id = " + id;
-			Statement st;
-			st = c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			rs.next();
-			Medicine m = new Medicine (rs.getString("name"), rs.getInt("numberAssigned")); 
-			return m;
+			String sql = "SELECT * FROM medicines WHERE id = ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, id);
+			ResultSet rs = search.executeQuery();
+			while (rs.next()) {
+				Medicine m = new Medicine (rs.getString("name"), rs.getInt("numberAssigned"), rs.getInt("quantity")); 
+				return m;
+			}
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
