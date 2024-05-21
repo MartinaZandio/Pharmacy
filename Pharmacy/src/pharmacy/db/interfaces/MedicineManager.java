@@ -11,9 +11,10 @@ import pharmacy.db.pojos.*;
 public interface MedicineManager {
 		
 	public void addMedicine(Medicine medicine);
-	public ArrayList<Medicine> searchMedicineByName(String name);
+	public List<Medicine> searchMedicineByName(String name);
 	public Medicine getMedicine(int id);
-	ArrayList<Medicine> getMedicines(int patient_id);
+	//List<Medicine> getMedicines(int patient_id);
+	public String getMedicines(int patient_id);
 		
 }
 

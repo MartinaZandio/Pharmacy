@@ -121,7 +121,7 @@ public class Menu {
 		}
 			
 		private static void patientMenu(Patient p) throws Exception{
-			int patient_id = p.getId();
+			int patient_id;
 			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Check medical history.");
@@ -130,7 +130,8 @@ public class Menu {
 
 			int choice;
 			do {
-				 choice=Integer.parseInt(r.readLine());
+				patient_id = p.getId();
+				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
 					checkMedicalHistoryMenu(patient_id);
@@ -151,8 +152,8 @@ public class Menu {
 		}
 		
 		private static void checkMedicalHistoryMenu(int patient_id) throws Exception {
-			
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
+			
 			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			
@@ -162,9 +163,10 @@ public class Menu {
 		
 		private static void checkMedicineMenu(int patient_id) throws Exception {
 			
-			ArrayList<Medicine> medicines = new ArrayList<Medicine>();
-			medicines = medicineManager.getMedicines(patient_id);
-			System.out.println(medicines);
+			//List<Medicine> medicines = new ArrayList<Medicine>();
+			String medicine;
+			medicine = medicineManager.getMedicines(patient_id);
+			System.out.println(medicine);
 			
 			menuLogin();
 		}

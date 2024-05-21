@@ -42,8 +42,8 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public ArrayList<Medicine> searchMedicineByName(String name){   //SE USA
-		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+	public List<Medicine> searchMedicineByName(String name){   //SE USA
+		List<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);
@@ -83,21 +83,21 @@ public class JDBCMedicineManager implements MedicineManager {
 	
 	}
 	
-	// TODO revisar
+	
 	@Override
-	public ArrayList<Medicine> getMedicines(int patient_id){   //SE USA
-		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+	public String getMedicines(int patient_id){   //SE USA
+		List<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			String sql = "SELECT id FROM prescriptions WHERE patient_id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, patient_id);
 			ResultSet rs = search.executeQuery();
 			while(rs.next()) {
-				Integer id = rs.getInt("id");
+				Integer idPres = rs.getInt("id");
 				
-				String sql2 = "SELECT * FROM pres_med WHERE id LIKE ?";
+				String sql2 = "SELECT * FROM pres_med WHERE prescription_id LIKE ?";
 				PreparedStatement search2 = c.prepareStatement(sql2);
-				search.setInt(1, id);
+				search2.setInt(1, idPres);
 				ResultSet rs2 = search2.executeQuery();
 				
 				while (rs2.next()) {
@@ -105,22 +105,19 @@ public class JDBCMedicineManager implements MedicineManager {
 					
 					String sql3 = "SELECT name FROM medicines WHERE numberAssigned LIKE ?";
 					PreparedStatement search3 = c.prepareStatement(sql3);
-					search.setInt(1, med_id);
+					search3.setInt(1, med_id);
 					ResultSet rs3 = search3.executeQuery();
-
-				rs.close();
-				rs2.close();
-				rs3.close();
-				search.close();
-				search2.close();
-				search3.close();
+					
+					String nombreMed = rs3.getString("name");
+					return nombreMed;
+				
 				}
 			}
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			System.out.println("Error looking for a medicine");
 			e.printStackTrace();
-		}
-		return medicines;
+		} 
+		return null;
 	}
 
 

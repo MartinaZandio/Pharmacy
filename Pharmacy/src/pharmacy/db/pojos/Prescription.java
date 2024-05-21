@@ -84,9 +84,10 @@ import java.util.Objects;
 
 	@Override
 	public String toString() {
-		return "Prescription [id=" + id + ", quantity=" + quantity + ", issueDate=" + issueDate + ", dateUsed="
-				+ dateUsed + ", patientId=" + patient + ", medicines=" + medicines + "]";
-	}
+		return "Prescription" + "\n" +
+	"Id: " + id + "\n" + 
+				"Quantity of mediciness: "+ quantity + "\n" +
+	"Issue date: " + issueDate + "Date used: " + dateUsed;}
 
 	@Override
 	public int hashCode() {
