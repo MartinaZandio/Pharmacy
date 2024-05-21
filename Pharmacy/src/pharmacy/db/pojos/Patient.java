@@ -26,12 +26,11 @@ public class Patient implements Serializable{
 	}
 
 	
-	public Patient(Integer id, String name, Date dateOfBirth, String sex, String userName) {
+	public Patient(Integer id, String name, Date dateOfBirth, String userName) {
 		super();
 		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
-		this.sex= sex;
 		this.userName = userName;
 		
 	}
@@ -49,6 +48,14 @@ public class Patient implements Serializable{
 		this.dateOfBirth=dateOfBirth2;
 		this.sex= sex2;
 		this.userName = username2;
+	}
+
+	public Patient(Integer id2, String name1, Date dateOfBirth3, String sex2, String userName2) {
+		super();
+		this.name = name1;
+		this.dateOfBirth = dateOfBirth3;
+		this.sex = sex2;
+		this.userName = userName2;
 	}
 
 

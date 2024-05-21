@@ -121,7 +121,7 @@ public class Menu {
 		}
 			
 		private static void patientMenu(Patient p) throws Exception{
-			int patient_id=p.getId();
+			int patient_id = p.getId();
 			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Check medical history.");
@@ -176,7 +176,6 @@ public class Menu {
 			System.out.println("2. Check stock.");
 			System.out.println("3. Print Xml.");
 			System.out.println("4. Change Xml to Java.");
-
 			System.out.println("0. Exit");			
 			
 			int choice;
@@ -234,8 +233,9 @@ public class Menu {
 			System.out.println(patients);
 			System.out.println("Type the patient's id that you want to select: ");
 			int patientId = Integer.parseInt(r.readLine());
-			patientManager.identifyPatient(patientId);
-			pharmacist_patientMenu();
+			
+			Patient p = patientManager.identifyPatient(patientId);
+			pharmacist_patientMenu(p);
 			return patientId;
 		}
 		
@@ -253,7 +253,9 @@ public class Menu {
 			
 		}
 		
-		private static void pharmacist_patientMenu() throws Exception {
+		private static void pharmacist_patientMenu(Patient p) throws Exception {
+			int patient_id = p.getId();
+			
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("1. Mark prescription as used.");
 			System.out.println("2. Check autenticity.");
@@ -265,11 +267,11 @@ public class Menu {
 				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
-					markPrescriptionAsUsedMenu();
+					markPrescriptionAsUsedMenu(patient_id);
 					break;
 				}
 				case 2: {
-					checkAutenticityMenu();
+					checkAutenticityMenu(patient_id);
 					break;
 				}
 				case 0: {
@@ -282,26 +284,24 @@ public class Menu {
 		}
 	
 		
-		private static void markPrescriptionAsUsedMenu() throws Exception{
-			// int patientId = identifyPatientMenu();
-		
+		private static void markPrescriptionAsUsedMenu(int patient_id) throws Exception{
+			
 			System.out.println("Select the prescription you want to mark as used, by typing its id.");
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
-			prescriptions = prescriptionManager.getPrescription(identifyPatientMenu());
+			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
 			
 			pharmacyManager.markPrescriptionAsUsed(idPrescription);
 			
-			pharmacist_patientMenu();
+			pharmacistMenu();
 		}
 		
-		private static void checkAutenticityMenu() throws Exception {
-			int patientId = identifyPatientMenu();
-
+		private static void checkAutenticityMenu(int patient_id) throws Exception {
+	
 			System.out.println("Select the prescription you want to check by typing its id: ");
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
-			prescriptions = prescriptionManager.getPrescription(patientId);
+			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
 		
@@ -309,11 +309,11 @@ public class Menu {
 			boolean autenticity = pharmacyManager.checkAuthenticity(idPrescription);
 			System.out.println(autenticity);
 			
-			pharmacist_patientMenu();
+			pharmacistMenu();
 		}
 		
 		private static void sellMedicineMenu() throws Exception {
-			int patientId = identifyPatientMenu();
+			int patient_id = identifyPatientMenu();
 			
 			System.out.println("Type the pharmacy name: ");
 			String name = r.readLine();
@@ -323,7 +323,9 @@ public class Menu {
 			System.out.println("Type the pharmacy id: ");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 			
-			pharmacyManager.sellMedicine(patientId, idPharmacy);
+			pharmacyManager.sellMedicine(patient_id, idPharmacy);
+			
+			pharmacistMenu();
 		}
 		
 		private static void stockMenu() throws Exception{

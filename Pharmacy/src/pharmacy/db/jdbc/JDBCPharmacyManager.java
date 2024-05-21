@@ -144,8 +144,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public List<Patient> identifyPatient(String name) {
-		ArrayList<Patient> patients = new ArrayList<Patient>();
+	public List<Patient> identifyPatient(String name) { // SE USA
+		List<Patient> patients = new ArrayList<Patient>();
 	try {
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(template);
@@ -155,7 +155,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer id = rs.getInt("id");
 				String name1 = rs.getString("name");
 				Date dateOfBirth = rs.getDate("dateOfBirth");
-				String sex = rs.getString("gender");
+				String sex = rs.getString("sex");
 				String userName = rs.getString("userName");
 				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
 				patients.add(p);
@@ -166,48 +166,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
-	
 			return patients;
 		}
-
-	/*@Override
-	public void assignMedicine(int medicineId, int prescriptionId) {
-		try { 
-			String sql;
-			sql = "INSERT INTO pres_med (medicine_numAsigned, prescription_id)"
-					+ "VALUES (?,?);";
-			
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setInt(1, medicineId);
-			insert.setInt(2,prescriptionId);
-			
-			insert.executeUpdate();
-			insert.close();
-			} catch (SQLException sqlE) {
-			System.out.println("Error");
-			sqlE.printStackTrace();
-			}
-		}*/
-	
-	/*@Override
-	public void assignPrescription(int prescriptionId) {
-		try { 
-			
-			String sql;
-			sql = "INSERT INTO prescriptions (id, patient_id)"
-					+ "VALUES (?,?);";
-			
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setInt(1, prescription.getId());
-			insert.setInt(2, patient.getId());
-			
-			insert.executeUpdate();
-			insert.close();
-			} catch (SQLException sqlE) {
-			System.out.println("Error");
-			sqlE.printStackTrace();
-			}
-		}*/
 	
 	@Override
 	public List<Pharmacy> getPharmacy(String name) {  //SE USA
@@ -234,6 +194,5 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		return null;
 	}
-
 
 }
