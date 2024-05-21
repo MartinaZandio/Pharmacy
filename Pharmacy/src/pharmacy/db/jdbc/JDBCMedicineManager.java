@@ -42,7 +42,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public ArrayList<Medicine> searchMedicineByName(String name){   //SE USA
+	public List<Medicine> searchMedicineByName(String name){   //SE USA
 		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
