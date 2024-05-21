@@ -9,11 +9,7 @@ import pharmacy.db.pojos.*;
 public interface PatientManager {
 
 	public void addPatient(Patient p);
-	public List<Patient> searchPatientByName(String name);
 	public List<Patient> searchPatientById(int id);
-	public void deletePatient(Patient p) throws SQLException;
-	public Patient getPatient(int id);
-	public void identifyPatient(int patientId);
+	public Patient identifyPatient(int patientId);
 	public Patient getPatient(String username);
-	
 }
