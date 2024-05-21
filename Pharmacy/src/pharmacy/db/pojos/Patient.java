@@ -42,6 +42,14 @@ public class Patient implements Serializable{
 		this.userName = userName;
 	}
 
+	
+	public Patient(int id, String name2, Date dateOfBirth2, String username2) {
+		super();
+		this.id= id;
+		this.name=name2;
+		this.dateOfBirth=dateOfBirth2;
+		this.userName = username2;
+	}
 
 	public Patient(String name2, Date dateOfBirth2, String sex2, String username2) {
 		super();
