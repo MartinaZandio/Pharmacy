@@ -38,13 +38,9 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-<<<<<<< HEAD
+
 	public List<Prescription> getPrescription(int patient_id){  //SE USA
 		List<Prescription> prescriptions = new ArrayList<Prescription>();
-=======
-	public ArrayList<Prescription> getPrescription(int patient_id){  //SE USA
-		ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		try {
 			String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
 			PreparedStatement search = c.prepareStatement(sql); 

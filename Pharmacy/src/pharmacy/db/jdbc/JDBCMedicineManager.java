@@ -43,11 +43,8 @@ public class JDBCMedicineManager implements MedicineManager {
 	
 	@Override
 	public List<Medicine> searchMedicineByName(String name){   //SE USA
-<<<<<<< HEAD
 		List<Medicine> medicines = new ArrayList<Medicine>();
-=======
-		ArrayList<Medicine> medicines = new ArrayList<Medicine>();
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
+
 		try {
 			String sql = "SELECT * FROM medicines WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);
@@ -87,7 +84,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	
 	}
 	
-	
+	// Split in 2 methods; 1. Get a list of prec for a patient id. 2. get a list of medicines for a presc id
 	@Override
 	public String getMedicines(int patient_id){   //SE USA
 		List<Medicine> medicines = new ArrayList<Medicine>();
