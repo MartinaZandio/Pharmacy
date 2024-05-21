@@ -13,6 +13,6 @@ public interface PharmacyManager {
 	public List<Patient> identifyPatient(String name);
 	public boolean checkAuthenticity(int prescription_id);
 	public Pharmacy getPharmacy(int id);
-	ArrayList<Pharmacy> getPharmacy(String name);
+	List<Pharmacy> getPharmacy(String name);
 	public void sellMedicine(int patient_id, int pharmacy_id);
 }

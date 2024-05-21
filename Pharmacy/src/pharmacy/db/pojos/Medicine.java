@@ -26,12 +26,14 @@ public class Medicine implements Serializable {
 	private List<Stock> stock;
 	@XmlTransient
 	private List<Prescription> prescriptions;
+	private int quantity;
 
 
 	public Medicine() {
 		super();
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
+		this.quantity = quantity;
 	}
 	
 	public Medicine(String name, int numAsigned) {
@@ -39,6 +41,7 @@ public class Medicine implements Serializable {
 		this.numAsigned= numAsigned;
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
+		this.quantity = quantity;
 	}
 	
 	public Medicine(String name, int numAsigned, Prescription prescription, Laboratory laboratory,
@@ -50,9 +53,19 @@ public class Medicine implements Serializable {
 		this.laboratory = laboratory;
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
+		this.quantity = quantity;
 		
 	}
 
+
+	public Medicine(String name, int numAsigned, int quantity) {
+		super();
+		this.name = name;
+		this.numAsigned = numAsigned;
+		this.quantity = quantity;
+		this.stock = new ArrayList<Stock>();
+		this.prescriptions = new ArrayList<Prescription>();
+	}
 
 	//Getters y Setters
 	public String getName() {
@@ -105,9 +118,17 @@ public class Medicine implements Serializable {
 	}
 	
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock);
+		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock, quantity);
 	}
 
 	@Override
@@ -126,12 +147,12 @@ public class Medicine implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Medicine [name=" + name + ", numAsigned=" + numAsigned + ", prescription=" + prescription
-				+ ", laboratory=" + laboratory + ", stock=" + stock + ", prescriptions=" + prescriptions + "]";
+		return "Medicine" + "\n" + 
+	name + ", id: " + numAsigned + "\n"+
+	"stock: " + quantity;
 	}
 
-	
-	
+
 	
 }
  

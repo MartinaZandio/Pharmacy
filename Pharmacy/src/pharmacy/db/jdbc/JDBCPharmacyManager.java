@@ -210,7 +210,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}*/
 	
 	@Override
-	public ArrayList<Pharmacy> getPharmacy(String name) {  //SE USA
+	public List<Pharmacy> getPharmacy(String name) {  //SE USA
 		ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 		try {
 			String sql = "SELECT * FROM pharmacies WHERE name LIKE ?";

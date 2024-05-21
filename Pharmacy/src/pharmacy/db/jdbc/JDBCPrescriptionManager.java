@@ -38,7 +38,7 @@ public class JDBCPrescriptionManager implements PrescriptionManager {
 	}
 	
 	@Override
-	public ArrayList<Prescription> getPrescription(int patient_id){  //SE USA
+	public List<Prescription> getPrescription(int patient_id){  //SE USA
 		ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
 		try {
 			String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
