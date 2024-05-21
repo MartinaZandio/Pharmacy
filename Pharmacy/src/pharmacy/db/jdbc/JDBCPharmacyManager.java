@@ -23,7 +23,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public Pharmacy getPharmacy(int id) {  //SE USA
 		
 		try {
-			String template= "SELECT * FROM pharmacies WHERE id = " + id;
+			String template= "SELECT * FROM pharmacies WHERE numAssigned = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(template);
@@ -41,7 +41,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public void markPrescriptionAsUsed (int prescription_id) {  //SE USA
 		Date localDate = null;
 		try{
-			String sql = "UPDATE prescriptions SET dateUsed = localDate WHERE id =?";
+			String sql = "UPDATE prescription SET useDate=localDate WHERE precription_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setDate(1, localDate);
 			prep.setInt(2, prescription_id);
@@ -54,12 +54,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public boolean checkAuthenticity(int prescription_id) {  //SE USA
 		try {
-			String sql = "SELECT dateUsed FROM prescriptions WHERE id LIKE ?";
+			String sql = "SELECT useDate FROM prescriptions WHERE id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
 			search.setInt(1, prescription_id);
 			ResultSet rs = search.executeQuery();
 			rs.next();
-			Date useDate = rs.getDate("dateUsed");
+			Date useDate = rs.getDate("useDate");
 			if (useDate != null) {
 				return true;
 			} else return false;
@@ -100,7 +100,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 						try {
 						String sql4 = "UPDATE stock SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
 						PreparedStatement prep4 = c.prepareStatement(sql4);
-						prep4.setInt(1, amount);
+						prep4.setInt(1, quantity);
 						prep4.setInt(2, medicine_id);
 						prep4.setInt(3, pharmacy_id);
 						prep4.executeUpdate();
@@ -144,8 +144,8 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public List<Patient> identifyPatient(String name) {
-		ArrayList<Patient> patients = new ArrayList<Patient>();
+	public List<Patient> identifyPatient(String name) { // SE USA
+		List<Patient> patients = new ArrayList<Patient>();
 	try {
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(template);
@@ -159,6 +159,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				String userName = rs.getString("userName");
 				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
 				patients.add(p);
+				return patients;
 				}
 			rs.close();
 			search.close();
@@ -166,52 +167,16 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
-	
-			return patients;
+			return null;
 		}
-
-	/*@Override
-	public void assignMedicine(int medicineId, int prescriptionId) {
-		try { 
-			String sql;
-			sql = "INSERT INTO pres_med (medicine_numAsigned, prescription_id)"
-					+ "VALUES (?,?);";
-			
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setInt(1, medicineId);
-			insert.setInt(2,prescriptionId);
-			
-			insert.executeUpdate();
-			insert.close();
-			} catch (SQLException sqlE) {
-			System.out.println("Error");
-			sqlE.printStackTrace();
-			}
-		}*/
-	
-	/*@Override
-	public void assignPrescription(int prescriptionId) {
-		try { 
-			
-			String sql;
-			sql = "INSERT INTO prescriptions (id, patient_id)"
-					+ "VALUES (?,?);";
-			
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setInt(1, prescription.getId());
-			insert.setInt(2, patient.getId());
-			
-			insert.executeUpdate();
-			insert.close();
-			} catch (SQLException sqlE) {
-			System.out.println("Error");
-			sqlE.printStackTrace();
-			}
-		}*/
 	
 	@Override
 	public List<Pharmacy> getPharmacy(String name) {  //SE USA
+<<<<<<< HEAD
 		ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+=======
+		List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		try {
 			String sql = "SELECT * FROM pharmacies WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
@@ -224,6 +189,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer postalCode = rs.getInt("postalCode");
 				Pharmacy phs = new Pharmacy(id1, name1, location, postalCode);
 				pharmacies.add(phs);
+				return pharmacies;
 				}
 			rs.close();
 			search.close();
@@ -234,6 +200,5 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				}
 		return null;
 	}
-
 
 }
