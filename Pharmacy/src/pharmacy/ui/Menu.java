@@ -152,7 +152,7 @@ public class Menu {
 		
 		private static void checkMedicalHistoryMenu(int patient_id) throws Exception {
 			
-			ArrayList<Prescription> prescriptions = new ArrayList<Prescription>();
+			List<Prescription> prescriptions = new ArrayList<Prescription>();
 			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			
@@ -356,7 +356,7 @@ public class Menu {
 			
 			System.out.println("Type the pharmacy name: ");
 			String name = r.readLine();
-			ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+			List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 			pharmacies = pharmacyManager.getPharmacy(name);
 			System.out.println(pharmacies);
 			System.out.println("Type the id of the pharmacy where you want to order the new stock.");
