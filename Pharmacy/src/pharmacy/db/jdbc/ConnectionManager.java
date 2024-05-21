@@ -69,8 +69,7 @@ public class ConnectionManager {
 			String create2="CREATE TABLE medicines ( "
 					+ " numberAssigned INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ " name TEXT NOT NULL,"
-					+ " laboratory_id REFERENCES laboratories(id),"
-					+ " quantity INTEGER )";
+					+ " laboratory_id REFERENCES laboratories(id))";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
 			Statement createTables3=c.createStatement();

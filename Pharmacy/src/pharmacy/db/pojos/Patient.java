@@ -25,18 +25,46 @@ public class Patient implements Serializable{
 		super();
 	}
 	
+<<<<<<< HEAD
+=======
+	public Patient(Integer id, String name, Date dateOfBirth, String sex, String userName) {
+		super();
+		this.id=id;
+		this.name=name;
+		this.dateOfBirth=dateOfBirth;
+		this.sex= sex;
+		this.userName = userName;
+		
+	}
+
+
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 	public Patient(String userName) {
 		super();
 		this.userName = userName;
 	}
 
+<<<<<<< HEAD
 	public Patient(Integer id, String name, Date dateOfBirth, String userName) {
+=======
+	
+	public Patient(int id, String name2, Date dateOfBirth2, String username2) {
+		super();
+		this.id= id;
+		this.name=name2;
+		this.dateOfBirth=dateOfBirth2;
+		this.userName = username2;
+	}
+
+	public Patient(String name2, Date dateOfBirth2, String sex2, String username2) {
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 		super();
 		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
 		this.userName = userName;	
 	}
+<<<<<<< HEAD
 	
 	public Patient(String name2, Date dateOfBirth2, String sex, String userName2) {
 		super();
@@ -45,6 +73,8 @@ public class Patient implements Serializable{
 		this.sex = sex;
 		this.userName = userName2;	
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 
 
 	public Integer getId() {
@@ -112,9 +142,12 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "\n" + "id: " + id + "\n" +
-				"Name: " + name + "\n" +
-				"User name: " + userName;
+		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", sex=" + sex + ", userName="
+				+ userName + "]";
 	}
+
+
+	
+	
 	
 }
