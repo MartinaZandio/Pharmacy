@@ -159,6 +159,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				String userName = rs.getString("userName");
 				Patient p = new Patient(id, name1, dateOfBirth, sex, userName);
 				patients.add(p);
+				return patients;
 				}
 			rs.close();
 			search.close();
@@ -166,12 +167,12 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				System.out.println("Error creating the prescription");
 				e.printStackTrace();
 				}
-			return patients;
+			return null;
 		}
 	
 	@Override
 	public List<Pharmacy> getPharmacy(String name) {  //SE USA
-		ArrayList<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+		List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 		try {
 			String sql = "SELECT * FROM pharmacies WHERE name LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
@@ -184,6 +185,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				Integer postalCode = rs.getInt("postalCode");
 				Pharmacy phs = new Pharmacy(id1, name1, location, postalCode);
 				pharmacies.add(phs);
+				return pharmacies;
 				}
 			rs.close();
 			search.close();
