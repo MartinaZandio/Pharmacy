@@ -136,18 +136,18 @@ public class ConnectionManager {
 		try {
 			
 
-			Statement insertTablesPatients=c.createStatement();
+			/*Statement insertTablesPatients=c.createStatement();
 			String sql = "INSERT INTO patients(id, name, dateOfBirth, sex, userName) "
 					+ " VALUES (1, 'Blanca', 13-05-2004, 'Female', 'blancamaldo')";
 			insertTablesPatients.executeUpdate(sql);
 			sql = "INSERT INTO patients(id, name, dateOfBirth, sex, userName) "
 					+ " VALUES (2, 'Martina', 19-10-2004, 'Female', 'martizandio')";
 			insertTablesPatients.executeUpdate(sql);
-			insertTablesPatients.close();
+			insertTablesPatients.close();*/
 
 
 			Statement insertTablesLaboratories =c.createStatement();
-			sql ="INSERT INTO laboratories(id, name, location, postalCode) "
+			String sql ="INSERT INTO laboratories(id, name, location, postalCode) "
 					+ " VALUES (1, 'Cinfa', 'Sevilla' , 14024)";
 			insertTablesLaboratories.executeUpdate(sql);
 			
@@ -184,12 +184,12 @@ public class ConnectionManager {
 			
 			Statement insertTablesPrescriptions =c.createStatement();
 			sql ="INSERT INTO prescriptions(id, quantity, issueDate, dateUsed, patient_id) "
-					+ " VALUES (1, 1 , 12-04-2024, NULL , 2)";
+					+ " VALUES (1, 1 , 12-04-2024, NULL , NULL)";
 			insertTablesPrescriptions.executeUpdate(sql);
 			
 
 			sql = "INSERT INTO prescriptions(id, quantity, issueDate, dateUsed, patient_id)"
-					+  "VALUES (2, 5 , 20-05-2024, NULL , 1)";
+					+  "VALUES (2, 5 , 20-05-2024, NULL , NULL)";
 			insertTablesPrescriptions.executeUpdate(sql);
 			insertTablesPrescriptions.close();
 			
@@ -212,7 +212,7 @@ public class ConnectionManager {
 			insertTablesPresMed.executeUpdate(sql);
 			
 			sql ="INSERT INTO pres_med(prescription_id, medicine_id)"
-					+  "VALUES (2,2)";
+					+  "VALUES (2,1)";
 			insertTablesPresMed.executeUpdate(sql);
 			insertTablesPresMed.close();
 			

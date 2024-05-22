@@ -99,7 +99,7 @@ public class Menu {
 			User u = new User (username,password, role);
 			userMan.register(u);
 			if (u.getRole().getName().equals("Patient")) {
-				System.out.println("Please type your name: ");
+				System.out.println("Please type your name and lastname: ");
 				String name = r.readLine();
 				System.out.println("Please type your date of birth (dd-MM-yyyy): ");
 				String date = r.readLine();
@@ -112,7 +112,7 @@ public class Menu {
 			}
 			else if(u.getRole().getName().equals("Pharmacist")) {
 				System.out.println("Pharmacist user created");
-				menuLogin();
+				mainMenu();
 			}
 		}
 			
@@ -121,9 +121,9 @@ public class Menu {
 			
 			System.out.println();
 			System.out.println("Select an option by typing a number: ");
-			System.out.println("1. Check medical history.");
-			System.out.println("2. Check medicine.");
-			System.out.println("0. Exit");
+			System.out.println("	1. Check medical history.");
+			System.out.println("	2. Check medicine.");
+			System.out.println("	0. Exit");
 
 			int choice;
 			do {
@@ -209,9 +209,15 @@ public class Menu {
 		}
 		
 		private static void pharmacy2Xml() throws Exception {
-			System.out.print("Choose a pharmacy to turn into an XML file:");
-			int id = Integer.parseInt(r.readLine());
-			Pharmacy p= pharmacyManager.getPharmacy(id);
+			System.out.print("Choose a pharmacy to turn into an XML file.");
+			System.out.println("Type the pharmacy name: ");
+			String name = r.readLine();
+			List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+			pharmacies = pharmacyManager.getPharmacy(name);
+			System.out.println(pharmacies);
+			System.out.println("Type the pharmacy id: ");
+			Integer idPharmacy = Integer.parseInt(r.readLine());
+			Pharmacy p= pharmacyManager.getPharmacy(idPharmacy);
 			File xml = new File ("./xmls/External-Pharmacy"); 
 			XmlPharmacyManager.pharmacy2Xml(p,xml);
 		}
@@ -243,9 +249,9 @@ public class Menu {
 			System.out.println(meds);
 			System.out.println("Type the medicine id that you want to select: ");
 			int medicineId = Integer.parseInt(r.readLine());
-			Medicine m = medicineManager.getMedicine(medicineId);
-			System.out.println(m);
-			stockMenu();
+			int stock = medicineManager.getMedicine(medicineId);
+			System.out.println("The stock of " + medicineName + " is " +stock);
+			stockMenu(medicineId);
 			return medicineId;
 			
 		}
@@ -254,10 +260,10 @@ public class Menu {
 			int patient_id = p.getId();
 			
 			System.out.println("Select an option by typing a number: ");
-			System.out.println("1. Mark prescription as used.");
-			System.out.println("2. Check autenticity.");
-			System.out.println("3. Sell medicine.");
-			System.out.println("0. Go back.");
+			System.out.println("	1. Mark prescription as used.");
+			System.out.println("	2. Check autenticity.");
+			System.out.println("	3. Sell medicine.");
+			System.out.println("	0. Go back.");
 
 			int choice;
 			do {
@@ -272,7 +278,7 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					sellMedicineMenu();
+					sellMedicineMenu(patient_id);
 					break;
 				}
 				case 0: {
@@ -312,9 +318,7 @@ public class Menu {
 			pharmacistMenu();
 		}
 		
-		private static void sellMedicineMenu() throws Exception {
-			int patient_id = identifyPatientMenu();
-			
+		private static void sellMedicineMenu(int patient_id) throws Exception {
 			System.out.println("Type the pharmacy name: ");
 			String name = r.readLine();
 			List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
@@ -328,17 +332,17 @@ public class Menu {
 			pharmacistMenu();
 		}
 		
-		private static void stockMenu() throws Exception{
+		private static void stockMenu(int medicineId) throws Exception{
 			System.out.println("Select an option by typing a number: ");
-			System.out.println("1. Order new stock.");
-			System.out.println("0. Exit");
-
+			System.out.println("	1. Order new stock.");
+			System.out.println("	0. Exit");
+			
 			int choice;
 			do {
 				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
 				case 1: {
-					orderStockMenu();
+					orderStockMenu(medicineId);
 					break;
 				}
 				case 0: {
@@ -350,9 +354,7 @@ public class Menu {
 			} while (choice != 0);
 		}
 
-		private static void orderStockMenu() throws Exception {
-			int medicineId = checkStockMenu();
-			
+		private static void orderStockMenu(int medicineId) throws Exception {		
 			System.out.println("Type the amount of medicine you want to order: ");
 			int quantity = Integer.parseInt(r.readLine());
 			

@@ -148,8 +148,7 @@ public class Medicine implements Serializable {
 	@Override
 	public String toString() {
 		return "Medicine" + "\n" + 
-	name + ", id: " + numAsigned + "\n"+
-	"stock: " + quantity;
+	name + ", id: " + numAsigned;
 	}
 
 

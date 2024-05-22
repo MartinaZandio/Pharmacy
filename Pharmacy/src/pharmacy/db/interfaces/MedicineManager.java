@@ -12,7 +12,7 @@ public interface MedicineManager {
 		
 	public void addMedicine(Medicine medicine);
 	public List<Medicine> searchMedicineByName(String name);
-	public Medicine getMedicine(int id);
+	public int getMedicine(int id);
 	//List<Medicine> getMedicines(int patient_id);
 	//public String getMedicines(int patient_id);
 	List<Prescription> getPrescription(int patient_id);

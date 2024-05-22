@@ -64,24 +64,26 @@ public class JDBCMedicineManager implements MedicineManager {
 		return medicines;
 	}
 
-	
 	@Override
-	public Medicine getMedicine(int id) {  //SE USA
+	public int getMedicine(int id) {  //SE USA
 		try {
-			String sql = "SELECT * FROM medicines WHERE id = ?";
+			String sql = "SELECT * FROM stock WHERE medicine_id = ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, id);
 			ResultSet rs = search.executeQuery();
 			while (rs.next()) {
-				Medicine m = new Medicine (rs.getString("name"), rs.getInt("numberAssigned"), rs.getInt("quantity")); 
-				return m;
+				Integer pharmacy_id = rs.getInt("pharmacy_id");
+				Integer medicine_id = rs.getInt("medicine_id");
+				Integer amount = rs.getInt("amount");
+				return amount;
 			}
+			rs.close();
+			search.close();
 		} catch (SQLException e) {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return null;
-	
+		return (Integer) null;
 	}
 		
 	@Override 
@@ -116,7 +118,7 @@ public class JDBCMedicineManager implements MedicineManager {
 		List<String> medicines= new ArrayList<String>();
 		try {
 			String sql= "SELECT name FROM medicines INNER JOIN pres_med ON medicines.numberAssigned = pres_med.medicine_id WHERE prescription_id = ?";
-			PreparedStatement search=c.prepareStatement(sql);
+			PreparedStatement search =c.prepareStatement(sql);
 			search.setInt(1, prescription_id);
 			ResultSet rs = search.executeQuery();
 			String nombreMed = rs.getString("name");

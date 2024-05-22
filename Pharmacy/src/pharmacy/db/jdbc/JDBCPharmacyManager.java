@@ -73,7 +73,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	public void sellMedicine(int patient_id, int pharmacy_id) {	// SE USA
 		try{
-			String sql = "SELECT id, quantity FROM prescriptions WHERE patient_id LIKE ?";
+			String sql = "SELECT * FROM prescriptions WHERE patient_id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient_id);
 			ResultSet rs = prep.executeQuery();
@@ -131,12 +131,13 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public void orderStock(int medicine_id, int pharmacy_id, int qty) {  //SE USA
 	
 		try{
-			String sql = "UPDATE stock SET amount=amount+? WHERE medicine_id=? AND pharmacy_id=?";
+			String sql = "UPDATE stock SET amount = amount+? WHERE medicine_id=? AND pharmacy_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, qty);
 			prep.setInt(2, medicine_id);
 			prep.setInt(3, pharmacy_id);
 			prep.executeUpdate();
+			prep.close();
 			System.out.println("Update finished.");
 		}catch(Exception e){
 			System.out.println("Error ordering the stock");
