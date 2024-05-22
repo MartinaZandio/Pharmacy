@@ -25,8 +25,15 @@ public class JPAUserManager implements UserManager {
 		} catch(NoResultException e) {
 			this.createRole(new Role ("Pharmacist"));
 			this.createRole(new Role ("Patient"));
+			
 		}
-	
+				
+		/*User u1= new User(1, "blancamaldo", "maldo");
+		u1.assignRole(u1, );
+		User u2= new User(2, "martizandio", "zandio");
+		u1.assignRole(u2, );
+		register(u1);
+		register(u2);*/
 	}
 	
 	@Override
@@ -36,20 +43,23 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().commit();  //after every change
 	}
 
+	
 	public void register(User u) {
 		em.getTransaction().begin();  
 		em.persist(u);
 		em.getTransaction().commit();
 	}
 
+	
 	@Override
 	public Role getRole(String username) {    //SE USA 
 		Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, username);
-		Role r= (Role) q.getSingleResult();
+		Role r = (Role) q.getSingleResult();
 		return r;
 	}
 	
+
 	public List<Role> getAllRoles(){    //SE USA
 		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
 		List<Role> resultList = (List<Role>) q.getResultList();

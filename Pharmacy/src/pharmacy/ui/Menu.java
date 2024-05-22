@@ -62,9 +62,9 @@ public class Menu {
 	private static int mainMenu() throws NumberFormatException, IOException {
 		System.out.println("Welcome!");
 		System.out.println("Select an option by typing a number: ");
-		System.out.println("1. Log in.");
-		System.out.println("2. Sign up.");
-		System.out.println("0. Save & exit.");
+		System.out.println("	1. Log in.");
+		System.out.println("	2. Sign up.");
+		System.out.println("	0. Save & exit.");
 
 		int choice=Integer.parseInt(r.readLine());
 		return choice;
@@ -112,7 +112,7 @@ public class Menu {
 			}
 			else if(u.getRole().getName().equals("Pharmacist")) {
 				System.out.println("Pharmacist user created");
-				pharmacistMenu();
+				menuLogin();
 			}
 		}
 			
@@ -173,11 +173,11 @@ public class Menu {
 		private static void pharmacistMenu() throws Exception{
 			
 			System.out.println("Select an option by typing a number: ");
-			System.out.println("1. Identify a patient.");
-			System.out.println("2. Check stock.");
-			System.out.println("3. Print Xml.");
-			System.out.println("4. Change Xml to Java.");
-			System.out.println("0. Exit");			
+			System.out.println("	1. Identify a patient.");
+			System.out.println("	2. Check stock.");
+			System.out.println("	3. Print Xml.");
+			System.out.println("	4. Change Xml to Java.");
+			System.out.println("	0. Exit");			
 			
 			int choice;
 			do {
