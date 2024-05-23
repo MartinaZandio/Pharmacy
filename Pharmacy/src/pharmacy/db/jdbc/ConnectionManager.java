@@ -148,15 +148,19 @@ public class ConnectionManager {
 			
 			Statement insertTablesMedicines =c.createStatement();
 			sql = "INSERT INTO medicines(numberAssigned, name, laboratory_id) "
-					+ " VALUES (1, 'Ibuprofen 400gr', 2)";
+					+ " VALUES (1, 'Ibuprofen 200gr', 2)";
 			insertTablesMedicines.executeUpdate(sql);
 			
 			sql = "INSERT INTO medicines(numberAssigned, name, laboratory_id) "
-					+ " VALUES (2, 'Paracetamol', 1)";
+					+ " VALUES (2, 'Paracetamol 500mg', 1)";
 			insertTablesMedicines.executeUpdate(sql);
 			
 			sql = "INSERT INTO medicines(numberAssigned, name, laboratory_id) "
-					+ " VALUES (3, 'Ibuprofen 600gr', 1)";
+					+ " VALUES (3, 'Ibuprofen 400gr', 1)";
+			insertTablesMedicines.executeUpdate(sql);
+			
+			sql = "INSERT INTO medicines(numberAssigned, name, laboratory_id) "
+					+ " VALUES (4, 'Paracetamol 100mg', 1)";
 			insertTablesMedicines.executeUpdate(sql);
 			insertTablesMedicines.close();
 
@@ -169,7 +173,12 @@ public class ConnectionManager {
 			sql = "INSERT INTO pharmacies(id, name, location, postalCode, numberOfWorkers) "
 					+ " VALUES (2, 'Mendez', 'Alicante', 03540, 5)";
 			insertTablesPharmacies.executeUpdate(sql);
+			
+			sql = "INSERT INTO pharmacies(id, name, location, postalCode, numberOfWorkers) "
+					+ " VALUES (3, 'Zandios&Co', 'Madrid', 28009, 3)";
+			insertTablesPharmacies.executeUpdate(sql);
 			insertTablesPharmacies.close();			
+			
 			
 			Statement insertTablesStock =c.createStatement();
 			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
@@ -184,6 +193,10 @@ public class ConnectionManager {
 					+ " VALUES (1, 3, 15)";
 			insertTablesStock.executeUpdate(sql);
 			
+			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (1, 4, 6)";
+			insertTablesStock.executeUpdate(sql);
+			
 			sql="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
 					+ " VALUES (2, 1, 3)";
 			insertTablesStock.executeUpdate(sql);
@@ -194,6 +207,26 @@ public class ConnectionManager {
 			
 			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
 					+ " VALUES (2, 3, 2)";
+			insertTablesStock.executeUpdate(sql);
+			
+			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (2, 4, 3)";
+			insertTablesStock.executeUpdate(sql);
+			
+			sql="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (3, 1, 6)";
+			insertTablesStock.executeUpdate(sql);
+			
+			sql="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (3, 2, 3)";
+			insertTablesStock.executeUpdate(sql);
+			
+			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (3, 3, 8)";
+			insertTablesStock.executeUpdate(sql);
+			
+			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
+					+ " VALUES (3, 4, 5)";
 			insertTablesStock.executeUpdate(sql);
 			insertTablesStock.close();
 			

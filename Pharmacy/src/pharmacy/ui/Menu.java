@@ -60,6 +60,7 @@ public class Menu {
 	
 	
 	private static int mainMenu() throws NumberFormatException, IOException {
+		System.out.println();
 		System.out.println("Welcome!");
 		System.out.println("Select an option by typing a number: ");
 		System.out.println("	1. Log in.");

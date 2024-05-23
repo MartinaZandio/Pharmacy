@@ -92,9 +92,8 @@ import java.util.Objects;
 
 	@Override
 	public String toString() {
-		return "Prescription" + "\n" +
-	"Id: " + id + "\n" + 
-	"Quantity of mediciness: "+ quantity + "\n" +
+		return "Prescription Id: " + id + "\n" + 
+	"Quantity of medicines: "+ quantity + "\n" +
 	"Issue date: " + issueDate + "\n"; }
 
 	@Override
