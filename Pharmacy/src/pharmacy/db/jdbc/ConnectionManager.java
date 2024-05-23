@@ -133,18 +133,7 @@ public class ConnectionManager {
 	
 	
 	private void insertTables() {
-		try {
-			
-
-			/*Statement insertTablesPatients=c.createStatement();
-			String sql = "INSERT INTO patients(id, name, dateOfBirth, sex, userName) "
-					+ " VALUES (1, 'Blanca', 13-05-2004, 'Female', 'blancamaldo')";
-			insertTablesPatients.executeUpdate(sql);
-			sql = "INSERT INTO patients(id, name, dateOfBirth, sex, userName) "
-					+ " VALUES (2, 'Martina', 19-10-2004, 'Female', 'martizandio')";
-			insertTablesPatients.executeUpdate(sql);
-			insertTablesPatients.close();*/
-
+		try {	
 
 			Statement insertTablesLaboratories =c.createStatement();
 			String sql ="INSERT INTO laboratories(id, name, location, postalCode) "
@@ -180,19 +169,7 @@ public class ConnectionManager {
 			sql = "INSERT INTO pharmacies(id, name, location, postalCode, numberOfWorkers) "
 					+ " VALUES (2, 'Mendez', 'Alicante', 03540, 5)";
 			insertTablesPharmacies.executeUpdate(sql);
-			insertTablesPharmacies.close();
-			
-			
-			Statement insertTablesPrescriptions =c.createStatement();
-			sql ="INSERT INTO prescriptions(id, quantity, issueDate, dateUsed, patient_id) "
-					+ " VALUES (1, 1 , 12-04-2024, NULL , NULL)";
-			insertTablesPrescriptions.executeUpdate(sql);
-			
-			sql = "INSERT INTO prescriptions(id, quantity, issueDate, dateUsed, patient_id)"
-					+  "VALUES (2, 5 , 20-05-2024, NULL , NULL)";
-			insertTablesPrescriptions.executeUpdate(sql);
-			insertTablesPrescriptions.close();
-			
+			insertTablesPharmacies.close();			
 			
 			Statement insertTablesStock =c.createStatement();
 			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
@@ -218,24 +195,11 @@ public class ConnectionManager {
 			sql ="INSERT INTO stock(pharmacy_id, medicine_id, amount) "
 					+ " VALUES (2, 3, 2)";
 			insertTablesStock.executeUpdate(sql);
-			
 			insertTablesStock.close();
-	
-			
-			Statement insertTablesPresMed =c.createStatement();
-			sql ="INSERT INTO pres_med(prescription_id, medicine_id)"
-					+  "VALUES (1,1)";
-			insertTablesPresMed.executeUpdate(sql);
-			
-			sql ="INSERT INTO pres_med(prescription_id, medicine_id)"
-					+  "VALUES (2,1)";
-			insertTablesPresMed.executeUpdate(sql);
-			insertTablesPresMed.close();
-			
 			
 		}catch(SQLException sqlE) {
-			if(sqlE.getMessage().contains("already exist")){
-				System.out.println("No need to create the tables; already there");
+			if(sqlE.getMessage().contains("UNIQUE constraint failed")){
+				System.out.println("");
 			}
 			else {
 			System.out.println("Error in query");

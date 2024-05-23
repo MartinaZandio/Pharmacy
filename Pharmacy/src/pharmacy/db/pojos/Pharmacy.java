@@ -116,15 +116,13 @@ public class Pharmacy implements Serializable{
 				&& Objects.equals(numberOfWorkers, other.numberOfWorkers)
 				&& Objects.equals(postalCode, other.postalCode) && Objects.equals(stock, other.stock);
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Pharmacy [id=" + id + ", name=" + name + ", location=" + location + ", postalCode=" + postalCode
-				+ ", numberOfWorkers=" + numberOfWorkers + ", stock=" + stock + "]";
-	}
-
-	
-	
-	
-	
+		return "Pharmacy" + "\n" +
+	"Id: " + id + "\n" +
+	"Name: " + name + "\n" +
+	"Location: " + location + "\n" +
+	"Postal code: " + postalCode + "\n";
+	}	
 }

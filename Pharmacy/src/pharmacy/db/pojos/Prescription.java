@@ -94,8 +94,8 @@ import java.util.Objects;
 	public String toString() {
 		return "Prescription" + "\n" +
 	"Id: " + id + "\n" + 
-				"Quantity of mediciness: "+ quantity + "\n" +
-	"Issue date: " + issueDate + "Date used: " + dateUsed;}
+	"Quantity of mediciness: "+ quantity + "\n" +
+	"Issue date: " + issueDate + "\n"; }
 
 	@Override
 	public int hashCode() {

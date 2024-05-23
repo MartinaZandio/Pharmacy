@@ -85,6 +85,7 @@ public class Menu {
 				}
 			} catch (Exception e){
 				System.out.println("Error with the username / password.");
+				e.printStackTrace();
 				menuLogin();
 			}
 		}
@@ -116,21 +117,21 @@ public class Menu {
 			}
 			else if(u.getRole().getName().equals("Pharmacist")) {
 				System.out.println("Pharmacist user created");
-				mainMenu();
 			}
 		}
 			
 		private static void patientMenu(Patient p) throws Exception{
 			int patient_id;
+			int choice;
 			
+			do {
 			System.out.println();
 			System.out.println("Select an option by typing a number: ");
 			System.out.println("	1. Check medical history.");
 			System.out.println("	2. Check medicine.");
+			System.out.println("	3. Insert prescription to the db.");
 			System.out.println("	0. Exit");
-
-			int choice;
-			do {
+			
 				patient_id = p.getId();
 				choice=Integer.parseInt(r.readLine());
 				switch(choice) {
@@ -140,6 +141,10 @@ public class Menu {
 				}
 				case 2: {
 					checkMedicineMenu(patient_id);
+					break;
+				}
+				case 3: {
+					insertPrescriptionMenu(patient_id);
 					break;
 				}
 				case 0: {
@@ -152,14 +157,32 @@ public class Menu {
 			
 		}
 		
+		private static void insertPrescriptionMenu(int patient_id) throws Exception {
+			System.out.println("Insert the quantity of medicine in the prescription: ");
+			int quantity = Integer.parseInt(r.readLine());
+			
+			System.out.println("Please type the issue date (dd-MM-yyyy): ");
+			String date = r.readLine();
+			LocalDate localDate = LocalDate.parse(date, formatter);
+			Date issueDate = Date.valueOf(localDate);
+			
+			Prescription p;
+			p = prescriptionManager.createPrescription(quantity, issueDate, patient_id);
+			
+			System.out.println("Type the medicine name: ");
+			String medicineName = r.readLine();
+			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
+			System.out.println(meds);
+			System.out.println("Type the medicine id that you want to select: ");
+			int medicineId = Integer.parseInt(r.readLine());
+			prescriptionManager.pres_medInsert(p.getId(), medicineId);
+		}
+		
 		private static void checkMedicalHistoryMenu(int patient_id) throws Exception {
 			List<Prescription> prescriptions = new ArrayList<Prescription>();
 			
 			prescriptions = prescriptionManager.getPrescription(patient_id);
-			System.out.println(prescriptions);
-			
-			menuLogin();
-			
+			System.out.println(prescriptions);		
 		}
 		
 		private static void checkMedicineMenu(int patient_id) throws Exception {
@@ -169,9 +192,9 @@ public class Menu {
 			for(Prescription p: prs) {
 				System.out.println(medicineManager.getMedicines(p.getId()));
 			}
-			System.out.println("Press 0 to go back to the Principal Menu");
-			int n= Integer.parseInt(r.readLine());
-			if(n==0) menuLogin();
+			//System.out.println("Press 0 to go back to the Principal Menu");
+			//int n= Integer.parseInt(r.readLine());
+			//if(n==0) menuLogin();
 		}
 		
 		private static void pharmacistMenu() throws Exception{
@@ -312,8 +335,6 @@ public class Menu {
 			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
 			
-			pharmacyManager.markPrescriptionAsUsed(idPrescription);
-			
 			pharmacistMenu();
 		}
 		
@@ -326,7 +347,12 @@ public class Menu {
 			Integer idPrescription = Integer.parseInt(r.readLine());
 		
 			boolean autenticity = pharmacyManager.checkAuthenticity(idPrescription);
-			System.out.println(autenticity);
+			if (autenticity == false) {
+				System.out.println("The prescription has not been used yet. It's valid.");
+			} else {
+				System.out.println("The prescription has been used. It's not valid.");
+			}
+			
 			
 			pharmacistMenu();
 		}
