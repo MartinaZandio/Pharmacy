@@ -129,7 +129,6 @@ public class JDBCPharmacyManager implements PharmacyManager {
 
 	@Override
 	public void orderStock(int medicine_id, int pharmacy_id, int qty) {  //SE USA
-	
 		try{
 			String sql = "UPDATE stock SET amount = amount+? WHERE medicine_id=? AND pharmacy_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);

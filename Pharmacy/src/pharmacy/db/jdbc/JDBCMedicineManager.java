@@ -65,14 +65,15 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 
 	@Override
-	public int getMedicine(int id) {  //SE USA
+	public int getMedicine(int med_id, int pharmacy_id) {  //SE USA
 		try {
-			String sql = "SELECT * FROM stock WHERE medicine_id = ?";
+			String sql = "SELECT * FROM stock WHERE medicine_id = ? AND pharmacy_id = ?";
 			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, id);
+			search.setInt(1, med_id);
+			search.setInt(2, pharmacy_id);
 			ResultSet rs = search.executeQuery();
 			while (rs.next()) {
-				Integer pharmacy_id = rs.getInt("pharmacy_id");
+				Integer pharmacy_id2 = rs.getInt("pharmacy_id");
 				Integer medicine_id = rs.getInt("medicine_id");
 				Integer amount = rs.getInt("amount");
 				return amount;
@@ -113,62 +114,20 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	
-	public List<String> getMedicines(int prescription_id) {
-		List<String> medicines= new ArrayList<String>();
+	public String getMedicines(int prescription_id) {
 		try {
 			String sql= "SELECT name FROM medicines INNER JOIN pres_med ON medicines.numberAssigned = pres_med.medicine_id WHERE prescription_id = ?";
 			PreparedStatement search =c.prepareStatement(sql);
 			search.setInt(1, prescription_id);
 			ResultSet rs = search.executeQuery();
 			String nombreMed = rs.getString("name");
-			medicines.add(nombreMed);
-			return medicines;
+	
+			return nombreMed;
 		}catch(SQLException e) {
 			System.out.println("Error looking for a prescription");
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	/* Split in 2 methods; 1. Get a list of prec for a patient id. 2. get a list of medicines for a presc id
-	@Override
-	public String getMedicines(int patient_id){   //SE USA
-		List<Medicine> medicines = new ArrayList<Medicine>();
-		try {
-			String sql = "SELECT id FROM prescriptions WHERE patient_id LIKE ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, patient_id);
-			ResultSet rs = search.executeQuery();
-			while(rs.next()) {
-				Integer idPres = rs.getInt("id");
-				String sql2 = "SELECT * FROM pres_med WHERE prescription_id LIKE ?";
-				PreparedStatement search2 = c.prepareStatement(sql2);
-				search2.setInt(1, idPres);
-				ResultSet rs2 = search2.executeQuery();
-				
-				while (rs2.next()) {
-					Integer med_id = rs2.getInt("medicine_id");
-					
-					String sql3 = "SELECT name FROM medicines WHERE numberAssigned LIKE ?";
-					PreparedStatement search3 = c.prepareStatement(sql3);
-					search3.setInt(1, med_id);
-					ResultSet rs3 = search3.executeQuery();
-					
-					String nombreMed = rs3.getString("name");
-					return nombreMed;
-				
-				}
-			}
-		} catch(SQLException e) {
-			System.out.println("Error looking for a medicine");
-			e.printStackTrace();
-		} 
-		return null;
-	}
-	*/
-
-
-	
 
 }

@@ -70,19 +70,23 @@ public class Menu {
 		return choice;
 	}
 		
-		private static Patient menuLogin() throws Exception{
-			System.out.println("· Username: ");
-			String username = r.readLine();
-			System.out.println("· Password: ");
-			String password = r.readLine();
-			User u = userMan.login(username, password);
-			if (u.getRole().getName().equals("Patient")) {
-				Patient p = patientManager.getPatient(username);
-				patientMenu(p);
-			} else {
-			pharmacistMenu();
+		private static void menuLogin() throws Exception{
+			try {
+				System.out.println("· Username: ");
+				String username = r.readLine();
+				System.out.println("· Password: ");
+				String password = r.readLine();
+				User u = userMan.login(username, password);
+				if (u.getRole().getName().equals("Patient")) {
+					Patient p = patientManager.getPatient(username);
+					patientMenu(p);
+				} else {
+				pharmacistMenu();
+				}
+			} catch (Exception e){
+				System.out.println("Error with the username / password.");
+				menuLogin();
 			}
-			return null;
 		}
 		
 		
@@ -243,14 +247,23 @@ public class Menu {
 		}
 		
 		private static int checkStockMenu() throws Exception {
+			System.out.println("Type the pharmacy name: ");
+			String name = r.readLine();
+			List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
+			pharmacies = pharmacyManager.getPharmacy(name);
+			System.out.println(pharmacies);
+			System.out.println("Type the id of the pharmacy where you want to check stock.");
+			int idPharmacy = Integer.parseInt(r.readLine());
+			
 			System.out.println("Type the medicine name: ");
 			String medicineName = r.readLine();
 			List<Medicine> meds = medicineManager.searchMedicineByName(medicineName);
 			System.out.println(meds);
 			System.out.println("Type the medicine id that you want to select: ");
 			int medicineId = Integer.parseInt(r.readLine());
-			int stock = medicineManager.getMedicine(medicineId);
-			System.out.println("The stock of " + medicineName + " is " +stock);
+			
+			int stock = medicineManager.getMedicine(medicineId, idPharmacy);
+			System.out.println("The stock of the medcine selected is " +stock);
 			stockMenu(medicineId);
 			return medicineId;
 			

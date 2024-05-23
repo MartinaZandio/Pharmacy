@@ -12,11 +12,9 @@ public interface MedicineManager {
 		
 	public void addMedicine(Medicine medicine);
 	public List<Medicine> searchMedicineByName(String name);
-	public int getMedicine(int id);
-	//List<Medicine> getMedicines(int patient_id);
-	//public String getMedicines(int patient_id);
+	public int getMedicine(int med_id, int pharmacy_id);
 	List<Prescription> getPrescription(int patient_id);
-	public List<String> getMedicines(int prescription_id);
+	public String getMedicines(int prescription_id);
 
 		
 }
