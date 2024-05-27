@@ -23,7 +23,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	public Pharmacy getPharmacy(int id) {  //SE USA
 		
 		try {
-			String template= "SELECT * FROM pharmacies WHERE numAssigned = " + id;
+			String template= "SELECT * FROM pharmacies WHERE id = " + id;
 			Statement st;
 			st = c.createStatement();
 			ResultSet rs = st.executeQuery(template);

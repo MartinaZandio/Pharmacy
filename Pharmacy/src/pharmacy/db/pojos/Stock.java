@@ -14,17 +14,18 @@ public class Stock implements Serializable{
 	private static final long serialVersionUID = 4731831667008411270L;
 	@XmlTransient
 	private Pharmacy pharmacy;
-	@XmlElementWrapper(name="stock")
+	@XmlElement
 	private Medicine medicine;
 	@XmlTransient
 	private List<Stock> stock;
-	@XmlAttribute
+	@XmlTransient
 	private int amount;
 	
 	public Stock() {
 		super();
 		this.stock = new ArrayList<Stock>();
 	}
+	
 	public Stock(Pharmacy pharmacy, Medicine medicine, List<Stock> stock, int amount) {
 		super();
 		this.pharmacy = pharmacy;

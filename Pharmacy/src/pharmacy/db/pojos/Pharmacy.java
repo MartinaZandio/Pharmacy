@@ -2,14 +2,16 @@ package pharmacy.db.pojos;
 
 import java.util.*;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 import java.io.Serializable;
 
-@XmlAccessorType(XmlAccessType.FIELD) 
+@XmlAccessorType(XmlAccessType.FIELD)
+
 @XmlRootElement(name = "Pharmacy") 
 @XmlType(propOrder = { "name", "location", "postalCode", "stock" })
+
+
 public class Pharmacy implements Serializable{
 	
 	private static final long serialVersionUID = -4622538807700766019L;
@@ -24,7 +26,7 @@ public class Pharmacy implements Serializable{
 	private Integer postalCode; 
 	@XmlAttribute
 	private Integer numberOfWorkers;
-	@XmlTransient
+	@XmlElement
 	private ArrayList<Stock> stock;
 	
 	public Pharmacy() {

@@ -6,13 +6,13 @@ import java.sql.Date;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class SQLDateAdapter extends XmlAdapter<String, Date> { //from String to date and viceversa
+public class SQLDateAdapter extends XmlAdapter<String, Date> { 
 	
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	@Override //comes from the interface
+	@Override 
 	public String marshal(Date sqlDate) throws Exception {
-		return sqlDate.toLocalDate().format(formatter); //returns a string from a java sqlDate
+		return sqlDate.toLocalDate().format(formatter); 
 	}
 
 	@Override
@@ -21,4 +21,4 @@ public class SQLDateAdapter extends XmlAdapter<String, Date> { //from String to 
 		return Date.valueOf(localDate); 
 	}
 
-} //to create our own adapter we have to create the marshal() and unmarshal()
+}

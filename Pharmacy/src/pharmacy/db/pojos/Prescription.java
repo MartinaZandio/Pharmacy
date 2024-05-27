@@ -1,21 +1,30 @@
 	
-	package pharmacy.db.pojos;
+package pharmacy.db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-	
-	public class Prescription implements Serializable{
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+
+	public class Prescription implements Serializable{
 	
 	private static final long serialVersionUID = -758766051603616038L;
+	@XmlTransient
 	private int id;
-	private int quantity;
+	@XmlElement
+	private int qty;
+	@XmlTransient
 	private Date issueDate;
+	@XmlTransient
 	private Date dateUsed;
+	@XmlTransient
 	private int patient;
+	@XmlTransient
 	private List<Medicine> medicines;
 	
 	
@@ -26,7 +35,7 @@ import java.util.Objects;
 	
 	public Prescription(int id, int quantity, Date issueDate, Date dateUsed) {
 		this.id=id;
-		this.quantity=quantity;
+		this.qty=quantity;
 		this.issueDate=issueDate;
 		this.dateUsed=dateUsed;
 		this.medicines = new ArrayList<Medicine>();
@@ -34,7 +43,7 @@ import java.util.Objects;
 	
 	public Prescription(int id, int quantity, Date issueDate, Date dateUsed, int patient) {
 		this.id=id;
-		this.quantity=quantity;
+		this.qty=quantity;
 		this.issueDate=issueDate;
 		this.dateUsed=dateUsed;
 		this.patient = patient;
@@ -51,11 +60,11 @@ import java.util.Objects;
 	}
 	
 	public int getQuantity() {
-		return quantity;
+		return qty;
 	}
 	
 	public void setQuantity(int quantity) {
-		this.quantity=quantity;
+		this.qty=quantity;
 	}
 	
 	public Date getIssueDate(){
@@ -93,12 +102,12 @@ import java.util.Objects;
 	@Override
 	public String toString() {
 		return "Prescription Id: " + id + "\n" + 
-	"Quantity of medicines: "+ quantity + "\n" +
+	"Quantity of medicines: "+ qty + "\n" +
 	"Issue date: " + issueDate + "\n"; }
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateUsed, id, issueDate, medicines, patient, quantity);
+		return Objects.hash(dateUsed, id, issueDate, medicines, patient, qty);
 	}
 
 	@Override
@@ -112,7 +121,7 @@ import java.util.Objects;
 		Prescription other = (Prescription) obj;
 		return Objects.equals(dateUsed, other.dateUsed) && id == other.id && Objects.equals(issueDate, other.issueDate)
 				&& Objects.equals(medicines, other.medicines) && Objects.equals(patient, other.patient)
-				&& quantity == other.quantity;
+				&& qty == other.qty;
 	}
 
 	

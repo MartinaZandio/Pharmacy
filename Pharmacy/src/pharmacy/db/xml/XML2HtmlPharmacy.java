@@ -8,6 +8,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class XML2HtmlPharmacy {
+	
 	public static void simpleTransfrom(String sourcePath, String xsltPath, String resultDir) {
 		TransformerFactory tfactory= TransformerFactory.newInstance();
 		try {

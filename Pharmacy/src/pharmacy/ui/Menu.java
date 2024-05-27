@@ -9,6 +9,7 @@ import pharmacy.db.jdbc.ConnectionManager;
 import pharmacy.db.interfaces.*;
 import pharmacy.db.jpa.JPAUserManager;
 import pharmacy.db.pojos.*;
+import pharmacy.db.xml.XML2HtmlPharmacy;
 import pharmacy.db.xml.XmlPharmacyManager;
 
 public class Menu {
@@ -225,8 +226,12 @@ public class Menu {
 				}
 				case 4:{
 					xml2Pharmacy();
+					System.out.println("	Press 1 to get html file.");
+					int c=Integer.parseInt(r.readLine());
+					if (c==1) getHtmlFile();
 					break;
 				}
+				
 				case 0: {
 					mainMenu();
 					return;
@@ -255,6 +260,16 @@ public class Menu {
 			String rute = r.readLine();
 			File xml= new File(rute);
 			XmlPharmacyManager.xml2Pharmacy(xml);
+		}
+		
+		private static void getHtmlFile() throws Exception {
+			System.out.println("Introduce the absolute path to source xml file: ");
+			String source= r.readLine();
+			System.out.println("Introduce the absolute path to xslt file");
+			String xsltPath= r.readLine();
+			System.out.println("Introduce the directory where you want to put resulting file");
+			String directory= r.readLine();
+			XML2HtmlPharmacy.simpleTransfrom(source, xsltPath, directory);
 		}
 		
 		private static int identifyPatientMenu() throws Exception {
