@@ -7,24 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
-
-@XmlAccessorType(XmlAccessType.FIELD)
 
 	public class Prescription implements Serializable{
 	
 	private static final long serialVersionUID = -758766051603616038L;
-	@XmlTransient
 	private int id;
-	@XmlElement
 	private int qty;
-	@XmlTransient
 	private Date issueDate;
-	@XmlTransient
 	private Date dateUsed;
-	@XmlTransient
 	private int patient;
-	@XmlTransient
+	
 	private List<Medicine> medicines;
 	
 	

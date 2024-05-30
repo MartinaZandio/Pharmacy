@@ -150,11 +150,11 @@ public class Menu {
 					break;
 				}
 				case 0: {
-					mainMenu();
 					return;
 				}
 				default:
 				}
+				
 			} while (choice != 0);
 			
 		}
@@ -251,6 +251,7 @@ public class Menu {
 			System.out.println("Type the pharmacy id: ");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 			Pharmacy p= pharmacyManager.getPharmacy(idPharmacy);
+			p.setStock(pharmacyManager.getStocksForPharmacy(idPharmacy));
 			File xml = new File ("./xmls/External-Pharmacy"); 
 			XmlPharmacyManager.pharmacy2Xml(p,xml);
 		}

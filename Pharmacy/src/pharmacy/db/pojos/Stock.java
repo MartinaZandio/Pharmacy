@@ -10,29 +10,25 @@ import javax.xml.bind.annotation.*;
 
 public class Stock implements Serializable{
 
-
 	private static final long serialVersionUID = 4731831667008411270L;
 	@XmlTransient
 	private Pharmacy pharmacy;
 	@XmlElement
 	private Medicine medicine;
 	@XmlTransient
-	private List<Stock> stock;
-	@XmlTransient
 	private int amount;
 	
 	public Stock() {
 		super();
-		this.stock = new ArrayList<Stock>();
 	}
 	
 	public Stock(Pharmacy pharmacy, Medicine medicine, List<Stock> stock, int amount) {
 		super();
 		this.pharmacy = pharmacy;
 		this.medicine = medicine;
-		this.stock = new ArrayList<Stock>();
 		this.amount= amount;
 	}
+	
 	public Stock(int amount) {
 		super();
 		this.amount=amount;
@@ -50,12 +46,6 @@ public class Stock implements Serializable{
 	public void setMedicine(Medicine medicine) {
 		this.medicine = medicine;
 	}
-	public List<Stock> getStock() {
-		return stock;
-	}
-	public void setStock(List<Stock> stock) {
-		this.stock = stock;
-	}
 	
 	public int getAmount() {
 		return amount;
@@ -63,10 +53,12 @@ public class Stock implements Serializable{
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, medicine, pharmacy, stock);
+		return Objects.hash(medicine, pharmacy);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,12 +68,12 @@ public class Stock implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		return amount == other.amount && Objects.equals(medicine, other.medicine)
-				&& Objects.equals(pharmacy, other.pharmacy) && Objects.equals(stock, other.stock);
+		return Objects.equals(medicine, other.medicine) && Objects.equals(pharmacy, other.pharmacy);
 	}
+
 	@Override
 	public String toString() {
-		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", stock=" + stock + ", amount=" + amount
+		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", amount=" + amount
 				+ "]";
 	}
 	

@@ -21,7 +21,6 @@ public class Role implements Serializable{
 	@Column(nullable = false, unique =true)
 	private String name;
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-	@JoinColumn
 	private List<User> users;
 	
 	public Role() {

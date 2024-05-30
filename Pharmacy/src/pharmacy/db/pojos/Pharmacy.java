@@ -7,10 +7,8 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-
 @XmlRootElement(name = "Pharmacy") 
 @XmlType(propOrder = { "name", "location", "postalCode", "stock" })
-
 
 public class Pharmacy implements Serializable{
 	
@@ -27,7 +25,8 @@ public class Pharmacy implements Serializable{
 	@XmlAttribute
 	private Integer numberOfWorkers;
 	@XmlElement
-	private ArrayList<Stock> stock;
+	@XmlElementWrapper(name = "stocks")
+	private List<Stock> stock;
 	
 	public Pharmacy() {
 		super();
@@ -92,7 +91,7 @@ public class Pharmacy implements Serializable{
 		this.numberOfWorkers = numberOfWorkers;
 	}
 
-	public ArrayList<Stock> getStock() {
+	public List<Stock> getStock() {
 		return stock;
 	}
 

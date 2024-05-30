@@ -18,7 +18,7 @@ public class Medicine implements Serializable {
 	private String name;
 	@XmlTransient
 	private int numAsigned;
-	@XmlElement
+	@XmlTransient
 	private Prescription prescription;
 	@XmlTransient
 	private Laboratory laboratory;
@@ -26,7 +26,7 @@ public class Medicine implements Serializable {
 	private List<Stock> stock;
 	@XmlTransient
 	private List<Prescription> prescriptions;
-	@XmlTransient
+	@XmlElement
 	private int quantity;
 
 
