@@ -67,7 +67,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	@Override
 	public int getMedicine(int med_id, int pharmacy_id) {  //SE USA
 		try {
-			String sql = "SELECT * FROM stock WHERE medicine_id = ? AND pharmacy_id = ?";
+			String sql = "SELECT * FROM stocks WHERE medicine_id = ? AND pharmacy_id = ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, med_id);
 			search.setInt(2, pharmacy_id);
