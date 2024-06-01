@@ -95,8 +95,8 @@ public class Pharmacy implements Serializable{
 		return stock;
 	}
 
-	public void setStock(ArrayList<Stock> stock) {
-		this.stock = stock;
+	public void setStock(List<Stock> list) {
+		this.stock = list;
 	}
 
 	@Override
@@ -125,5 +125,6 @@ public class Pharmacy implements Serializable{
 	"Name: " + name + "\n" +
 	"Location: " + location + "\n" +
 	"Postal code: " + postalCode + "\n";
-	}	
+	}
+
 }

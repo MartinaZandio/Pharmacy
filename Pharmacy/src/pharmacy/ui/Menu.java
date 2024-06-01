@@ -245,13 +245,17 @@ public class Menu {
 			System.out.print("Choose a pharmacy to turn into an XML file.");
 			System.out.println("Type the pharmacy name: ");
 			String name = r.readLine();
+			
 			List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 			pharmacies = pharmacyManager.getPharmacy(name);
 			System.out.println(pharmacies);
+			
 			System.out.println("Type the pharmacy id: ");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 			Pharmacy p= pharmacyManager.getPharmacy(idPharmacy);
-			p.setStock(pharmacyManager.getStocksForPharmacy(idPharmacy));
+		
+			p.setStock(pharmacyManager.getStockPharmacy(idPharmacy));
+			
 			File xml = new File ("./xmls/External-Pharmacy"); 
 			XmlPharmacyManager.pharmacy2Xml(p,xml);
 		}

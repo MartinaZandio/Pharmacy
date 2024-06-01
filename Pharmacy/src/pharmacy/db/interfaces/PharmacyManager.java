@@ -15,4 +15,5 @@ public interface PharmacyManager {
 	public Pharmacy getPharmacy(int id);
 	List<Pharmacy> getPharmacy(String name);
 	public void sellMedicine(int patient_id, int pharmacy_id);
+	public List<Stock> getStockPharmacy(int pharmacyId);
 }
