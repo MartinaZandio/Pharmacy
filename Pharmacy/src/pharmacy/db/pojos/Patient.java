@@ -9,9 +9,7 @@ import javax.persistence.*;
 @Table(name= "patients")
 public class Patient implements Serializable{
 	
-	private static final long serialVersionUID1 = 3668403771940551440L;
-
-	
+	private static final long serialVersionUID = -5925822566554416559L;
 	@GeneratedValue(generator="patients")
 	//...
 	@Id
@@ -27,7 +25,6 @@ public class Patient implements Serializable{
 	
 	public Patient(String name, Date dateOfBirth, String sex, String userName) {
 		super();
-		this.id=id;
 		this.name=name;
 		this.dateOfBirth=dateOfBirth;
 		this.sex= sex;
@@ -97,7 +94,6 @@ public class Patient implements Serializable{
 		return Objects.hash(dateOfBirth, id, name, sex, userName);
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,7 +107,6 @@ public class Patient implements Serializable{
 				&& Objects.equals(name, other.name) && Objects.equals(sex, other.sex)
 				&& Objects.equals(userName, other.userName);
 	}
-
 
 	@Override
 	public String toString() {

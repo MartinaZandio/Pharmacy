@@ -188,15 +188,11 @@ public class Menu {
 		}
 		
 		private static void checkMedicineMenu(int patient_id) throws Exception {
-			// List<Medicine> medicines = new ArrayList<Medicine>();
 			List<Prescription> prs= new ArrayList<Prescription>();
 			prs = medicineManager.getPrescription(patient_id);
 			for(Prescription p: prs) {
 				System.out.println(medicineManager.getMedicines(p.getId()));
 			}
-			//System.out.println("Press 0 to go back to the Principal Menu");
-			//int n= Integer.parseInt(r.readLine());
-			//if(n==0) menuLogin();
 		}
 		
 		private static void pharmacistMenu() throws Exception{
@@ -267,9 +263,9 @@ public class Menu {
 		}
 		
 		private static void getHtmlFile() throws Exception {
-			System.out.println("Introduce the absolute path to source xml file: ");
+			System.out.println("Introduce the absolute path to source XML file: ");
 			String source= r.readLine();
-			System.out.println("Introduce the absolute path to xslt file");
+			System.out.println("Introduce the absolute path to XSLT file");
 			String xsltPath= r.readLine();
 			System.out.println("Introduce the directory where you want to put resulting file");
 			String directory= r.readLine();
@@ -354,7 +350,6 @@ public class Menu {
 			prescriptions = prescriptionManager.getPrescription(patient_id);
 			System.out.println(prescriptions);
 			Integer idPrescription = Integer.parseInt(r.readLine());
-			
 			pharmacistMenu();
 		}
 		
@@ -425,7 +420,6 @@ public class Menu {
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 		
 			pharmacyManager.orderStock(medicineId, idPharmacy, quantity);
-			
 			pharmacistMenu();
 		}
 }

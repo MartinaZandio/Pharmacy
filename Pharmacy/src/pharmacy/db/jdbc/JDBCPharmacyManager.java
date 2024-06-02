@@ -20,7 +20,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 	
 	@Override 
-	public Pharmacy getPharmacy(int id) {  //SE USA
+	public Pharmacy getPharmacy(int id) {  
 		
 		try {
 			String template= "SELECT * FROM pharmacies WHERE id = " + id;
@@ -38,7 +38,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 	
 	@Override 
-	public void markPrescriptionAsUsed (int prescription_id) {  //SE USA
+	public void markPrescriptionAsUsed (int prescription_id) {
 		Date localDate = null;
 		try{
 			String sql = "UPDATE prescriptions SET dateUsed = localDate WHERE id = ?";
@@ -52,7 +52,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 
 	@Override
-	public boolean checkAuthenticity(int prescription_id) {  //SE USA
+	public boolean checkAuthenticity(int prescription_id) {  
 		try {
 			String sql = "SELECT dateUsed FROM prescriptions WHERE id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql); 
@@ -71,7 +71,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}	
 		
 
-	public void sellMedicine(int patient_id, int pharmacy_id) {	// SE USA
+	public void sellMedicine(int patient_id, int pharmacy_id) {	
 		try{
 			String sql = "SELECT * FROM prescriptions WHERE patient_id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -128,7 +128,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public void orderStock(int medicine_id, int pharmacy_id, int qty) {  //SE USA
+	public void orderStock(int medicine_id, int pharmacy_id, int qty) { 
 		try{
 			String sql = "UPDATE stock SET amount = amount+? WHERE medicine_id=? AND pharmacy_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	}
 
 	@Override
-	public List<Patient> identifyPatient(String name) { // SE USA
+	public List<Patient> identifyPatient(String name) { 
 		List<Patient> patients = new ArrayList<Patient>();
 	try {
 			String template = "SELECT * FROM patients WHERE name LIKE ?";
@@ -170,7 +170,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		}
 	
 	@Override
-	public List<Pharmacy> getPharmacy(String name) {  //SE USA
+	public List<Pharmacy> getPharmacy(String name) {  
 
 		List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
 		try {

@@ -21,7 +21,7 @@ public class JDBCPatientManager implements PatientManager {
 	}
 
 	@Override
-	public void addPatient(Patient p) {    //SE USA 
+	public void addPatient(Patient p) {   
 		try {
 		String template= "INSERT INTO patients (name, dateOfBirth, sex, userName)"
 				+ "VALUES (?,?,?,?);";
@@ -44,7 +44,7 @@ public class JDBCPatientManager implements PatientManager {
 		try {
 			String sql= "SELECT * FROM patients WHERE id = ?";
 			PreparedStatement search=c.prepareStatement(sql);
-			search.setInt(1, id); //Fills the question marks
+			search.setInt(1, id); 
 			ResultSet rs= search.executeQuery();
 			while(rs.next()) {
 				Integer id2 = rs.getInt("id");
@@ -67,7 +67,7 @@ public class JDBCPatientManager implements PatientManager {
 	
 	
 	@Override 
-	public Patient identifyPatient(int patientId) {    //SE USA
+	public Patient identifyPatient(int patientId) {    
     try {
 			String sql = "SELECT * FROM patients WHERE id LIKE ?";
 			PreparedStatement search = c.prepareStatement(sql);

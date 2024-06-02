@@ -64,7 +64,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public List<Medicine> searchMedicineById(int medId){   //SE USA
+	public List<Medicine> searchMedicineById(int medId){  
 		List<Medicine> medicines = new ArrayList<Medicine>();
 
 		try {
@@ -108,27 +108,6 @@ public class JDBCMedicineManager implements MedicineManager {
 		}
 		return null;
 	}
-	
-	
-//	@Override 
-//	public int getQuantityMedicine(int medicineId) {
-//		try {
-//			String sql = "SELECT amount FROM stock WHERE medicine_id = ?";
-//			PreparedStatement search = c.prepareStatement(sql);
-//			search.setInt(1, medicineId);
-//			ResultSet rs = search.executeQuery();
-//			while (rs.next()) {
-//				Integer amount = rs.getInt("amount");
-//				return amount;
-//			}
-//			rs.close();
-//			search.close();
-//		} catch (SQLException e) {
-//			System.out.println("Error in the database");
-//			e.printStackTrace();
-//		}
-//		return 0;
-//	}
 	
 	
 	@Override

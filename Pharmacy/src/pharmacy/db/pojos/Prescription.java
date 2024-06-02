@@ -18,8 +18,7 @@ import java.util.Objects;
 	private int patient;
 	
 	private List<Medicine> medicines;
-	
-	
+
 	public Prescription() {
 		super();
 		this.medicines = new ArrayList<Medicine>();
@@ -99,7 +98,7 @@ import java.util.Objects;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateUsed, id, issueDate, medicines, patient, qty);
+		return Objects.hash(dateUsed, id, issueDate, qty);
 	}
 
 	@Override
@@ -112,11 +111,8 @@ import java.util.Objects;
 			return false;
 		Prescription other = (Prescription) obj;
 		return Objects.equals(dateUsed, other.dateUsed) && id == other.id && Objects.equals(issueDate, other.issueDate)
-				&& Objects.equals(medicines, other.medicines) && Objects.equals(patient, other.patient)
 				&& qty == other.qty;
 	}
-
-	
 	
 	
 	
