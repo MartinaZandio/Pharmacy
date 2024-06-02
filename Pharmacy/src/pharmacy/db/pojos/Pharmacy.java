@@ -25,7 +25,6 @@ public class Pharmacy implements Serializable{
 	@XmlAttribute
 	private Integer numberOfWorkers;
 	@XmlElement
-	@XmlElementWrapper(name = "stocks")
 	private List<Stock> stock;
 	
 	public Pharmacy() {

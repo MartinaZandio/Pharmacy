@@ -42,7 +42,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public List<Medicine> searchMedicineByName(String name){   //SE USA
+	public List<Medicine> searchMedicineByName(String name){   
 		List<Medicine> medicines = new ArrayList<Medicine>();
 
 		try {
@@ -98,11 +98,10 @@ public class JDBCMedicineManager implements MedicineManager {
 				int amount = rs.getInt("amount");
 				Stock s = new Stock (amount);
 				stocks.add(s);
-	
+				return stocks;
 			}
 			rs.close();
 			stmt.close();
-			return stocks;
 		} catch (SQLException e){
 			System.out.println("Error selecting the stock.");
 			e.printStackTrace();
@@ -111,25 +110,25 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	
-	@Override 
-	public int getQuantityMedicine(int medicineId) {
-		try {
-			String sql = "SELECT amount FROM stock WHERE medicine_id = ?";
-			PreparedStatement search = c.prepareStatement(sql);
-			search.setInt(1, medicineId);
-			ResultSet rs = search.executeQuery();
-			while (rs.next()) {
-				Integer amount = rs.getInt("amount");
-				return amount;
-			}
-			rs.close();
-			search.close();
-		} catch (SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
-		return 0;
-	}
+//	@Override 
+//	public int getQuantityMedicine(int medicineId) {
+//		try {
+//			String sql = "SELECT amount FROM stock WHERE medicine_id = ?";
+//			PreparedStatement search = c.prepareStatement(sql);
+//			search.setInt(1, medicineId);
+//			ResultSet rs = search.executeQuery();
+//			while (rs.next()) {
+//				Integer amount = rs.getInt("amount");
+//				return amount;
+//			}
+//			rs.close();
+//			search.close();
+//		} catch (SQLException e) {
+//			System.out.println("Error in the database");
+//			e.printStackTrace();
+//		}
+//		return 0;
+//	}
 	
 	
 	@Override
@@ -154,22 +153,17 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public List<Medicine> getMedicinesPharmacy(int pharmacy_id) {  //SE USA
+	public List<Medicine> getMedicinesPharmacy(int pharmacy_id) {  
 		try {
 			List<Medicine> medicines= new ArrayList<Medicine>();
-			String sql = "SELECT * FROM stock WHERE pharmacy_id = ?";
+			String sql = "SELECT * FROM medicines JOIN stock ON numberAssigned = medicine_id WHERE pharmacy_id = ?";
 			PreparedStatement search = c.prepareStatement(sql);
 			search.setInt(1, pharmacy_id);
 			ResultSet rs = search.executeQuery();
 			while (rs.next()) {
-				Integer medicine_id = rs.getInt("medicine_id");
-				Integer amount = rs.getInt("amount");
-				List<Stock> stocks= new ArrayList<Stock>();
-				Stock s= new Stock(amount);
-				stocks.add(s);
-				Medicine m= new Medicine();
-				m.setNumAsigned(medicine_id);
-				m.setStock(stocks);
+				Integer medicine_id = rs.getInt("numberAssigned");
+				String name = rs.getString("name");
+				Medicine m= new Medicine(name, medicine_id);
 				medicines.add(m);
 				return medicines;
 			}

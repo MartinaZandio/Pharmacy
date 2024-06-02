@@ -64,11 +64,6 @@ public class Medicine implements Serializable {
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
 	}
-
-	public Medicine(int numberAssigned, String name, List<Stock> stock) {
-		this.numAsigned= numberAssigned;
-		this.stock= stock;
-	}
 	
 	
 	//Getters y Setters

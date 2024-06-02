@@ -17,7 +17,6 @@ public interface MedicineManager {
 	public String getMedicines(int prescription_id);
 	public List<Medicine> getMedicinesPharmacy(int pharmacy_id);
 	public List<Medicine> searchMedicineById(int medId);
-	int getQuantityMedicine(int medicineId);
 	public List<Stock> getStockMedicine(int medicineId);
 
 		

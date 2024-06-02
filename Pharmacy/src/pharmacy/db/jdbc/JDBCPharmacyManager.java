@@ -206,10 +206,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 			String sql = "SELECT * FROM stock WHERE pharmacy_id LIKE " + pharmacyId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				int pharmacy_id = rs.getInt("pharmacy_id");
-				int medicine_id = rs.getInt("medicine_id");
 				int amount = rs.getInt("amount");
-		
 				Stock s = new Stock (amount);
 				stocks.add(s);
 	

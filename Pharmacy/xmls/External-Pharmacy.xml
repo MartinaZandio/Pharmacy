@@ -7,11 +7,9 @@
     <stock>
         <medicine>
             <name>Ibuprofen 200 gr</name>
-            <quantity>10</quantity>
         </medicine>
         <medicine>
             <name>Ibuprofen 400 gr</name>
-            <quantity>5</quantity>
         </medicine>
     </stock>
 </Pharmacy>

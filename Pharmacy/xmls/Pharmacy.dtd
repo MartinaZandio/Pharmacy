@@ -11,6 +11,6 @@ IDs that start with a number
    <!ELEMENT location (#PCDATA)>
    <!ELEMENT postalCode (#PCDATA)>
    <!ELEMENT stock (medicine+)>
-   <!ELEMENT medicine (name, quantity)>
-   <!ELEMENT quantity (#PCDATA)>
+   <!ELEMENT medicine (name)>
+   <!ELEMENT name (#PCDATA)>
 ]>
