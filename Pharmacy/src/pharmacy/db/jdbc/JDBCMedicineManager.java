@@ -42,7 +42,7 @@ public class JDBCMedicineManager implements MedicineManager {
 	}
 	
 	@Override
-	public List<Medicine> searchMedicineByName(String name){   //SE USA
+	public List<Medicine> searchMedicineByName(String name){   
 		List<Medicine> medicines = new ArrayList<Medicine>();
 
 		try {
@@ -53,9 +53,30 @@ public class JDBCMedicineManager implements MedicineManager {
 			while(rs.next()) {
 				Integer numAsigned = rs.getInt("numberAssigned");
 				String medicineName = rs.getString("name");
-		
-			Medicine medicine = new Medicine (medicineName, numAsigned);
-			medicines.add(medicine);
+				Medicine medicine = new Medicine (medicineName, numAsigned);
+				medicines.add(medicine);
+			}
+		}catch(SQLException e) {
+			System.out.println("Error looking for a medicine");
+			e.printStackTrace();
+		}
+		return medicines;
+	}
+	
+	@Override
+	public List<Medicine> searchMedicineById(int medId){  
+		List<Medicine> medicines = new ArrayList<Medicine>();
+
+		try {
+			String sql = "SELECT * FROM medicines WHERE numberAssigned LIKE ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, medId);
+			ResultSet rs = search.executeQuery();
+			while(rs.next()) {
+				Integer numAsigned = rs.getInt("numberAssigned");
+				String medicineName = rs.getString("name");
+				Medicine medicine = new Medicine (medicineName, numAsigned);
+				medicines.add(medicine);
 			}
 		}catch(SQLException e) {
 			System.out.println("Error looking for a medicine");
@@ -64,6 +85,31 @@ public class JDBCMedicineManager implements MedicineManager {
 		return medicines;
 	}
 
+	
+
+	@Override
+	public List<Stock> getStockMedicine(int medicineId) {
+		List<Stock> stocks = new ArrayList<Stock>();
+		try {
+			Statement stmt = c.createStatement();
+			String sql = "SELECT * FROM stock WHERE medicine_id LIKE " + medicineId;
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int amount = rs.getInt("amount");
+				Stock s = new Stock (amount);
+				stocks.add(s);
+				return stocks;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e){
+			System.out.println("Error selecting the stock.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public int getMedicine(int med_id, int pharmacy_id) {  //SE USA
 		try {
@@ -73,8 +119,6 @@ public class JDBCMedicineManager implements MedicineManager {
 			search.setInt(2, pharmacy_id);
 			ResultSet rs = search.executeQuery();
 			while (rs.next()) {
-				Integer pharmacy_id2 = rs.getInt("pharmacy_id");
-				Integer medicine_id = rs.getInt("medicine_id");
 				Integer amount = rs.getInt("amount");
 				return amount;
 			}
@@ -84,8 +128,35 @@ public class JDBCMedicineManager implements MedicineManager {
 			System.out.println("Error in the database");
 			e.printStackTrace();
 		}
-		return (Integer) null;
+		return 0;
 	}
+	
+	@Override
+	public List<Medicine> getMedicinesPharmacy(int pharmacy_id) {  
+		try {
+			List<Medicine> medicines= new ArrayList<Medicine>();
+			String sql = "SELECT * FROM medicines JOIN stock ON numberAssigned = medicine_id WHERE pharmacy_id = ?";
+			PreparedStatement search = c.prepareStatement(sql);
+			search.setInt(1, pharmacy_id);
+			ResultSet rs = search.executeQuery();
+			while (rs.next()) {
+				Integer medicine_id = rs.getInt("numberAssigned");
+				String name = rs.getString("name");
+				Medicine m= new Medicine(name, medicine_id);
+				medicines.add(m);
+				return medicines;
+			}
+			rs.close();
+			search.close();
+		} catch (SQLException e) {
+			System.out.println("Error in the database");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 		
 	@Override 
 	public List<Prescription> getPrescription(int patient_id){

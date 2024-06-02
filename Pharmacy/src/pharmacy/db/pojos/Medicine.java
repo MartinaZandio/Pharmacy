@@ -26,7 +26,7 @@ public class Medicine implements Serializable {
 	private List<Stock> stock;
 	@XmlTransient
 	private List<Prescription> prescriptions;
-	@XmlElement
+	@XmlTransient
 	private int quantity;
 
 
@@ -34,7 +34,6 @@ public class Medicine implements Serializable {
 		super();
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
-		this.quantity = quantity;
 	}
 	
 	public Medicine(String name, int numAsigned) {
@@ -53,9 +52,7 @@ public class Medicine implements Serializable {
 		this.prescription = prescription;
 		this.laboratory = laboratory;
 		this.stock = new ArrayList<Stock>();
-		this.prescriptions = new ArrayList<Prescription>();
-		this.quantity = quantity;
-		
+		this.prescriptions = new ArrayList<Prescription>();		
 	}
 
 
@@ -67,7 +64,8 @@ public class Medicine implements Serializable {
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
 	}
-
+	
+	
 	//Getters y Setters
 	public String getName() {
 		return name;
@@ -127,9 +125,11 @@ public class Medicine implements Serializable {
 		this.quantity = quantity;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(laboratory, name, numAsigned, prescription, prescriptions, stock, quantity);
+		return Objects.hash(name, numAsigned, quantity);
 	}
 
 	@Override
@@ -141,15 +141,13 @@ public class Medicine implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Medicine other = (Medicine) obj;
-		return Objects.equals(laboratory, other.laboratory) && Objects.equals(name, other.name)
-				&& numAsigned == other.numAsigned && Objects.equals(prescription, other.prescription)
-				&& Objects.equals(prescriptions, other.prescriptions) && Objects.equals(stock, other.stock);
+		return Objects.equals(name, other.name) && numAsigned == other.numAsigned && quantity == other.quantity;
 	}
 
 	@Override
 	public String toString() {
-		return "Medicine" + "\n" + 
-	name + ", id: " + numAsigned;
+		return "\nMedicine" + "\n" + 
+	name + ", id: \n" + numAsigned;
 	}
 
 

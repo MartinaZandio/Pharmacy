@@ -18,8 +18,6 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		// Create default roles
-		// If they don't exist already
 		try {
 			this.getRole("Pharmacist");
 		} catch(NoResultException e) {
@@ -27,20 +25,14 @@ public class JPAUserManager implements UserManager {
 			this.createRole(new Role ("Patient"));
 			
 		}
-				
-		/*User u1= new User(1, "blancamaldo", "maldo");
-		u1.assignRole(u1, );
-		User u2= new User(2, "martizandio", "zandio");
-		u1.assignRole(u2, );
-		register(u1);
-		register(u2);*/
+			
 	}
 	
 	@Override
 	public void createRole(Role r) {
-		em.getTransaction().begin();  //before every change
+		em.getTransaction().begin();  
 		em.persist(r);
-		em.getTransaction().commit();  //after every change
+		em.getTransaction().commit();  
 	}
 
 	
@@ -52,7 +44,7 @@ public class JPAUserManager implements UserManager {
 
 	
 	@Override
-	public Role getRole(String username) {    //SE USA 
+	public Role getRole(String username) {    
 		Query q= em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, username);
 		Role r = (Role) q.getSingleResult();
@@ -60,7 +52,7 @@ public class JPAUserManager implements UserManager {
 	}
 	
 
-	public List<Role> getAllRoles(){    //SE USA
+	public List<Role> getAllRoles(){   
 		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
 		List<Role> resultList = (List<Role>) q.getResultList();
 		List<Role> roles = resultList;
@@ -82,7 +74,7 @@ public class JPAUserManager implements UserManager {
 		q.setParameter(1,userName);
 		q.setParameter(2, password);
 		try{
-			u = (User) q.getSingleResult(); //Cast because you get an object
+			u = (User) q.getSingleResult(); 
 		}catch (NoResultException e) {
 			return null;
 		}

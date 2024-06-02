@@ -25,7 +25,6 @@ public class Pharmacy implements Serializable{
 	@XmlAttribute
 	private Integer numberOfWorkers;
 	@XmlElement
-	@XmlElementWrapper(name = "stocks")
 	private List<Stock> stock;
 	
 	public Pharmacy() {
@@ -98,10 +97,10 @@ public class Pharmacy implements Serializable{
 	public void setStock(List<Stock> list) {
 		this.stock = list;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, location, name, numberOfWorkers, postalCode, stock);
+		return Objects.hash(id, location, name, numberOfWorkers, postalCode);
 	}
 
 	@Override
@@ -115,12 +114,12 @@ public class Pharmacy implements Serializable{
 		Pharmacy other = (Pharmacy) obj;
 		return id == other.id && Objects.equals(location, other.location) && Objects.equals(name, other.name)
 				&& Objects.equals(numberOfWorkers, other.numberOfWorkers)
-				&& Objects.equals(postalCode, other.postalCode) && Objects.equals(stock, other.stock);
+				&& Objects.equals(postalCode, other.postalCode);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Pharmacy" + "\n" +
+		return "\nPharmacy" + "\n" +
 	"Id: " + id + "\n" +
 	"Name: " + name + "\n" +
 	"Location: " + location + "\n" +

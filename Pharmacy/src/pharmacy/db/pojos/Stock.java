@@ -54,9 +54,10 @@ public class Stock implements Serializable{
 		this.amount = amount;
 	}
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(medicine, pharmacy);
+		return Objects.hash(amount);
 	}
 
 	@Override
@@ -68,13 +69,13 @@ public class Stock implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		return Objects.equals(medicine, other.medicine) && Objects.equals(pharmacy, other.pharmacy);
+		return amount == other.amount;
 	}
 
 	@Override
 	public String toString() {
-		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", amount=" + amount
-				+ "]";
+		return "\nStock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", amount=" + amount
+				+ "]\n";
 	}
 	
 	
