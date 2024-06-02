@@ -253,8 +253,16 @@ public class Menu {
 			System.out.println("Type the pharmacy id: ");
 			Integer idPharmacy = Integer.parseInt(r.readLine());
 			Pharmacy p= pharmacyManager.getPharmacy(idPharmacy);
-		
 			p.setStock(pharmacyManager.getStockPharmacy(idPharmacy));
+
+			List<Medicine> medicines= new ArrayList<Medicine>();
+			medicines=medicineManager.getMedicinesPharmacy(idPharmacy);
+			System.out.println(medicines);
+			
+			System.out.println("Type the medicine id: ");
+			Integer idMedicine = Integer.parseInt(r.readLine());
+			//Medicine m= medicineManager.searchMedicineById(idMedicine);
+			p.setStock(medicineManager.getStockMedicine(idMedicine));			
 			
 			File xml = new File ("./xmls/External-Pharmacy"); 
 			XmlPharmacyManager.pharmacy2Xml(p,xml);
@@ -373,7 +381,6 @@ public class Menu {
 			} else {
 				System.out.println("The prescription has been used. It's not valid.");
 			}
-			
 			
 			pharmacistMenu();
 		}

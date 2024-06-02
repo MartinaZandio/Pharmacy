@@ -8,7 +8,13 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class XML2HtmlPharmacy {
-	
+
+	/**
+	 * Simple transformation method. You can use it in your project.
+	 * @param sourcePath - Absolute path to source xml file.
+	 * @param xsltPath - Absolute path to xslt file.
+	 * @param resultDir - Directory where you want to put resulting files.
+	 */
 	public static void simpleTransfrom(String sourcePath, String xsltPath, String resultDir) {
 		TransformerFactory tfactory= TransformerFactory.newInstance();
 		try {

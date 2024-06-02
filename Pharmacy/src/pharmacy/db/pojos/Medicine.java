@@ -26,7 +26,7 @@ public class Medicine implements Serializable {
 	private List<Stock> stock;
 	@XmlTransient
 	private List<Prescription> prescriptions;
-	@XmlElement
+	@XmlTransient
 	private int quantity;
 
 
@@ -34,7 +34,6 @@ public class Medicine implements Serializable {
 		super();
 		this.stock = new ArrayList<Stock>();
 		this.prescriptions = new ArrayList<Prescription>();
-		this.quantity = quantity;
 	}
 	
 	public Medicine(String name, int numAsigned) {
@@ -53,9 +52,7 @@ public class Medicine implements Serializable {
 		this.prescription = prescription;
 		this.laboratory = laboratory;
 		this.stock = new ArrayList<Stock>();
-		this.prescriptions = new ArrayList<Prescription>();
-		this.quantity = quantity;
-		
+		this.prescriptions = new ArrayList<Prescription>();		
 	}
 
 
@@ -68,6 +65,12 @@ public class Medicine implements Serializable {
 		this.prescriptions = new ArrayList<Prescription>();
 	}
 
+	public Medicine(int numberAssigned, String name, List<Stock> stock) {
+		this.numAsigned= numberAssigned;
+		this.stock= stock;
+	}
+	
+	
 	//Getters y Setters
 	public String getName() {
 		return name;
@@ -148,8 +151,8 @@ public class Medicine implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Medicine" + "\n" + 
-	name + ", id: " + numAsigned;
+		return "\nMedicine" + "\n" + 
+	name + ", id: \n" + numAsigned;
 	}
 
 

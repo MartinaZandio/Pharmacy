@@ -103,7 +103,7 @@ public class ConnectionManager {
 			
 			
 			Statement createTables6=c.createStatement();
-			String create6="CREATE TABLE stocks ( "
+			String create6="CREATE TABLE stock ( "
 					+ " pharmacy_id REFERENCES pharmacies(id),"
 					+ " medicine_id REFERENCES medicines(numberAssigned), " 
 					+ " amount INTEGER NOT NULL)";

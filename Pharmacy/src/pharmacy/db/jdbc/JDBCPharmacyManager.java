@@ -89,7 +89,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 				while (rs2.next()) {
 					Integer medicine_id = rs.getInt("medicine_id");
 					
-					String sql3 = "SELECT amount FROM stocks WHERE medicine_id LIKE ?";
+					String sql3 = "SELECT amount FROM stock WHERE medicine_id LIKE ?";
 					PreparedStatement prep3 = c.prepareStatement(sql2);
 					prep.setInt(1, medicine_id);
 					ResultSet rs3 = prep3.executeQuery(); 
@@ -98,7 +98,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 						Integer amount = rs3.getInt("amount");
 					
 						try {
-						String sql4 = "UPDATE stocks SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
+						String sql4 = "UPDATE stock SET amount=amount-? WHERE medicine_id=? AND pharmacy_id=?";
 						PreparedStatement prep4 = c.prepareStatement(sql4);
 						prep4.setInt(1, quantity);
 						prep4.setInt(2, medicine_id);
@@ -130,7 +130,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 	@Override
 	public void orderStock(int medicine_id, int pharmacy_id, int qty) {  //SE USA
 		try{
-			String sql = "UPDATE stocks SET amount = amount+? WHERE medicine_id=? AND pharmacy_id=?";
+			String sql = "UPDATE stock SET amount = amount+? WHERE medicine_id=? AND pharmacy_id=?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, qty);
 			prep.setInt(2, medicine_id);
@@ -203,7 +203,7 @@ public class JDBCPharmacyManager implements PharmacyManager {
 		List<Stock> stocks = new ArrayList<Stock>();
 		try {
 			Statement stmt = c.createStatement();
-			String sql = "SELECT * FROM stocks WHERE pharmacy_id LIKE  = " + pharmacyId;
+			String sql = "SELECT * FROM stock WHERE pharmacy_id LIKE " + pharmacyId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				int pharmacy_id = rs.getInt("pharmacy_id");

@@ -120,7 +120,7 @@ public class Pharmacy implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Pharmacy" + "\n" +
+		return "\nPharmacy" + "\n" +
 	"Id: " + id + "\n" +
 	"Name: " + name + "\n" +
 	"Location: " + location + "\n" +

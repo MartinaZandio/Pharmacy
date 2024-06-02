@@ -73,8 +73,8 @@ public class Stock implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Stock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", amount=" + amount
-				+ "]";
+		return "\nStock [pharmacy=" + pharmacy + ", medicine=" + medicine + ", amount=" + amount
+				+ "]\n";
 	}
 	
 	
