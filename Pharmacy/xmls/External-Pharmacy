@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<<<<<<< HEAD
 <Pharmacy numberOfWorkers="4">
     <name>Zandios</name>
     <location>Pamplona</location>
     <postalCode>35489</postalCode>
-=======
-<Pharmacy numberOfWorkers="3">
-    <name>Zandios&amp;Co</name>
-    <location>Madrid</location>
-    <postalCode>28009</postalCode>
     <stock/>
     <stock/>
     <stock/>
     <stock/>
->>>>>>> branch 'master' of https://github.com/MartinaZandio/Pharmacy
 </Pharmacy>
